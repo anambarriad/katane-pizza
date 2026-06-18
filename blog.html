@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Blog — Katané Pizza</title>
+<meta name="description" content="Historias, tradición y gastronomía siciliana desde Katané Pizza Panamá."/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400;1,600&family=Jost:wght@300;400;500&family=Pacifico&display=swap" rel="stylesheet"/>
+<link rel="stylesheet" href="katane.css"/>
+<style>
+/* ── ESTILOS EXCLUSIVOS: blog.html ── */
+
+/* ARTÍCULO DESTACADO */
+.art-dest {
+  padding:var(--pad) 0;
+}
+.art-dest-g {
+  display:grid; grid-template-columns:1.2fr 1fr;
+  gap:clamp(2.5rem,5vw,5rem); align-items:center;
+}
+.art-dest-foto {
+  position:relative; aspect-ratio:16/10;
+  border-radius:3px; overflow:hidden;
+  box-shadow:var(--shadow);
+}
+.art-dest-foto-bg {
+  position:absolute; inset:0;
+  background:linear-gradient(135deg,#9A6040,#5A2810);
+}
+.art-dest-tag {
+  position:absolute; top:1.25rem; left:1.25rem;
+  background:var(--rojo); color:var(--crema);
+  font-family:var(--ff-b); font-size:.65rem; font-weight:500;
+  letter-spacing:.12em; text-transform:uppercase;
+  padding:.3rem .85rem; border-radius:1px;
+}
+.art-dest-meta { font-size:.72rem; color:var(--warm); letter-spacing:.06em; margin-bottom:.65rem; font-style:italic; }
+.art-dest-tit { font-family:var(--ff-d); font-size:clamp(1.6rem,2.8vw,2.6rem); font-weight:400; line-height:1.2; margin-bottom:1rem; }
+.art-dest-tit:hover em { color:var(--rojo); }
+.art-dest-tit em { font-style:italic; color:var(--terracota); transition:color .25s; }
+.art-dest-p { font-size:.96rem; color:var(--warm); line-height:1.85; margin-bottom:1.5rem; }
+.art-dest-leer { display:inline-flex; align-items:center; gap:.5rem; font-family:var(--ff-b); font-size:.75rem; font-weight:500; letter-spacing:.1em; text-transform:uppercase; color:var(--rojo); transition:gap .25s; }
+.art-dest-leer:hover { gap:.85rem; }
+.art-dest-leer svg { width:1rem; height:1rem; }
+
+/* GRID ARTÍCULOS */
+.art-grid-sec { padding-bottom:var(--pad); }
+.art-grid-hdr { margin-bottom:clamp(2rem,4vw,3rem); }
+.art-grid {
+  display:grid; grid-template-columns:repeat(3,1fr);
+  gap:1.75rem;
+}
+.art-card {
+  background:var(--crema); border:1px solid var(--arena-med);
+  border-radius:3px; overflow:hidden;
+  transition:transform .3s var(--ease),box-shadow .3s;
+  position:relative;
+}
+.art-card:hover { transform:translateY(-5px); box-shadow:var(--shadow); }
+.art-card::after {
+  content:''; position:absolute; top:0; left:0; right:0; height:3px;
+  background:linear-gradient(90deg,var(--rojo),var(--limon));
+  transform:scaleX(0); transform-origin:left; transition:transform .4s var(--ease);
+}
+.art-card:hover::after { transform:scaleX(1); }
+.art-card-foto { height:180px; position:relative; overflow:hidden; }
+.art-card-foto-bg { position:absolute; inset:0; background-size:cover; background-position:center; transition:transform .5s var(--ease); }
+.art-card:hover .art-card-foto-bg { transform:scale(1.05); }
+.art-card-cat {
+  position:absolute; bottom:.75rem; left:.75rem;
+  background:var(--rojo); color:var(--crema);
+  font-size:.6rem; font-weight:500; letter-spacing:.1em; text-transform:uppercase;
+  padding:.2rem .65rem; border-radius:1px;
+  font-family:var(--ff-b);
+}
+.art-card-body { padding:1.5rem; }
+.art-card-meta { font-size:.7rem; color:var(--warm); font-style:italic; margin-bottom:.5rem; }
+.art-card-tit { font-family:var(--ff-d); font-size:1.15rem; font-weight:600; line-height:1.3; margin-bottom:.65rem; color:var(--tinta); transition:color .25s; }
+.art-card:hover .art-card-tit { color:var(--rojo); }
+.art-card-p { font-size:.83rem; color:var(--warm); line-height:1.65; margin-bottom:1rem; }
+.art-card-leer { font-size:.72rem; font-weight:500; letter-spacing:.08em; text-transform:uppercase; color:var(--terracota); display:flex; align-items:center; gap:.35rem; transition:gap .25s; font-family:var(--ff-b); }
+.art-card:hover .art-card-leer { gap:.65rem; }
+.art-card-leer svg { width:.85rem; height:.85rem; }
+
+/* Colores placeholder de fotos */
+.foto-bg-1 { background:linear-gradient(135deg,#B85030,#7A2810); }
+.foto-bg-2 { background:linear-gradient(135deg,#4A6438,#2E3A20); }
+.foto-bg-3 { background:linear-gradient(135deg,#2A5080,#1A3050); }
+.foto-bg-4 { background:linear-gradient(135deg,#B89420,#7A5C10); }
+
+/* NEWSLETTER CTA */
+.newsletter {
+  background:var(--tinta); padding:4rem 0;
+  text-align:center;
+}
+.newsletter h2 { font-family:var(--ff-d); font-size:clamp(1.8rem,3vw,2.8rem); font-weight:400; color:var(--arena); margin-bottom:.75rem; }
+.newsletter h2 em { font-style:italic; color:var(--rojo); }
+.newsletter p { font-size:.96rem; color:rgba(240,230,204,.58); margin-bottom:1.75rem; }
+.nl-form { display:flex; gap:.75rem; justify-content:center; flex-wrap:wrap; }
+.nl-input { padding:.8rem 1.5rem; background:rgba(250,245,234,.08); border:1px solid rgba(250,245,234,.15); border-radius:1px; color:var(--crema); font-family:var(--ff-b); font-size:.88rem; min-width:280px; outline:none; transition:border-color .25s; }
+.nl-input::placeholder { color:rgba(250,245,234,.35); }
+.nl-input:focus { border-color:rgba(250,245,234,.4); }
+
+@media(max-width:1024px){
+  .art-dest-g { grid-template-columns:1fr; gap:2.5rem; }
+  .art-grid { grid-template-columns:1fr 1fr; }
+}
+@media(max-width:767px){
+  .art-grid { grid-template-columns:1fr; }
+}
+</style>
+</head>
+<body>
+
+<nav class="nav" id="nav">
+  <a class="nav-logo" href="index.html"><img src="katane_logo.png" alt="Katané Pizza"/></a>
+  <ul class="nav-links" role="list">
+    <li><a href="index.html">Inicio</a></li>
+    <li><a href="historia.html">Historia</a></li>
+    <li><a href="menu.html">Menú</a></li>
+    <li><a href="blog.html" class="activo">Blog</a></li>
+    <li><a href="promociones.html">Promociones</a></li>
+    <li><a href="contacto.html">Contacto</a></li>
+  </ul>
+  <a href="https://wa.me/50769624549" class="nav-cta" target="_blank" rel="noopener">Reservar mesa</a>
+  <button class="hamb" id="hambBtn" aria-label="Abrir menú" aria-expanded="false"><span></span><span></span><span></span></button>
+</nav>
+<div class="mm" id="mm">
+  <a href="index.html"    class="lm">Inicio</a>
+  <a href="historia.html" class="lm">Historia</a>
+  <a href="menu.html"     class="lm">Menú</a>
+  <a href="blog.html"     class="lm">Blog</a>
+  <a href="promociones.html" class="lm">Promociones</a>
+  <a href="contacto.html" class="lm">Contacto</a>
+</div>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-foto"></div>
+  <div class="hero-overlay"></div>
+  <div class="w" style="width:100%">
+    <div class="hero-body">
+      <div class="hero-logo"><img src="katane_logo.png" alt="Katané Pizza"/></div>
+      <p class="hero-nombre">Gastronomia e cultura</p>
+      <h1 class="hero-eslogan">Historias y tradición siciliana</h1>
+      <p class="hero-sub">Descubre los secretos de la cocina italiana,<br>la historia de Sicilia y la pasión de Katané.</p>
+    </div>
+  </div>
+  <div class="hero-scroll" aria-hidden="true"><div class="scroll-l"></div><span>Leggi</span></div>
+</section>
+
+<div class="cinta" aria-hidden="true">
+  <div class="cinta-pista">
+    <span>Gastronomia siciliana</span><span class="sep">✦</span><span>Tradizioni italiane</span><span class="sep">✦</span><span>Ricette autentiche</span><span class="sep">✦</span><span>Cultura del gusto</span><span class="sep">✦</span><span>Storie di famiglia</span><span class="sep">✦</span><span>Pizza artigianale</span><span class="sep">✦</span>
+    <span>Gastronomia siciliana</span><span class="sep">✦</span><span>Tradizioni italiane</span><span class="sep">✦</span><span>Ricette autentiche</span><span class="sep">✦</span><span>Cultura del gusto</span><span class="sep">✦</span><span>Storie di famiglia</span><span class="sep">✦</span><span>Pizza artigianale</span><span class="sep">✦</span>
+  </div>
+</div>
+
+<!-- ARTÍCULO DESTACADO -->
+<div class="franja"></div>
+<section class="art-dest piedra-bg">
+  <div class="w">
+    <div class="art-dest-g">
+      <div class="rl">
+        <div class="art-dest-foto">
+          <div class="art-dest-foto-bg foto-bg-1"><!-- FOTO ARTÍCULO DESTACADO --></div>
+          <span class="art-dest-tag">Artículo destacado</span>
+        </div>
+      </div>
+      <div class="rv">
+        <p class="eyebrow">Pizza & Tradición</p>
+        <p class="art-dest-meta">Por Parra Francys · 6 de mayo de 2026</p>
+        <h2 class="art-dest-tit"><em>Opciones de Pizzas Vegetarianas o Veganas:</em> la guía completa para elegir la mejor</h2>
+        <p class="art-dest-p">¿Sabías que algunas de las pizzas más sabrosas no llevan carne ni lácteos tradicionales? Lo curioso es que muchas personas creen que la pizza vegetariana es "aburrida", pero las recetas italianas más antiguas nacieron sin carne. Descubre cuál es la pizza vegetariana más popular en Katané.</p>
+        <a href="https://katanepizza.com/opciones-de-pizzas-vegetarianas-o-veganas/" target="_blank" class="art-dest-leer">
+          Leer artículo completo
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- GRID ARTÍCULOS -->
+<div class="franja"></div>
+<section class="art-grid-sec">
+  <div class="w" style="padding-top:var(--pad)">
+    <div class="art-grid-hdr">
+      <p class="eyebrow rv">Más historias</p>
+      <h2 class="h2 rv" style="transition-delay:.1s">Cultura y<br><em>gastronomía italiana</em></h2>
+    </div>
+    <div class="art-grid">
+
+      <div class="art-card rv">
+        <div class="art-card-foto">
+          <div class="art-card-foto-bg foto-bg-1"><!-- FOTO ARTICULO 1 --></div>
+          <span class="art-card-cat">Pizza</span>
+        </div>
+        <div class="art-card-body">
+          <p class="art-card-meta">23 de agosto de 2025 · Por Parra Francys</p>
+          <h3 class="art-card-tit">¡Descubre la Mejor Pizza Italiana de Panamá en Katané Pizza!</h3>
+          <p class="art-card-p">Si alguna vez has probado una verdadera pizza italiana, sabrás que es una experiencia completamente diferente. Masa delgada, crujiente pero elástica, ingredientes frescos.</p>
+          <a href="https://katanepizza.com/descubre-la-mejor-pizza-italiana-de-panama/" target="_blank" class="art-card-leer">
+            Leer más <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- NEWSLETTER CTA -->
+<div class="franja"></div>
+<section class="newsletter">
+  <div class="w">
+    <p class="eyebrow rv" style="justify-content:center;color:var(--limon)">Rimani aggiornato</p>
+    <h2 class="rv" style="transition-delay:.1s">Historias directo<br><em>a tu bandeja</em></h2>
+    <p class="rv" style="transition-delay:.2s;color:rgba(240,230,204,.55);font-size:.96rem;margin-bottom:2rem;">Recibe los nuevos artículos, recetas y novedades de Katané Pizza.</p>
+    <div class="nl-form rv" style="transition-delay:.3s">
+      <input type="email" class="nl-input" placeholder="Tu correo electrónico" aria-label="Correo electrónico"/>
+      <a href="mailto:katanepizza@gmail.com" class="btn-r">Suscribirme</a>
+    </div>
+    <p style="font-size:.72rem;color:rgba(240,230,204,.28);margin-top:1rem;font-style:italic" class="rv" style="transition-delay:.4s">O contáctanos directamente en katanepizza@gmail.com</p>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="footer-g">
+    <div class="footer-m"><img class="footer-logo" src="katane_logo.png" alt="Katané Pizza"/><p>Restaurante siciliano auténtico en Panamá. Tres sucursales, una sola tradición desde 2015.</p><div class="footer-redes"><a href="#" class="rs" aria-label="Instagram"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r=".5" fill="currentColor"/></svg></a><a href="#" class="rs" aria-label="Facebook"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg></a><a href="#" class="rs" aria-label="TikTok"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M9 12a4 4 0 1 0 4 4V4a5 5 0 0 0 5 5"/></svg></a></div></div>
+    <div class="footer-col"><h4>Menú</h4><ul><li><a href="menu.html">Pizzas artesanales</a></li><li><a href="menu.html">Pastas frescas</a></li><li><a href="menu.html">Risottos</a></li><li><a href="menu.html">Postres</a></li></ul></div>
+    <div class="footer-col"><h4>Katané</h4><ul><li><a href="historia.html">Nuestra historia</a></li><li><a href="historia.html#masa">La masa</a></li><li><a href="blog.html">Blog</a></li></ul></div>
+    <div class="footer-col"><h4>Contacto</h4><ul><li><a href="tel:+50769624549">6962-4549 · El Cangrejo</a></li><li><a href="tel:+50769558884">6955-8884 · San Francisco</a></li><li><a href="tel:+50765591711">6559-1711 · Costa del Este</a></li><li><a href="mailto:katanepizza@gmail.com">katanepizza@gmail.com</a></li></ul></div>
+  </div>
+  <div class="footer-bot"><p>© 2024 Katané Pizza, Panamá. Tutti i diritti riservati.</p><div style="display:flex;gap:1.5rem"><a href="https://katanepizza.com/politica-de-privacidad/" target="_blank">Privacidad</a><a href="https://katanepizza.com/terminos-y-condiciones/" target="_blank">Términos</a></div></div>
+</footer>
+<script src="katane.js"></script>
+</body>
+</html>

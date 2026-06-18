@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Contacto — Katané Pizza</title>
+<meta name="description" content="Contáctanos o visítanos en cualquiera de nuestras tres sucursales en Ciudad de Panamá."/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400;1,600&family=Jost:wght@300;400;500&family=Pacifico&display=swap" rel="stylesheet"/>
+<link rel="stylesheet" href="katane.css"/>
+<style>
+/* ── ESTILOS EXCLUSIVOS: contacto.html ── */
+
+/* FORMULARIO + WHATSAPP */
+.cto-main { padding:var(--pad) 0; }
+.cto-main-g {
+  display:grid; grid-template-columns:1fr 1fr;
+  gap:clamp(2.5rem,6vw,6rem); align-items:start;
+}
+
+/* FORMULARIO */
+.form-wrap { background:var(--arena); border:1px solid var(--arena-med); border-radius:3px; padding:2.5rem; }
+.form-wrap h2 { font-family:var(--ff-d); font-size:clamp(1.5rem,2.5vw,2.2rem); font-weight:400; margin-bottom:1.75rem; }
+.form-wrap h2 em { font-style:italic; color:var(--terracota); }
+.campo { margin-bottom:1.25rem; }
+.campo label { display:block; font-family:var(--ff-b); font-size:.72rem; font-weight:500; letter-spacing:.1em; text-transform:uppercase; color:var(--warm); margin-bottom:.45rem; }
+.campo input, .campo select, .campo textarea {
+  width:100%; padding:.8rem 1rem;
+  background:var(--crema); border:1.5px solid var(--arena-med);
+  border-radius:2px; font-family:var(--ff-b); font-size:.92rem;
+  color:var(--tinta); outline:none;
+  transition:border-color .25s;
+}
+.campo input:focus, .campo select:focus, .campo textarea:focus { border-color:var(--terracota); }
+.campo textarea { min-height:120px; resize:vertical; }
+.campo select { cursor:pointer; }
+.form-nota { font-size:.75rem; color:var(--warm); font-style:italic; margin-bottom:1.5rem; }
+.form-btn { width:100%; }
+
+/* WHATSAPP + INFO */
+.cto-info h2 { font-family:var(--ff-d); font-size:clamp(1.5rem,2.5vw,2.2rem); font-weight:400; margin-bottom:1.5rem; }
+.cto-info h2 em { font-style:italic; color:var(--terracota); }
+.cto-info p { font-size:.96rem; color:var(--warm); line-height:1.85; margin-bottom:2rem; }
+
+/* CARDS WHATSAPP */
+.wa-cards { display:flex; flex-direction:column; gap:1rem; margin-bottom:2.5rem; }
+.wa-card {
+  display:flex; align-items:center; gap:1.25rem;
+  padding:1.25rem 1.5rem;
+  background:var(--arena); border:1px solid var(--arena-med);
+  border-radius:3px; border-left:3px solid var(--rojo);
+  transition:transform .25s,box-shadow .25s;
+  text-decoration:none; color:inherit;
+}
+.wa-card:hover { transform:translateX(4px); box-shadow:var(--shadow); }
+.wa-card-ico { width:2.5rem; height:2.5rem; background:var(--rojo); border-radius:50%; display:flex; align-items:center; justify-content:center; flex-shrink:0; }
+.wa-card-ico svg { width:1.2rem; height:1.2rem; }
+.wa-card-nom { font-family:var(--ff-d); font-size:1.05rem; font-weight:600; }
+.wa-card-tel { font-size:.8rem; color:var(--rojo); font-weight:500; margin-top:.15rem; }
+.wa-card-txt { font-size:.75rem; color:var(--warm); font-style:italic; margin-top:.1rem; }
+
+/* EMAIL */
+.email-box {
+  padding:1.25rem 1.5rem;
+  background:var(--arena); border:1px solid var(--arena-med);
+  border-radius:3px; display:flex; align-items:center; gap:1rem;
+}
+.email-box svg { width:1.4rem; height:1.4rem; flex-shrink:0; color:var(--terracota); }
+.email-box a { font-family:var(--ff-b); font-size:.9rem; font-weight:500; color:var(--rojo); transition:color .25s; }
+.email-box a:hover { color:var(--rojo-osc); }
+
+/* HORARIOS */
+.horarios { padding:var(--pad) 0; }
+.horarios-g { display:grid; grid-template-columns:repeat(3,1fr); gap:1.75rem; }
+.horario-card {
+  background:var(--arena); border:1px solid var(--arena-med);
+  border-radius:3px; padding:2rem;
+  position:relative; overflow:hidden;
+  transition:box-shadow .3s,transform .3s;
+}
+.horario-card:hover { box-shadow:var(--shadow); transform:translateY(-3px); }
+.horario-card::before {
+  content:''; position:absolute; top:0; left:0; right:0; height:3px;
+  background:linear-gradient(90deg,var(--rojo),var(--limon));
+}
+.hor-nom { font-family:var(--ff-d); font-size:1.3rem; font-weight:600; margin-bottom:1rem; }
+.hor-row { display:flex; justify-content:space-between; align-items:center; padding:.45rem 0; border-bottom:1px solid var(--arena-med); font-size:.86rem; }
+.hor-row:last-child { border-bottom:none; }
+.hor-dia { color:var(--warm); font-style:italic; }
+.hor-hora { font-family:var(--ff-b); font-size:.78rem; font-weight:500; color:var(--tinta); }
+.hor-tel { margin-top:1.25rem; font-size:.8rem; font-weight:500; color:var(--rojo); font-family:var(--ff-b); }
+
+/* MAPS */
+.maps-sec { padding-bottom:var(--pad); }
+.maps-g { display:grid; grid-template-columns:repeat(3,1fr); gap:1.5rem; }
+.map-card { border-radius:3px; overflow:hidden; box-shadow:var(--shadow); }
+.map-card h3 { font-family:var(--ff-d); font-size:1rem; font-weight:600; padding:.75rem 1rem; background:var(--arena); border:1px solid var(--arena-med); border-bottom:none; }
+.map-iframe { width:100%; height:220px; border:none; display:block; }
+.map-placeholder { width:100%; height:220px; background:linear-gradient(135deg,var(--arena),var(--piedra)); display:flex; align-items:center; justify-content:center; border:1px solid var(--arena-med); }
+.map-placeholder p { font-size:.75rem; color:var(--warm); font-style:italic; text-align:center; padding:1rem; }
+
+@media(max-width:1024px){
+  .cto-main-g { grid-template-columns:1fr; gap:3rem; }
+  .horarios-g,.maps-g { grid-template-columns:1fr; }
+}
+@media(max-width:767px){
+  .horarios-g,.maps-g { grid-template-columns:1fr; }
+}
+</style>
+</head>
+<body>
+
+<nav class="nav" id="nav">
+  <a class="nav-logo" href="index.html"><img src="katane_logo.png" alt="Katané Pizza"/></a>
+  <ul class="nav-links" role="list">
+    <li><a href="index.html">Inicio</a></li>
+    <li><a href="historia.html">Historia</a></li>
+    <li><a href="menu.html">Menú</a></li>
+    <li><a href="blog.html">Blog</a></li>
+    <li><a href="promociones.html">Promociones</a></li>
+    <li><a href="contacto.html" class="activo">Contacto</a></li>
+  </ul>
+  <a href="https://wa.me/50769624549" class="nav-cta" target="_blank" rel="noopener">Reservar mesa</a>
+  <button class="hamb" id="hambBtn" aria-label="Abrir menú" aria-expanded="false"><span></span><span></span><span></span></button>
+</nav>
+<div class="mm" id="mm">
+  <a href="index.html"    class="lm">Inicio</a>
+  <a href="historia.html" class="lm">Historia</a>
+  <a href="menu.html"     class="lm">Menú</a>
+  <a href="blog.html"     class="lm">Blog</a>
+  <a href="promociones.html" class="lm">Promociones</a>
+  <a href="contacto.html" class="lm">Contacto</a>
+</div>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-foto"></div>
+  <div class="hero-overlay"></div>
+  <div class="w" style="width:100%">
+    <div class="hero-body">
+      <div class="hero-logo"><img src="katane_logo.png" alt="Katané Pizza"/></div>
+      <p class="hero-nombre">Vieni a trovarci</p>
+      <h1 class="hero-eslogan">Te esperamos en la mesa</h1>
+      <p class="hero-sub">Tres sucursales en Ciudad de Panamá.<br>Sin reserva previa. Solo llega.</p>
+      <div class="hero-btns">
+        <a href="#formulario" class="btn-r-inv">Enviar mensaje</a>
+        <a href="#sucursales" class="btn-o-inv">Ver sucursales</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="cinta" aria-hidden="true">
+  <div class="cinta-pista">
+    <span>El Cangrejo · 6962-4549</span><span class="sep">✦</span><span>San Francisco · 6955-8884</span><span class="sep">✦</span><span>Costa del Este · 6559-1711</span><span class="sep">✦</span><span>katanepizza@gmail.com</span><span class="sep">✦</span>
+    <span>El Cangrejo · 6962-4549</span><span class="sep">✦</span><span>San Francisco · 6955-8884</span><span class="sep">✦</span><span>Costa del Este · 6559-1711</span><span class="sep">✦</span><span>katanepizza@gmail.com</span><span class="sep">✦</span>
+  </div>
+</div>
+
+<!-- FORMULARIO + WHATSAPP -->
+<div class="franja"></div>
+<section class="cto-main piedra-bg" id="formulario">
+  <div class="w">
+    <div class="cto-main-g">
+
+      <!-- FORMULARIO -->
+      <div class="rl">
+        <div class="form-wrap">
+          <h2>Envíanos un <em>mensaje</em></h2>
+          <form action="https://katanepizza.com/contacto/" method="post">
+            <div class="campo">
+              <label for="nombre">Nombre</label>
+              <input type="text" id="nombre" name="nombre" placeholder="Tu nombre completo" required/>
+            </div>
+            <div class="campo">
+              <label for="email">Correo electrónico</label>
+              <input type="email" id="email" name="email" placeholder="tu@correo.com" required/>
+            </div>
+            <div class="campo">
+              <label for="whatsapp">WhatsApp (opcional)</label>
+              <input type="tel" id="whatsapp" name="whatsapp" placeholder="+507"/>
+            </div>
+            <div class="campo">
+              <label for="motivo">Motivo de contacto</label>
+              <select id="motivo" name="motivo">
+                <option value="">Selecciona un motivo</option>
+                <option value="comentarios">Comentarios o Sugerencias</option>
+                <option value="eventos">Eventos o Catering</option>
+                <option value="otros">Otros</option>
+              </select>
+            </div>
+            <div class="campo">
+              <label for="mensaje">Mensaje (opcional)</label>
+              <textarea id="mensaje" name="mensaje" placeholder="¿En qué podemos ayudarte?"></textarea>
+            </div>
+            <p class="form-nota">También puedes escribirnos directamente por WhatsApp o al correo katanepizza@gmail.com</p>
+            <a href="https://katanepizza.com/contacto/" target="_blank" class="btn-r form-btn" style="justify-content:center">Enviar mensaje</a>
+          </form>
+        </div>
+      </div>
+
+      <!-- WHATSAPP + INFO -->
+      <div class="cto-info rv">
+        <p class="eyebrow">Escríbenos ahora</p>
+        <h2>WhatsApp por <em>sucursal</em></h2>
+        <p>La forma más rápida de contactarnos. Elige la sucursal más cercana y te respondemos de inmediato.</p>
+
+        <div class="wa-cards">
+          <a href="https://wa.me/50769624549" target="_blank" rel="noopener" class="wa-card">
+            <div class="wa-card-ico"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.5" stroke-linecap="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg></div>
+            <div>
+              <div class="wa-card-nom">El Cangrejo</div>
+              <div class="wa-card-tel">6962-4549</div>
+              <div class="wa-card-txt">Escríbenos por WhatsApp →</div>
+            </div>
+          </a>
+          <a href="https://wa.me/50769558884" target="_blank" rel="noopener" class="wa-card">
+            <div class="wa-card-ico"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.5" stroke-linecap="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg></div>
+            <div>
+              <div class="wa-card-nom">San Francisco</div>
+              <div class="wa-card-tel">6955-8884</div>
+              <div class="wa-card-txt">Escríbenos por WhatsApp →</div>
+            </div>
+          </a>
+          <a href="https://wa.me/50765591711" target="_blank" rel="noopener" class="wa-card">
+            <div class="wa-card-ico"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.5" stroke-linecap="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg></div>
+            <div>
+              <div class="wa-card-nom">Costa del Este</div>
+              <div class="wa-card-tel">6559-1711</div>
+              <div class="wa-card-txt">Escríbenos por WhatsApp →</div>
+            </div>
+          </a>
+        </div>
+
+        <div class="email-box">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><polyline points="2 7 12 13 22 7"/></svg>
+          <div>
+            <div style="font-size:.72rem;letter-spacing:.08em;text-transform:uppercase;font-weight:500;color:var(--warm);margin-bottom:.2rem;font-family:var(--ff-b)">Correo electrónico</div>
+            <a href="mailto:katanepizza@gmail.com">katanepizza@gmail.com</a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- HORARIOS -->
+<div class="franja"></div>
+<section class="horarios" id="sucursales">
+  <div class="w">
+    <p class="eyebrow rv" style="justify-content:center">Orario di apertura</p>
+    <h2 class="h2 rv" style="transition-delay:.1s;text-align:center;margin-bottom:clamp(2rem,4vw,3rem)">Horarios de<br><em>atención</em></h2>
+    <div class="horarios-g">
+      <div class="horario-card rv">
+        <div class="hor-nom">El Cangrejo</div>
+        <div class="hor-row"><span class="hor-dia">Lunes — Viernes</span><span class="hor-hora">11:30 am – 10:00 pm</span></div>
+        <div class="hor-row"><span class="hor-dia">Sábados</span><span class="hor-hora">12:00 pm – 10:30 pm</span></div>
+        <div class="hor-row"><span class="hor-dia">Domingos</span><span class="hor-hora">12:00 pm – 10:00 pm</span></div>
+        <div class="hor-tel">Tel: 6962-4549</div>
+      </div>
+      <div class="horario-card rv" style="transition-delay:.1s">
+        <div class="hor-nom">San Francisco</div>
+        <div class="hor-row"><span class="hor-dia">Lunes — Viernes</span><span class="hor-hora">11:30 am – 10:00 pm</span></div>
+        <div class="hor-row"><span class="hor-dia">Sábados</span><span class="hor-hora">12:00 pm – 10:30 pm</span></div>
+        <div class="hor-row"><span class="hor-dia">Domingos</span><span class="hor-hora">12:00 pm – 10:00 pm</span></div>
+        <div class="hor-tel">Tel: 6955-8884</div>
+      </div>
+      <div class="horario-card rv" style="transition-delay:.2s">
+        <div class="hor-nom">Costa del Este</div>
+        <div class="hor-row"><span class="hor-dia">Lunes — Viernes</span><span class="hor-hora">11:30 am – 10:00 pm</span></div>
+        <div class="hor-row"><span class="hor-dia">Sábados</span><span class="hor-hora">12:00 pm – 10:30 pm</span></div>
+        <div class="hor-row"><span class="hor-dia">Domingos</span><span class="hor-hora">12:00 pm – 10:00 pm</span></div>
+        <div class="hor-tel">Tel: 6559-1711</div>
+      </div>
+    </div>
+    <p style="text-align:center;font-size:.78rem;color:var(--warm);font-style:italic;margin-top:1.5rem" class="rv">* Horarios aproximados. Confirma con la sucursal de tu preferencia.</p>
+  </div>
+</section>
+
+<!-- SUCURSALES + MAPS -->
+<div class="franja"></div>
+<section class="maps-sec piedra-bg">
+  <div class="w" style="padding-block:var(--pad)">
+    <p class="eyebrow rv" style="justify-content:center">Dove siamo</p>
+    <h2 class="h2 rv" style="transition-delay:.1s;text-align:center;margin-bottom:clamp(2rem,4vw,3rem)">Encuéntranos<br><em>en Panamá</em></h2>
+    <div class="maps-g">
+      <div class="map-card rv">
+        <h3>El Cangrejo</h3>
+        <!-- GOOGLE MAPS EL CANGREJO -->
+        <div class="map-placeholder">
+          <p><!-- IFRAME GOOGLE MAPS EL CANGREJO --><br>Reemplaza este bloque con el iframe de Google Maps de la sucursal El Cangrejo.</p>
+        </div>
+      </div>
+      <div class="map-card rv" style="transition-delay:.1s">
+        <h3>San Francisco</h3>
+        <!-- GOOGLE MAPS SAN FRANCISCO -->
+        <div class="map-placeholder">
+          <p><!-- IFRAME GOOGLE MAPS SAN FRANCISCO --><br>Reemplaza este bloque con el iframe de Google Maps de la sucursal San Francisco.</p>
+        </div>
+      </div>
+      <div class="map-card rv" style="transition-delay:.2s">
+        <h3>Costa del Este</h3>
+        <!-- GOOGLE MAPS COSTA DEL ESTE -->
+        <div class="map-placeholder">
+          <p><!-- IFRAME GOOGLE MAPS COSTA DEL ESTE --><br>Reemplaza este bloque con el iframe de Google Maps de la sucursal Costa del Este.</p>
+        </div>
+      </div>
+    </div>
+    <p style="text-align:center;font-size:.75rem;color:var(--warm);font-style:italic;margin-top:1.5rem" class="rv">Para insertar los mapas: en Google Maps busca cada sucursal → Compartir → Insertar mapa → copia el código iframe y pégalo aquí.</p>
+  </div>
+</section>
+
+<!-- SUCURSALES CARDS -->
+<div class="franja"></div>
+<section class="suc">
+  <div class="w">
+    <div class="suc-hdr"><p class="eyebrow rv">Tre sedi</p><h2 class="h2 rv" style="transition-delay:.1s">Nuestras<br><em>sucursales</em></h2></div>
+    <div class="suc-g">
+      <div class="suc-card rv suc-foto-1"><div class="suc-foto suc-foto-1"><div class="suc-foto-bg"></div><div class="suc-foto-lbl"><!-- FOTO SUCURSAL EL CANGREJO --></div></div><div class="suc-body"><div class="suc-ico"><svg viewBox="0 0 24 24" fill="none" stroke="var(--rojo)" stroke-width="1.5" stroke-linecap="round"><path d="M12 2 Q18 2 18 9 Q18 15 12 22 Q6 15 6 9 Q6 2 12 2 Z"/><circle cx="12" cy="9" r="2.5"/></svg></div><div class="suc-nom">El Cangrejo</div><div class="suc-dir">Ciudad de Panamá · El Cangrejo</div><div class="suc-tel">6962-4549</div><div class="suc-hora">Lun — Dom · 11:30 am – 10:00 pm</div><a href="https://wa.me/50769624549" class="suc-wa" target="_blank"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>WhatsApp</a></div></div>
+      <div class="suc-card rv suc-foto-2" style="transition-delay:.12s"><div class="suc-foto suc-foto-2"><div class="suc-foto-bg"></div><div class="suc-foto-lbl"><!-- FOTO SUCURSAL SAN FRANCISCO --></div></div><div class="suc-body"><div class="suc-ico"><svg viewBox="0 0 24 24" fill="none" stroke="var(--rojo)" stroke-width="1.5" stroke-linecap="round"><path d="M12 2 Q18 2 18 9 Q18 15 12 22 Q6 15 6 9 Q6 2 12 2 Z"/><circle cx="12" cy="9" r="2.5"/></svg></div><div class="suc-nom">San Francisco</div><div class="suc-dir">Ciudad de Panamá · San Francisco</div><div class="suc-tel">6955-8884</div><div class="suc-hora">Lun — Dom · 11:30 am – 10:00 pm</div><a href="https://wa.me/50769558884" class="suc-wa" target="_blank"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>WhatsApp</a></div></div>
+      <div class="suc-card rv suc-foto-3" style="transition-delay:.24s"><div class="suc-foto suc-foto-3"><div class="suc-foto-bg"></div><div class="suc-foto-lbl"><!-- FOTO SUCURSAL COSTA DEL ESTE --></div></div><div class="suc-body"><div class="suc-ico"><svg viewBox="0 0 24 24" fill="none" stroke="var(--rojo)" stroke-width="1.5" stroke-linecap="round"><path d="M12 2 Q18 2 18 9 Q18 15 12 22 Q6 15 6 9 Q6 2 12 2 Z"/><circle cx="12" cy="9" r="2.5"/></svg></div><div class="suc-nom">Costa del Este</div><div class="suc-dir">Ciudad de Panamá · Costa del Este</div><div class="suc-tel">6559-1711</div><div class="suc-hora">Lun — Dom · 11:30 am – 10:00 pm</div><a href="https://wa.me/50765591711" class="suc-wa" target="_blank"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>WhatsApp</a></div></div>
+    </div>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="footer-g">
+    <div class="footer-m"><img class="footer-logo" src="katane_logo.png" alt="Katané Pizza"/><p>Restaurante siciliano auténtico en Panamá. Tres sucursales, una sola tradición desde 2015.</p><div class="footer-redes"><a href="#" class="rs" aria-label="Instagram"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r=".5" fill="currentColor"/></svg></a><a href="#" class="rs" aria-label="Facebook"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg></a><a href="#" class="rs" aria-label="TikTok"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M9 12a4 4 0 1 0 4 4V4a5 5 0 0 0 5 5"/></svg></a></div></div>
+    <div class="footer-col"><h4>Menú</h4><ul><li><a href="menu.html">Pizzas artesanales</a></li><li><a href="menu.html">Pastas frescas</a></li><li><a href="menu.html">Risottos</a></li><li><a href="menu.html">Postres</a></li></ul></div>
+    <div class="footer-col"><h4>Katané</h4><ul><li><a href="historia.html">Nuestra historia</a></li><li><a href="historia.html#masa">La masa</a></li><li><a href="blog.html">Blog</a></li></ul></div>
+    <div class="footer-col"><h4>Contacto</h4><ul><li><a href="tel:+50769624549">6962-4549 · El Cangrejo</a></li><li><a href="tel:+50769558884">6955-8884 · San Francisco</a></li><li><a href="tel:+50765591711">6559-1711 · Costa del Este</a></li><li><a href="mailto:katanepizza@gmail.com">katanepizza@gmail.com</a></li></ul></div>
+  </div>
+  <div class="footer-bot"><p>© 2024 Katané Pizza, Panamá. Tutti i diritti riservati.</p><div style="display:flex;gap:1.5rem"><a href="https://katanepizza.com/politica-de-privacidad/" target="_blank">Privacidad</a><a href="https://katanepizza.com/terminos-y-condiciones/" target="_blank">Términos</a></div></div>
+</footer>
+<script src="katane.js"></script>
+</body>
+</html>

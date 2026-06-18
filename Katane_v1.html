@@ -1,0 +1,1639 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Katané Pizza</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400;1,600&family=Jost:wght@300;400;500&family=Pacifico&display=swap" rel="stylesheet"/>
+
+<style>
+/* ═══════════════════════════════════════════
+   TOKENS
+═══════════════════════════════════════════ */
+:root {
+  --crema:      #FAF5EA;
+  --arena:      #F0E6CC;
+  --arena-med:  #DDD0B0;
+  --piedra:     #C8B89A;
+  --rojo:       #B83A18;
+  --rojo-osc:   #8C2010;
+  --terracota:  #C85028;
+  --limon:      #B89420;
+  --oliva:      #4E6438;
+  --oliva-clr:  #7A8E5C;
+  --warm:       #6E5840;
+  --tinta:      #281808;
+  --noche:      #180C04;
+  --azul:       #2A5080;
+
+  --ff-d: 'Cormorant Garamond', Georgia, serif;
+  --ff-b: 'Jost', system-ui, sans-serif;
+  --ff-s: 'Pacifico', cursive;
+
+  --pad: clamp(4rem, 8vw, 7rem);
+  --w:   1180px;
+  --g:   clamp(1.25rem, 4vw, 3rem);
+  --ease: cubic-bezier(.25,.46,.45,.94);
+  --shadow: 0 4px 28px rgba(40,24,8,.10);
+}
+
+*,*::before,*::after { box-sizing:border-box; margin:0; padding:0; }
+html { scroll-behavior:smooth; }
+body {
+  background: var(--crema);
+  color: var(--tinta);
+  font-family: var(--ff-b);
+  font-weight: 300;
+  font-size: 16px;
+  line-height: 1.75;
+  overflow-x: hidden;
+}
+img { display:block; max-width:100%; }
+a { color:inherit; text-decoration:none; }
+button { cursor:pointer; border:none; background:none; font:inherit; color:inherit; }
+.w { max-width:var(--w); margin-inline:auto; padding-inline:var(--g); }
+
+/* ── REVEAL ────────────────────────────── */
+.rv    { opacity:0; transform:translateY(24px); transition:opacity .8s var(--ease),transform .8s var(--ease); }
+.rv.on { opacity:1; transform:none; }
+.rl    { opacity:0; transform:translateX(-28px); transition:opacity .85s var(--ease),transform .85s var(--ease); }
+.rl.on { opacity:1; transform:none; }
+.rr    { opacity:0; transform:translateX(28px);  transition:opacity .85s var(--ease),transform .85s var(--ease); }
+.rr.on { opacity:1; transform:none; }
+
+/* ── TIPO ──────────────────────────────── */
+.eyebrow {
+  font-family: var(--ff-b);
+  font-size: .7rem;
+  font-weight: 500;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+  color: var(--terracota);
+  display: flex;
+  align-items: center;
+  gap: .75rem;
+  margin-bottom: .65rem;
+}
+.eyebrow::before, .eyebrow::after {
+  content: '';
+  display: inline-block;
+  width: 1.75rem;
+  height: 1px;
+  background: var(--limon);
+  opacity: .7;
+}
+
+.h2 {
+  font-family: var(--ff-d);
+  font-size: clamp(2rem, 4vw, 3.6rem);
+  font-weight: 400;
+  line-height: 1.12;
+  letter-spacing: -.01em;
+}
+.h2 em { font-style:italic; color:var(--terracota); }
+
+/* ── BOTONES ───────────────────────────── */
+.btn-r {
+  display:inline-flex; align-items:center; gap:.5rem;
+  padding:.8rem 2rem;
+  background:var(--rojo); color:var(--crema);
+  font-family:var(--ff-b); font-size:.78rem; font-weight:500;
+  letter-spacing:.1em; text-transform:uppercase;
+  border:2px solid var(--rojo); border-radius:1px;
+  transition:background .3s,transform .2s;
+}
+.btn-r:hover { background:var(--rojo-osc); border-color:var(--rojo-osc); transform:translateY(-2px); }
+.btn-o {
+  display:inline-flex; align-items:center; gap:.5rem;
+  padding:.8rem 2rem;
+  background:transparent; color:var(--tinta);
+  font-family:var(--ff-b); font-size:.78rem; font-weight:500;
+  letter-spacing:.1em; text-transform:uppercase;
+  border:2px solid var(--piedra); border-radius:1px;
+  transition:border-color .3s,color .3s,transform .2s;
+}
+.btn-o:hover { border-color:var(--terracota); color:var(--terracota); transform:translateY(-2px); }
+
+/* ── DIVISOR BALCÓN ────────────────────── */
+/* SVG hierro forjado siciliano — separador entre secciones */
+.div-balcon {
+  display:flex; align-items:center; gap:1.5rem;
+  margin-block: 2.5rem; opacity:.35;
+}
+.div-balcon::before, .div-balcon::after {
+  content:''; flex:1; height:1px;
+  background:linear-gradient(90deg,transparent,var(--limon),transparent);
+}
+
+/* ── FRANJA MAIOLICA ───────────────────── */
+.franja {
+  height:8px;
+  background: repeating-linear-gradient(
+    90deg,
+    var(--azul) 0, var(--azul) 8px,
+    #fff 8px, #fff 10px,
+    var(--limon) 10px, var(--limon) 12px,
+    #fff 12px, #fff 14px,
+    var(--azul) 14px, var(--azul) 22px,
+    var(--crema) 22px, var(--crema) 24px
+  );
+  opacity:.45;
+}
+
+/* ── TEXTURA PIEDRA ────────────────────── */
+.piedra-bg {
+  position:relative;
+  background-color: var(--arena);
+}
+.piedra-bg::before {
+  content:''; position:absolute; inset:0; pointer-events:none; z-index:0;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='400'%3E%3Cfilter id='p'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65 0.45' numOctaves='5' seed='8' stitchTiles='stitch'/%3E%3CfeColorMatrix type='matrix' values='0 0 0 0 0.92 0 0 0 0 0.86 0 0 0 0 0.76 0 0 0 0.4 0'/%3E%3C/filter%3E%3Crect width='400' height='400' filter='url(%23p)'/%3E%3C/svg%3E");
+  mix-blend-mode:multiply; opacity:.8;
+}
+.piedra-bg > * { position:relative; z-index:1; }
+
+/* ═══════════════════════════════════════════
+   NAV
+═══════════════════════════════════════════ */
+.nav {
+  position:fixed; top:0; left:0; right:0; z-index:200;
+  padding:1rem var(--g);
+  display:flex; align-items:center; justify-content:space-between;
+  transition:background .5s, box-shadow .5s, padding .4s;
+}
+.nav.on {
+  background:rgba(250,245,234,.97);
+  backdrop-filter:blur(12px);
+  box-shadow:0 1px 18px rgba(40,24,8,.08);
+  padding-top:.75rem; padding-bottom:.75rem;
+}
+.nav-logo img {
+  height:40px; width:auto;
+  mix-blend-mode:multiply;
+  transition:height .4s;
+}
+.nav.on .nav-logo img { height:34px; }
+.nav-links { display:flex; gap:2rem; list-style:none; }
+.nav-links a {
+  font-size:.72rem; font-weight:500; letter-spacing:.1em;
+  text-transform:uppercase; color:var(--tinta); opacity:.65;
+  transition:opacity .25s, color .25s;
+}
+.nav-links a:hover { opacity:1; color:var(--terracota); }
+.nav-cta {
+  font-size:.72rem; font-weight:500; letter-spacing:.1em; text-transform:uppercase;
+  padding:.5rem 1.35rem; border:1.5px solid var(--terracota);
+  color:var(--terracota); border-radius:1px;
+  transition:background .25s, color .25s;
+}
+.nav-cta:hover { background:var(--terracota); color:var(--crema); }
+.hamb { display:none; flex-direction:column; gap:5px; }
+.hamb span { display:block; width:24px; height:1.5px; background:var(--tinta); border-radius:1px; transition:transform .3s,opacity .25s; }
+.hamb.open span:nth-child(1) { transform:translateY(6.5px) rotate(45deg); }
+.hamb.open span:nth-child(2) { opacity:0; }
+.hamb.open span:nth-child(3) { transform:translateY(-6.5px) rotate(-45deg); }
+.mm { display:none; position:fixed; inset:0; z-index:199; background:var(--crema); flex-direction:column; align-items:center; justify-content:center; gap:2.5rem; }
+.mm.open { display:flex; }
+.mm a { font-family:var(--ff-d); font-size:clamp(2rem,5vw,2.8rem); font-weight:400; color:var(--tinta); transition:color .25s; }
+.mm a:hover { color:var(--terracota); }
+
+/* ═══════════════════════════════════════════
+   HERO — Foto ciudad siciliana con overlay
+═══════════════════════════════════════════ */
+.hero {
+  min-height:100svh;
+  position:relative;
+  display:flex; align-items:center;
+  overflow:hidden;
+}
+
+/* ── FOTO PLACEHOLDER — ciudad siciliana ── */
+/* Cuando tengas la foto real, reemplaza este background por:
+   background: url('tu-foto.jpg') center/cover no-repeat;         */
+.hero-foto {
+  position:absolute; inset:0;
+   background: url('sicilia.jpg') center/cover no-repeat;
+}
+/* Silueta arquitectura — campanile, cúpulas, balcones */
+.hero-silueta {
+  position:absolute;
+  bottom:0; left:0; right:0;
+  height:45%;
+  pointer-events:none;
+  z-index:1;
+}
+/* Overlay oscuro elegante */
+.hero-overlay {
+  position:absolute; inset:0; z-index:2;
+  background: rgba(24,12,4,.82);
+}
+/* Texto marcador para foto real */
+.hero-foto-label {
+  position:absolute;
+  top:50%; left:50%;
+  transform:translate(-50%,-50%);
+  z-index:1;
+  font-family:var(--ff-b);
+  font-size:.65rem;
+  letter-spacing:.2em;
+  text-transform:uppercase;
+  color:rgba(250,245,234,.25);
+  border:1px solid rgba(250,245,234,.12);
+  padding:.5rem 1.25rem;
+  white-space:nowrap;
+  pointer-events:none;
+}
+
+.hero-body {
+  position:relative; z-index:3;
+  text-align:center;
+  max-width:760px;
+  margin-inline:auto;
+  padding-block:6rem 4rem;
+  padding-inline:var(--g);
+}
+
+/* LOGO en el hero */
+.hero-logo {
+  margin-bottom:2rem;
+  opacity:0; animation:sube 1.1s .2s var(--ease) forwards;
+}
+.hero-logo img {
+  height: clamp(200px, 30vw, 360px); width: auto;
+  margin-inline: auto;
+}
+
+.hero-nombre {
+  font-family:var(--ff-d);
+  font-size:clamp(.65rem,1.2vw,.85rem);
+  font-weight:400;
+  letter-spacing:.35em;
+  text-transform:uppercase;
+  color:rgba(250,245,234,.5);
+  margin-bottom:.5rem;
+  opacity:0; animation:sube 1s .45s var(--ease) forwards;
+}
+.hero-eslogan {
+  font-family:var(--ff-s);
+  font-size:clamp(1.25rem,2.8vw,2rem);
+  color:var(--crema);
+  line-height:1.35;
+  opacity:0; animation:sube 1s .65s var(--ease) forwards;
+  margin-bottom:1rem;
+}
+.hero-sub {
+  font-family:var(--ff-d);
+  font-size:clamp(1.05rem,1.8vw,1.35rem);
+  font-style:italic;
+  color:rgba(250,245,234,.7);
+  line-height:1.7;
+  max-width:560px;
+  margin-inline:auto;
+  opacity:0; animation:sube 1s .85s var(--ease) forwards;
+}
+.hero-btns {
+  display:flex; flex-wrap:wrap; gap:1rem; justify-content:center;
+  margin-top:2.5rem;
+  opacity:0; animation:sube 1s 1.1s var(--ease) forwards;
+}
+.btn-r-inv {
+  display:inline-flex; align-items:center; gap:.5rem;
+  padding:.8rem 2rem;
+  background:var(--rojo); color:var(--crema);
+  font-family:var(--ff-b); font-size:.78rem; font-weight:500;
+  letter-spacing:.1em; text-transform:uppercase;
+  border:2px solid var(--rojo); border-radius:1px;
+  transition:background .3s,transform .2s;
+}
+.btn-r-inv:hover { background:var(--rojo-osc); border-color:var(--rojo-osc); transform:translateY(-2px); }
+.btn-o-inv {
+  display:inline-flex; align-items:center; gap:.5rem;
+  padding:.8rem 2rem;
+  background:transparent; color:rgba(250,245,234,.82);
+  font-family:var(--ff-b); font-size:.78rem; font-weight:500;
+  letter-spacing:.1em; text-transform:uppercase;
+  border:2px solid rgba(250,245,234,.35); border-radius:1px;
+  transition:border-color .3s,color .3s,transform .2s;
+}
+.btn-o-inv:hover { border-color:var(--crema); color:var(--crema); transform:translateY(-2px); }
+
+/* Scroll indicator */
+.hero-scroll {
+  position:absolute; bottom:1.75rem; left:50%; transform:translateX(-50%);
+  z-index:3;
+  display:flex; flex-direction:column; align-items:center; gap:.35rem;
+  font-family:var(--ff-b); font-size:.62rem; font-weight:500;
+  letter-spacing:.18em; text-transform:uppercase;
+  color:rgba(250,245,234,.38);
+  opacity:0; animation:sube 1s 2s ease forwards;
+}
+.scroll-l { width:1px; height:34px; background:linear-gradient(to bottom,rgba(250,245,234,.5),transparent); animation:pulsa 2s 2.5s ease-in-out infinite; }
+
+@keyframes sube { from{opacity:0;transform:translateY(18px)} to{opacity:1;transform:translateY(0)} }
+@keyframes pulsa { 0%,100%{opacity:1;transform:scaleY(1);transform-origin:top} 50%{opacity:.3;transform:scaleY(.55)} }
+
+/* ═══════════════════════════════════════════
+   CINTA
+═══════════════════════════════════════════ */
+.cinta { background:var(--rojo); padding:.8rem 0; overflow:hidden; }
+.cinta-pista { display:flex; gap:3.5rem; animation:corre 30s linear infinite; white-space:nowrap; }
+.cinta-pista span { font-family:var(--ff-d); font-style:italic; font-size:.92rem; color:rgba(250,245,234,.8); flex-shrink:0; }
+.cinta-pista .sep { font-style:normal; color:var(--limon); font-size:.7rem; }
+@keyframes corre { from{transform:translateX(0)} to{transform:translateX(-50%)} }
+
+/* ═══════════════════════════════════════════
+   HISTORIA
+═══════════════════════════════════════════ */
+.historia { padding:var(--pad) 0; }
+.historia-g {
+  display:grid; grid-template-columns:1fr 1fr;
+  gap:clamp(2.5rem,6vw,6rem); align-items:start;
+}
+/* Foto placeholder historia */
+.foto-historia {
+  position:relative;
+  aspect-ratio:4/5;
+  border-radius:3px; overflow:hidden;
+  box-shadow:var(--shadow);
+}
+.foto-historia-bg {
+  position:absolute; inset:0;
+  /* FOTO HISTORIA — reemplazar con: url('foto-historia.jpg') center/cover */
+  background:linear-gradient(145deg,#C8956A,#9A6040 35%,#703818 65%,#481808);
+}
+.foto-historia-lbl {
+  position:absolute; bottom:1.25rem; left:50%; transform:translateX(-50%);
+  background:rgba(250,245,234,.92); padding:.35rem 1rem;
+  font-family:var(--ff-d); font-style:italic; font-size:.74rem; color:var(--tinta);
+  white-space:nowrap; border-radius:1px;
+}
+/* Marcador placeholder */
+.foto-placeholder-txt {
+  position:absolute; top:50%; left:50%; transform:translate(-50%,-50%);
+  font-size:.6rem; letter-spacing:.18em; text-transform:uppercase;
+  color:rgba(250,245,234,.22); text-align:center; line-height:1.8;
+  pointer-events:none;
+}
+
+/* Timeline */
+.tl-wrap { margin-top:2.25rem; position:relative; padding-top:.85rem; }
+.tl-wrap::before {
+  content:''; position:absolute; top:.85rem; left:0; right:0; height:1px;
+  background:linear-gradient(90deg,var(--rojo),var(--limon),var(--oliva-clr));
+  opacity:.28;
+}
+.tl-items { display:flex; }
+.tl-item { flex:1; text-align:center; padding-top:2rem; position:relative; }
+.tl-dot {
+  position:absolute; top:.35rem; left:50%; transform:translateX(-50%);
+  width:10px; height:10px; border-radius:50%;
+  background:var(--rojo); border:2px solid var(--crema);
+  box-shadow:0 0 0 2px var(--rojo);
+}
+.tl-y { font-family:var(--ff-d); font-weight:700; font-size:.8rem; color:var(--rojo); letter-spacing:.05em; }
+.tl-e { font-size:.72rem; font-style:italic; color:var(--warm); line-height:1.35; margin-top:.15rem; }
+
+.h-txt .h2 { margin-bottom:1.5rem; }
+.h-p { font-size:1rem; color:var(--warm); line-height:1.9; }
+.h-p+.h-p { margin-top:1rem; }
+.h-cita {
+  margin-top:2.25rem; padding:1.5rem 1.75rem;
+  background:var(--arena);
+  border-left:3px solid var(--rojo);
+  border-radius:0 3px 3px 0;
+  font-family:var(--ff-d); font-style:italic;
+  font-size:1.15rem; color:var(--tinta); line-height:1.6;
+}
+.h-cita cite { display:block; margin-top:.6rem; font-style:normal; font-size:.74rem; color:var(--terracota); letter-spacing:.07em; }
+
+/* ═══════════════════════════════════════════
+   BANDA ESTADÍSTICAS
+═══════════════════════════════════════════ */
+.stats {
+  background:var(--azul);
+  padding:3.25rem 0;
+  position:relative; overflow:hidden;
+  border-top:3px solid var(--limon); border-bottom:3px solid var(--limon);
+}
+.stats::before {
+  content:''; position:absolute; inset:0; pointer-events:none;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='80' height='80'%3E%3Ccircle cx='40' cy='40' r='26' fill='none' stroke='rgba(255,255,255,0.05)' stroke-width='1'/%3E%3Cline x1='40' y1='14' x2='40' y2='66' stroke='rgba(184,148,32,0.07)' stroke-width='1'/%3E%3Cline x1='14' y1='40' x2='66' y2='40' stroke='rgba(184,148,32,0.07)' stroke-width='1'/%3E%3C/svg%3E");
+  z-index:0;
+}
+.stats-inner {
+  position:relative; z-index:2;
+  display:flex; align-items:center; justify-content:center;
+  flex-wrap:wrap; gap:3.5rem;
+}
+.stat { text-align:center; }
+.stat-n { font-family:var(--ff-d); font-size:clamp(2.4rem,5vw,3.8rem); font-weight:400; color:#fff; line-height:1; }
+.stat-l { font-family:var(--ff-d); font-style:italic; font-size:.88rem; color:rgba(255,255,255,.5); letter-spacing:.04em; margin-top:.3rem; }
+.stat-div { width:1px; height:52px; background:rgba(255,255,255,.14); }
+
+/* ═══════════════════════════════════════════
+   MASA — con iconografía artesanal SVG
+═══════════════════════════════════════════ */
+.masa { padding:var(--pad) 0; }
+.masa-g { display:grid; grid-template-columns:1fr 1fr; gap:clamp(2.5rem,6vw,6rem); align-items:center; }
+.masa-txt .h2 { margin-bottom:1.5rem; }
+.masa-txt p { font-size:1rem; color:var(--warm); line-height:1.9; }
+
+/* Pasos con iconos SVG artesanales */
+.masa-pasos { margin-top:2.25rem; display:flex; flex-direction:column; gap:1.5rem; }
+.paso-art {
+  display:flex; gap:1.25rem; align-items:flex-start;
+}
+.paso-icono {
+  width:2.6rem; height:2.6rem; flex-shrink:0;
+  background:var(--arena); border-radius:50%;
+  display:flex; align-items:center; justify-content:center;
+  border:1.5px solid var(--arena-med);
+  margin-top:.1rem;
+}
+.paso-icono svg { width:1.2rem; height:1.2rem; }
+.paso-txt h4 { font-family:var(--ff-d); font-weight:600; font-size:1rem; margin-bottom:.2rem; }
+.paso-txt p  { font-size:.88rem; color:var(--warm); line-height:1.7; }
+
+/* Círculo masa */
+.masa-vis { display:flex; align-items:center; justify-content:center; }
+.masa-c-wrap { position:relative; width:min(88%,400px); aspect-ratio:1; }
+.masa-c {
+  position:absolute; inset:0; border-radius:50%;
+  background:radial-gradient(ellipse at 38% 32%,#E8C49A,#C4895A 28%,#A0582A 55%,#7A3D18 78%,#4A2208);
+  box-shadow:0 8px 36px rgba(184,58,24,.22),inset 0 -4px 18px rgba(0,0,0,.12);
+}
+.masa-c-txt {
+  position:absolute; inset:0;
+  display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center; padding:2rem;
+}
+.mc-n { font-family:var(--ff-d); font-size:clamp(3.2rem,6.5vw,5rem); font-weight:300; color:rgba(250,245,234,.9); line-height:1; }
+.mc-u { font-family:var(--ff-d); font-style:italic; font-size:.9rem; color:rgba(250,245,234,.55); margin-top:.2rem; }
+.mc-d { font-size:.65rem; color:rgba(250,245,234,.38); letter-spacing:.12em; text-transform:uppercase; margin-top:.35rem; }
+.masa-ring  { position:absolute; inset:-13px; border-radius:50%; border:1.5px dashed rgba(184,148,32,.28); animation:gira 35s linear infinite; }
+.masa-ring2 { position:absolute; inset:-25px; border-radius:50%; border:.5px solid rgba(184,148,32,.1); }
+@keyframes gira { to{transform:rotate(360deg)} }
+
+/* Foto masa artesanal placeholder */
+.foto-masa {
+  position:absolute; bottom:-2rem; right:-2rem;
+  width:120px; height:120px;
+  background:linear-gradient(135deg,var(--oliva),#2E4226);
+  border-radius:3px; border:5px solid var(--crema);
+  box-shadow:var(--shadow);
+  display:flex; align-items:center; justify-content:center;
+}
+.foto-masa svg { width:44px; height:44px; }
+
+/* ═══════════════════════════════════════════
+   ESPECIALIDADES — Los 8 platos destacados
+═══════════════════════════════════════════ */
+.menu-dest { padding:var(--pad) 0; }
+.menu-cab {
+  display:flex; align-items:flex-end; justify-content:space-between;
+  flex-wrap:wrap; gap:1.5rem;
+  margin-bottom:clamp(2rem,4.5vw,3.5rem);
+}
+.menu-tabs { display:flex; border:1.5px solid var(--arena-med); border-radius:2px; overflow:hidden; }
+.mtab {
+  padding:.58rem 1.25rem;
+  font-family:var(--ff-b); font-size:.72rem; font-weight:500; letter-spacing:.06em;
+  color:var(--warm); border-right:1px solid var(--arena-med);
+  transition:background .25s,color .25s;
+}
+.mtab:last-child { border-right:none; }
+.mtab.on,.mtab:hover { background:var(--rojo); color:var(--crema); }
+.mpanel { display:none; }
+.mpanel.on { display:block; }
+
+.platos-g {
+  display:grid; grid-template-columns:1fr 1fr;
+  gap:1px; background:var(--arena-med);
+  border:1px solid var(--arena-med);
+  border-radius:3px; overflow:hidden;
+}
+.plato {
+  background:var(--crema);
+  padding:1.6rem 1.85rem;
+  display:grid; grid-template-columns:auto 1fr auto;
+  gap:.4rem 1rem; align-items:start;
+  transition:background .25s;
+  position:relative;
+}
+.plato:hover { background:var(--arena); }
+/* Icono artesanal en cada plato */
+.plato-icono {
+  grid-column:1; grid-row:1/3;
+  width:2.25rem; height:2.25rem;
+  display:flex; align-items:center; justify-content:center;
+  background:var(--arena); border-radius:50%;
+  border:1px solid var(--arena-med);
+  flex-shrink:0; align-self:center;
+}
+.plato-icono svg { width:1.1rem; height:1.1rem; }
+.plato-nom { font-family:var(--ff-d); font-size:1.08rem; font-weight:600; grid-column:2; }
+.plato-prc { font-family:var(--ff-d); font-size:1rem; font-weight:600; color:var(--terracota); white-space:nowrap; grid-column:3; grid-row:1; }
+.plato-des { font-size:.84rem; color:var(--warm); line-height:1.6; grid-column:2/-1; font-style:italic; }
+.plato-tag { grid-column:2; font-size:.64rem; letter-spacing:.1em; text-transform:uppercase; color:var(--oliva); font-family:var(--ff-b); font-weight:500; }
+
+.menu-ver-mas {
+  display:flex; justify-content:center; margin-top:2.5rem;
+}
+
+/* ═══════════════════════════════════════════
+   EXPERIENCIA KATANÉ
+═══════════════════════════════════════════ */
+.exp {
+  padding:var(--pad) 0;
+  background:var(--rojo); color:var(--crema);
+  position:relative; overflow:hidden;
+}
+.exp::before {
+  content:''; position:absolute; inset:0; pointer-events:none;
+  background:radial-gradient(ellipse 60% 70% at 15% 50%,rgba(250,245,234,.04) 0%,transparent 60%),
+             radial-gradient(ellipse 45% 55% at 88% 30%,rgba(184,148,32,.06) 0%,transparent 55%);
+}
+.exp-wm {
+  position:absolute; top:50%; left:50%; transform:translate(-50%,-50%);
+  width:min(40vw,380px); pointer-events:none; z-index:0;
+  opacity:.04; mix-blend-mode:screen;
+}
+.exp-int { position:relative; z-index:2; text-align:center; max-width:740px; margin-inline:auto; }
+.exp-int .eyebrow { justify-content:center; color:var(--limon); }
+.exp-int .eyebrow::before,.exp-int .eyebrow::after { background:rgba(250,245,234,.3); }
+.exp-int .h2 { color:var(--crema); font-size:clamp(2rem,4.2vw,3.5rem); margin-bottom:1.4rem; }
+.exp-int .h2 em { color:var(--limon); }
+.exp-sub { font-family:var(--ff-d); font-style:italic; font-size:1.15rem; color:rgba(250,245,234,.72); line-height:1.85; max-width:560px; margin-inline:auto; }
+
+/* Cards con iconos artesanales SVG */
+.exp-cards { display:grid; grid-template-columns:repeat(3,1fr); gap:1.4rem; margin-top:3.25rem; text-align:left; }
+.exp-card {
+  padding:2rem; background:rgba(250,245,234,.08);
+  border:1px solid rgba(250,245,234,.12); border-radius:3px;
+  transition:background .3s;
+}
+.exp-card:hover { background:rgba(250,245,234,.13); }
+.exp-card-ico { margin-bottom:1.1rem; }
+.exp-card-ico svg { width:2rem; height:2rem; }
+.exp-card h3 { font-family:var(--ff-d); font-size:1.2rem; font-weight:600; color:var(--crema); margin-bottom:.5rem; }
+.exp-card p  { font-size:.86rem; color:rgba(250,245,234,.58); line-height:1.7; }
+
+/* ═══════════════════════════════════════════
+   SUCURSALES
+═══════════════════════════════════════════ */
+.suc { padding:var(--pad) 0; }
+.suc-hdr { margin-bottom:clamp(2rem,4.5vw,3.5rem); }
+.suc-g { display:grid; grid-template-columns:repeat(3,1fr); gap:1.75rem; }
+.suc-card {
+  background:var(--arena); border:1px solid var(--arena-med);
+  border-radius:3px; overflow:hidden; position:relative;
+  transition:box-shadow .35s,transform .35s;
+}
+.suc-card:hover { box-shadow:var(--shadow); transform:translateY(-4px); }
+.suc-card::before {
+  content:''; position:absolute; inset:0; pointer-events:none;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='s'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.68 0.48' numOctaves='4' seed='6' stitchTiles='stitch'/%3E%3CfeColorMatrix type='matrix' values='0 0 0 0 0.91 0 0 0 0 0.85 0 0 0 0 0.75 0 0 0 0.3 0'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23s)'/%3E%3C/svg%3E");
+  mix-blend-mode:multiply; opacity:.7; z-index:0;
+}
+/* Foto sucursal placeholder */
+.suc-foto {
+  width:100%; height:160px;
+  position:relative; overflow:hidden;
+}
+.suc-foto-bg { position:absolute; inset:0; }
+.suc-foto-lbl {
+  position:absolute; bottom:.75rem; left:50%; transform:translateX(-50%);
+  font-size:.58rem; letter-spacing:.16em; text-transform:uppercase;
+  color:rgba(250,245,234,.3); white-space:nowrap; pointer-events:none;
+}
+.suc-foto-1 .suc-foto-bg { background:linear-gradient(135deg,#8B5030,#5A2810); }
+.suc-foto-2 .suc-foto-bg { background:linear-gradient(135deg,#7A4828,#4A1C08); }
+.suc-foto-3 .suc-foto-bg { background:linear-gradient(135deg,#6A4020,#3A1808); }
+
+.suc-body { padding:1.75rem; position:relative; z-index:1; }
+.suc-ico { margin-bottom:.75rem; }
+.suc-ico svg { width:1.4rem; height:1.4rem; }
+.suc-nom { font-family:var(--ff-d); font-size:1.35rem; font-weight:600; margin-bottom:.5rem; }
+.suc-dir { font-size:.84rem; color:var(--warm); line-height:1.6; font-style:italic; }
+.suc-tel { margin-top:.75rem; font-family:var(--ff-b); font-size:.8rem; font-weight:500; color:var(--rojo); }
+.suc-hora { margin-top:.6rem; font-size:.7rem; letter-spacing:.08em; text-transform:uppercase; color:var(--warm); opacity:.7; }
+/* Acento superior */
+.suc-card::after {
+  content:''; position:absolute; top:0; left:0; right:0; height:3px;
+  background:linear-gradient(90deg,var(--rojo),var(--limon));
+  transform:scaleX(0); transform-origin:left; transition:transform .4s var(--ease); z-index:2;
+}
+.suc-card:hover::after { transform:scaleX(1); }
+.suc-wa {
+  display:inline-flex; align-items:center; gap:.45rem;
+  margin-top:1.25rem; font-size:.76rem; font-weight:500; letter-spacing:.06em;
+  color:var(--warm); transition:color .25s;
+}
+.suc-card:hover .suc-wa { color:var(--rojo); }
+.suc-wa svg { width:.9rem; height:.9rem; }
+
+/* ═══════════════════════════════════════════
+   VALORES
+═══════════════════════════════════════════ */
+.valores { padding:var(--pad) 0; }
+.valores-g {
+  display:grid; grid-template-columns:repeat(5,1fr);
+  gap:1.5rem; margin-top:3rem;
+}
+.valor {
+  text-align:center; padding:2rem 1rem;
+  background:var(--arena); border:1px solid var(--arena-med);
+  border-radius:3px;
+  transition:transform .3s var(--ease),box-shadow .3s;
+}
+.valor:hover { transform:translateY(-5px); box-shadow:var(--shadow); }
+.valor-ico { margin-bottom:1rem; display:flex; justify-content:center; }
+.valor-ico svg { width:2rem; height:2rem; }
+.valor h3 { font-family:var(--ff-d); font-size:1.1rem; font-weight:600; color:var(--tinta); margin-bottom:.35rem; }
+.valor p  { font-size:.8rem; color:var(--warm); line-height:1.6; font-style:italic; }
+
+/* ═══════════════════════════════════════════
+   CONTACTO CTA
+═══════════════════════════════════════════ */
+.cto {
+  padding:var(--pad) 0;
+  background:var(--noche);
+  text-align:center; position:relative; overflow:hidden;
+}
+.cto::before {
+  content:''; position:absolute; inset:0;
+  background:radial-gradient(ellipse 55% 60% at 50% 50%,rgba(184,58,24,.1) 0%,transparent 65%);
+  pointer-events:none;
+}
+.cto-wm {
+  position:absolute; top:50%; left:50%; transform:translate(-50%,-50%);
+  width:min(35vw,320px); pointer-events:none; z-index:0;
+  opacity:.04; mix-blend-mode:screen;
+}
+.cto-int { position:relative; z-index:2; max-width:580px; margin-inline:auto; }
+.cto-int .eyebrow { justify-content:center; color:var(--limon); }
+.cto-int .eyebrow::before,.cto-int .eyebrow::after { background:rgba(245,235,210,.25); }
+.cto-int .h2 { color:var(--arena); margin-bottom:1.4rem; }
+.cto-int .h2 em { color:var(--rojo); }
+.cto-int p { color:rgba(245,235,210,.58); font-size:1rem; line-height:1.85; }
+.cto-btns { display:flex; flex-wrap:wrap; gap:1rem; justify-content:center; margin-top:2.25rem; }
+.btn-crema {
+  display:inline-flex; align-items:center; gap:.5rem;
+  padding:.85rem 2rem;
+  background:var(--crema); color:var(--rojo);
+  font-family:var(--ff-b); font-size:.78rem; font-weight:500;
+  letter-spacing:.1em; text-transform:uppercase;
+  border:2px solid var(--crema); border-radius:1px;
+  transition:background .3s,transform .2s;
+}
+.btn-crema:hover { background:var(--arena); transform:translateY(-2px); }
+.btn-tr {
+  display:inline-flex; align-items:center; gap:.5rem;
+  padding:.85rem 2rem;
+  background:transparent; color:rgba(245,235,210,.72);
+  font-family:var(--ff-b); font-size:.78rem; font-weight:500;
+  letter-spacing:.1em; text-transform:uppercase;
+  border:2px solid rgba(245,235,210,.22); border-radius:1px;
+  transition:border-color .3s,color .3s,transform .2s;
+}
+.btn-tr:hover { border-color:rgba(245,235,210,.55); color:var(--arena); transform:translateY(-2px); }
+
+/* Contactos sucursales */
+.cto-suc {
+  display:grid; grid-template-columns:repeat(3,1fr); gap:1.25rem;
+  margin-top:3rem;
+}
+.cto-suc-item {
+  padding:1.35rem; background:rgba(250,245,234,.05);
+  border:1px solid rgba(250,245,234,.1); border-radius:3px;
+  text-align:center;
+}
+.cto-suc-item h4 { font-family:var(--ff-d); font-size:1rem; font-weight:600; color:var(--arena); margin-bottom:.4rem; }
+.cto-suc-item a { font-size:.85rem; color:rgba(245,235,210,.55); display:block; transition:color .25s; }
+.cto-suc-item a:hover { color:var(--limon); }
+
+/* ═══════════════════════════════════════════
+   FOOTER
+═══════════════════════════════════════════ */
+.footer { background:#120804; padding:4.5rem var(--g) 2.25rem; border-top:1px solid rgba(184,58,24,.14); }
+.footer-g {
+  display:grid; grid-template-columns:2fr 1fr 1fr 1fr;
+  gap:2.75rem; padding-bottom:3.5rem;
+  border-bottom:1px solid rgba(245,235,210,.05);
+  max-width:var(--w); margin-inline:auto;
+}
+.footer-logo { height:52px; width:auto; display:block; margin-bottom:.9rem; mix-blend-mode:lighten; filter:brightness(1.1); }
+.footer-m p { font-size:.84rem; color:rgba(245,235,210,.38); line-height:1.75; max-width:230px; font-style:italic; }
+.footer-redes { display:flex; gap:.7rem; margin-top:1.4rem; }
+.rs { width:36px; height:36px; border:1px solid rgba(245,235,210,.1); border-radius:50%; display:flex; align-items:center; justify-content:center; color:rgba(245,235,210,.38); transition:border-color .25s,color .25s; }
+.rs:hover { border-color:var(--rojo); color:var(--rojo); }
+.rs svg { width:14px; height:14px; }
+.footer-col h4 { font-family:var(--ff-b); font-size:.68rem; font-weight:500; letter-spacing:.14em; text-transform:uppercase; color:var(--rojo); margin-bottom:1.15rem; }
+.footer-col ul { list-style:none; display:flex; flex-direction:column; gap:.6rem; }
+.footer-col ul a { font-size:.84rem; color:rgba(245,235,210,.38); font-style:italic; transition:color .25s; }
+.footer-col ul a:hover { color:var(--arena); }
+.footer-bot {
+  display:flex; align-items:center; justify-content:space-between;
+  flex-wrap:wrap; gap:1rem; padding-top:1.75rem;
+  max-width:var(--w); margin-inline:auto;
+}
+.footer-bot p,.footer-bot a { font-size:.72rem; color:rgba(245,235,210,.18); font-style:italic; transition:color .25s; }
+.footer-bot a:hover { color:rgba(245,235,210,.5); }
+
+/* ═══════════════════════════════════════════
+   RESPONSIVE
+═══════════════════════════════════════════ */
+@media(max-width:1024px){
+  .nav-links,.nav-cta { display:none; }
+  .hamb { display:flex; }
+  .historia-g,.masa-g { grid-template-columns:1fr; gap:2.5rem; }
+  .masa-vis { order:-1; }
+  .masa-c-wrap { max-width:280px; margin-inline:auto; }
+  .suc-g { grid-template-columns:1fr 1fr; }
+  .footer-g { grid-template-columns:1fr 1fr; }
+  .exp-cards { grid-template-columns:1fr 1fr; }
+  .valores-g { grid-template-columns:repeat(3,1fr); }
+  .cto-suc { grid-template-columns:1fr; gap:.75rem; }
+}
+@media(max-width:767px){
+  .exp-cards,.suc-g,.valores-g { grid-template-columns:1fr; }
+  .footer-g { grid-template-columns:1fr; }
+  .platos-g { grid-template-columns:1fr; }
+  .menu-cab { flex-direction:column; align-items:flex-start; }
+  .tl-wrap { display:none; }
+  .stat-div { display:none; }
+  .stats-inner { gap:2rem; }
+  .cto-suc { grid-template-columns:1fr; }
+}
+@media(prefers-reduced-motion:reduce){
+  *,*::before,*::after { animation-duration:.01ms!important; transition-duration:.01ms!important; }
+}
+</style>
+</head>
+<body>
+
+<!-- ══ NAV ══════════════════════════════════════════════ -->
+<nav class="nav" id="nav">
+  <a class="nav-logo" href="#inicio" aria-label="Katané Pizza — inicio">
+    <img src="katane_logo.png"/>
+  </a>
+  <ul class="nav-links" role="list">
+    <li><a href="#historia">Historia</a></li>
+    <li><a href="#masa">La masa</a></li>
+    <li><a href="#menu-dest">Menú</a></li>
+    <li><a href="#sucursales">Sucursales</a></li>
+    <li><a href="#contacto">Contacto</a></li>
+  </ul>
+  <a href="https://wa.me/50769624549" class="nav-cta" target="_blank" rel="noopener">Reservar mesa</a>
+  <button class="hamb" id="hambBtn" aria-label="Abrir menú" aria-expanded="false">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+<div class="mm" id="mm">
+  <a href="#historia"  class="lm">Historia</a>
+  <a href="#masa"      class="lm">La masa</a>
+  <a href="#menu-dest" class="lm">Menú</a>
+  <a href="#sucursales"class="lm">Sucursales</a>
+  <a href="#contacto"  class="lm">Contacto</a>
+</div>
+
+<!-- ══ HERO ══════════════════════════════════════════════ -->
+<section class="hero" id="inicio">
+  <!-- FOTO HERO SICILIA — reemplazar .hero-foto con background:url('foto.jpg') center/cover -->
+  <div class="hero-foto">
+  </div>
+
+
+  <div class="hero-overlay"></div>
+
+  <div class="w" style="width:100%">
+    <div class="hero-body">
+      <div class="hero-logo">
+        <img src="katane_logo.png"/>
+      </div>
+      <p class="hero-nombre">Restaurante Siciliano · Panamá</p>
+      <h1 class="hero-eslogan">Una pizzería con alma siciliana</h1>
+      <p class="hero-sub">Desde Italia hasta Panamá, compartiendo tradición,<br>familia y auténtico sabor siciliano desde 2015.</p>
+      <div class="hero-btns">
+        <a href="#menu-dest" class="btn-r-inv">Ver el menú</a>
+        <a href="#historia"  class="btn-o-inv">Conoce nuestra historia</a>
+      </div>
+    </div>
+  </div>
+  <div class="hero-scroll" aria-hidden="true">
+    <div class="scroll-l"></div>
+    <span>Desliza</span>
+  </div>
+</section>
+
+<!-- ══ CINTA ══════════════════════════════════════════════ -->
+<div class="cinta" aria-hidden="true">
+  <div class="cinta-pista">
+    <span>Autenticità siciliana</span><span class="sep">✦</span>
+    <span>Gastronomia italiana</span><span class="sep">✦</span>
+    <span>Pasta fresca</span><span class="sep">✦</span>
+    <span>Pizza artesanal</span><span class="sep">✦</span>
+    <span>Fermentazione lenta</span><span class="sep">✦</span>
+    <span>Famiglia e tradizione</span><span class="sep">✦</span>
+    <span>Ingredienti freschi</span><span class="sep">✦</span>
+    <span>Catania, Sicilia</span><span class="sep">✦</span>
+    <span>Autenticità siciliana</span><span class="sep">✦</span>
+    <span>Gastronomia italiana</span><span class="sep">✦</span>
+    <span>Pasta fresca</span><span class="sep">✦</span>
+    <span>Pizza artesanal</span><span class="sep">✦</span>
+    <span>Fermentazione lenta</span><span class="sep">✦</span>
+    <span>Famiglia e tradizione</span><span class="sep">✦</span>
+    <span>Ingredienti freschi</span><span class="sep">✦</span>
+    <span>Catania, Sicilia</span><span class="sep">✦</span>
+  </div>
+</div>
+
+<!-- ══ HISTORIA ══════════════════════════════════════════════ -->
+<div class="franja"></div>
+<section class="historia piedra-bg" id="historia">
+  <div class="w" style="padding-block:var(--pad)">
+    <div class="historia-g">
+      <!-- FOTO HISTORIA -->
+      <div class="rl">
+        <div class="foto-historia">
+          <div class="foto-historia-bg">
+            <div class="foto-placeholder-txt"><!-- FOTO HISTORIA --><br>Speedy Pizza · 2015</div>
+          </div>
+          <div class="foto-historia-lbl">Speedy Pizza · Agosto 2015</div>
+        </div>
+        <div class="tl-wrap">
+          <div class="tl-items">
+            <div class="tl-item"><div class="tl-dot"></div><div class="tl-y">2015</div><div class="tl-e">Speedy Pizza<br>abre en Panamá</div></div>
+            <div class="tl-item"><div class="tl-dot" style="background:var(--limon);box-shadow:0 0 0 2px var(--limon)"></div><div class="tl-y">2018</div><div class="tl-e">Nuevos socios,<br>nueva visión</div></div>
+            <div class="tl-item"><div class="tl-dot" style="background:var(--azul);box-shadow:0 0 0 2px var(--azul)"></div><div class="tl-y">2020</div><div class="tl-e">Nace<br>Katané Pizza</div></div>
+            <div class="tl-item"><div class="tl-dot" style="background:var(--oliva);box-shadow:0 0 0 2px var(--oliva)"></div><div class="tl-y">Hoy</div><div class="tl-e">3 sucursales<br>en Panamá</div></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="h-txt">
+        <p class="eyebrow rv">La nostra storia</p>
+        <h2 class="h2 rv" style="transition-delay:.1s">
+          Un sueño siciliano<br><em>hecho realidad</em>
+        </h2>
+
+        <!-- Divisor balcón SVG hierro forjado -->
+        <div class="div-balcon rv" style="transition-delay:.15s" aria-hidden="true">
+          <svg width="56" height="36" viewBox="0 0 56 36" fill="none">
+            <rect x="0" y="32" width="56" height="2" fill="rgba(184,148,32,0.5)"/>
+            <line x1="8"  y1="32" x2="8"  y2="10" stroke="rgba(184,148,32,0.42)" stroke-width="1.5"/>
+            <line x1="28" y1="32" x2="28" y2="5"  stroke="rgba(184,148,32,0.42)" stroke-width="1.5"/>
+            <line x1="48" y1="32" x2="48" y2="10" stroke="rgba(184,148,32,0.42)" stroke-width="1.5"/>
+            <path d="M 4 10 Q 8 4 12 10"  fill="none" stroke="rgba(184,148,32,0.42)" stroke-width="1.5"/>
+            <path d="M 24 5 Q 28 -1 32 5" fill="none" stroke="rgba(184,148,32,0.42)" stroke-width="1.5"/>
+            <path d="M 44 10 Q 48 4 52 10" fill="none" stroke="rgba(184,148,32,0.42)" stroke-width="1.5"/>
+            <!-- Círculos estilo cerámica -->
+            <circle cx="8"  cy="21" r="2" fill="none" stroke="rgba(42,80,128,0.32)" stroke-width="1"/>
+            <circle cx="28" cy="18" r="2" fill="none" stroke="rgba(42,80,128,0.32)" stroke-width="1"/>
+            <circle cx="48" cy="21" r="2" fill="none" stroke="rgba(42,80,128,0.32)" stroke-width="1"/>
+          </svg>
+        </div>
+
+        <p class="h-p rv" style="transition-delay:.2s">Katané Pizza nació del sueño de tres sicilianos que llegaron a Panamá con una idea clara: compartir la verdadera esencia de la cocina siciliana. Con esfuerzo, pasión y el deseo de traer a la mesa un pedacito de Italia, abrieron la primera sucursal en agosto de 2015.</p>
+        <p class="h-p rv" style="transition-delay:.28s">Con el tiempo, nuevos socios se sumaron y juntos evolucionaron el nombre a <em>Katané</em> —el nombre griego de Catania— para honrar las raíces de donde todo nació. Hoy son tres sucursales, pero la esencia es la misma de siempre.</p>
+        <p class="h-p rv" style="transition-delay:.35s">En Katané no es solo pizza. Es la gastronomía siciliana en todas sus formas: pastas frescas, risottos, platos típicos y postres que endulzan cada visita.</p>
+        <blockquote class="h-cita rv" style="transition-delay:.42s">
+          "Katané no es solo pizza, es el sabor de estar juntos."
+          <cite>— Los fundadores de Katané</cite>
+        </blockquote>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ ESTADÍSTICAS ══════════════════════════════════════════════ -->
+<div class="stats">
+  <div class="w">
+    <div class="stats-inner">
+      <div class="stat rv"><div class="stat-n">2015</div><div class="stat-l">Fundación en Panamá</div></div>
+      <div class="stat-div"></div>
+      <div class="stat rv" style="transition-delay:.1s"><div class="stat-n">3</div><div class="stat-l">Sucursales activas</div></div>
+      <div class="stat-div"></div>
+      <div class="stat rv" style="transition-delay:.2s"><div class="stat-n">48h</div><div class="stat-l">Fermentación de la masa</div></div>
+      <div class="stat-div"></div>
+      <div class="stat rv" style="transition-delay:.3s"><div class="stat-n">100%</div><div class="stat-l">Recetas sicilianas originales</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- ══ MASA ══════════════════════════════════════════════ -->
+<div class="franja"></div>
+<section class="masa" id="masa">
+  <div class="w" style="padding-block:var(--pad)">
+    <div class="masa-g">
+      <div class="masa-txt">
+        <p class="eyebrow rv">Il nostro segreto</p>
+        <h2 class="h2 rv" style="transition-delay:.1s">
+          Nuestra masa,<br><em>nuestro orgullo</em>
+        </h2>
+        <p class="rv" style="transition-delay:.2s;color:var(--warm);font-size:1rem;line-height:1.9;margin-top:1rem;">
+          La historia de cada plato comienza en nuestra masa artesanal. Preparada con fermentación lenta y paciencia, es ligera, aromática y con un sabor inigualable que refleja el respeto por las recetas italianas tradicionales.
+        </p>
+        <div class="masa-pasos rv" style="transition-delay:.28s">
+
+          <!-- Icono: Trigo / Harina -->
+          <div class="paso-art">
+            <div class="paso-icono">
+              <svg viewBox="0 0 24 24" fill="none" stroke="var(--rojo)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                <line x1="12" y1="20" x2="12" y2="4"/>
+                <path d="M 8 8 Q 6 6 6 4 Q 9 4 12 7"/>
+                <path d="M 16 8 Q 18 6 18 4 Q 15 4 12 7"/>
+                <path d="M 8 13 Q 6 11 6 9 Q 9 9 12 12"/>
+                <path d="M 16 13 Q 18 11 18 9 Q 15 9 12 12"/>
+              </svg>
+            </div>
+            <div class="paso-txt">
+              <h4>Harina 00 de Nápoles</h4>
+              <p>Importada de Molino Caputo. Alta proteína, baja ceniza. La base de toda buena pizza italiana.</p>
+            </div>
+          </div>
+
+          <!-- Icono: Rodillo / Amasado -->
+          <div class="paso-art">
+            <div class="paso-icono">
+              <svg viewBox="0 0 24 24" fill="none" stroke="var(--rojo)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="3" y="10" width="18" height="4" rx="2"/>
+                <line x1="6" y1="10" x2="4" y2="7"/>
+                <line x1="18" y1="10" x2="20" y2="7"/>
+                <circle cx="4" cy="6.5" r="1.5"/>
+                <circle cx="20" cy="6.5" r="1.5"/>
+              </svg>
+            </div>
+            <div class="paso-txt">
+              <h4>Amasado a mano</h4>
+              <p>Con las palmas, no con máquinas. La masa se trabaja hasta conseguir la elasticidad exacta de la tradición napolitana.</p>
+            </div>
+          </div>
+
+          <!-- Icono: Reloj / Fermentación -->
+          <div class="paso-art">
+            <div class="paso-icono">
+              <svg viewBox="0 0 24 24" fill="none" stroke="var(--rojo)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="12" cy="12" r="9"/>
+                <polyline points="12 6 12 12 16 14"/>
+                <line x1="12" y1="3" x2="12" y2="1"/>
+                <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
+              </svg>
+            </div>
+            <div class="paso-txt">
+              <h4>48 horas de fermentación en frío</h4>
+              <p>El frío lento desarrolla el sabor auténtico. Ligera, aromática, con un carácter que ninguna masa rápida puede imitar.</p>
+            </div>
+          </div>
+
+          <!-- Icono: Horno -->
+          <div class="paso-art">
+            <div class="paso-icono">
+              <svg viewBox="0 0 24 24" fill="none" stroke="var(--rojo)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="2" y="8" width="20" height="13" rx="2"/>
+                <path d="M 2 11 L 22 11"/>
+                <path d="M 6 8 Q 6 4 9 4 Q 9 6 12 6 Q 15 6 15 4 Q 18 4 18 8"/>
+                <circle cx="7" cy="15" r="1.5"/>
+                <circle cx="17" cy="15" r="1.5"/>
+                <line x1="10" y1="14" x2="14" y2="14"/>
+                <line x1="10" y1="17" x2="14" y2="17"/>
+              </svg>
+            </div>
+            <div class="paso-txt">
+              <h4>Horno artesanal</h4>
+              <p>Alta temperatura, cocción rápida y uniforme. El resultado: borde alveolado, base crujiente, corazón suave.</p>
+            </div>
+          </div>
+
+        </div>
+      </div>
+      <div class="masa-vis rr">
+        <div class="masa-c-wrap">
+          <!-- FOTO MASA ARTESANAL — reemplazar con imagen real -->
+          <div class="foto-placeholder-txt" style="position:absolute;top:1rem;right:-4rem;font-size:.55rem;color:rgba(250,245,234,.15);letter-spacing:.12em;text-transform:uppercase"><!-- FOTO MASA --></div>
+          <div class="masa-c"></div>
+          <div class="masa-c-txt">
+            <div class="mc-n">48</div>
+            <div class="mc-u">horas</div>
+            <div class="mc-d">Fermentación lenta</div>
+          </div>
+          <div class="masa-ring"></div>
+          <div class="masa-ring2"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ ESPECIALIDADES ══════════════════════════════════════════════ -->
+<div class="franja"></div>
+<section class="menu-dest piedra-bg" id="menu-dest">
+  <div class="w" style="padding-block:var(--pad)">
+    <div class="menu-cab">
+      <div>
+        <p class="eyebrow rv">Nuestras especialidades</p>
+        <h2 class="h2 rv" style="transition-delay:.1s">Lo mejor<br><em>de Katané</em></h2>
+      </div>
+      <div class="menu-tabs rv" style="transition-delay:.2s" role="tablist">
+        <button class="mtab on" data-tab="pizzas" role="tab" aria-selected="true">Pizzas</button>
+        <button class="mtab" data-tab="pastas"  role="tab" aria-selected="false">Pastas</button>
+        <button class="mtab" data-tab="otros"   role="tab" aria-selected="false">Más</button>
+      </div>
+    </div>
+
+    <!-- PIZZAS -->
+    <div class="mpanel on rv" id="tab-pizzas">
+      <div class="platos-g">
+
+        <div class="plato">
+          <div class="plato-icono">
+            <!-- Icono: pizza con corte -->
+            <svg viewBox="0 0 24 24" fill="none" stroke="var(--rojo)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M12 2 L22 19 L2 19 Z"/>
+              <line x1="12" y1="2" x2="12" y2="19"/>
+              <circle cx="9" cy="14" r="1.5" fill="var(--rojo)" stroke="none"/>
+              <circle cx="15" cy="11" r="1" fill="var(--rojo)" stroke="none"/>
+              <circle cx="11" cy="9" r="1" fill="var(--rojo)" stroke="none"/>
+            </svg>
+          </div>
+          <div class="plato-nom">Pizza Gourmet Katané</div>
+          <div class="plato-prc">desde $17</div>
+          <div class="plato-des">Salsa de tomate, mozzarella, prosciutto crudo, tomate cherry, queso crema philadelphia, arúgula y parmesano. La firma de la casa.</div>
+          <div class="plato-tag">Signature · Gourmet</div>
+        </div>
+
+        <div class="plato">
+          <div class="plato-icono">
+            <svg viewBox="0 0 24 24" fill="none" stroke="var(--rojo)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M12 2 L22 19 L2 19 Z"/>
+              <line x1="12" y1="2" x2="12" y2="19"/>
+              <circle cx="9" cy="14" r="1.5" fill="var(--rojo)" stroke="none"/>
+              <circle cx="15" cy="11" r="1" fill="var(--rojo)" stroke="none"/>
+            </svg>
+          </div>
+          <div class="plato-nom">Pizza Gourmet Norma</div>
+          <div class="plato-prc">desde $15</div>
+          <div class="plato-des">Salsa de tomate, mozzarella, berenjena frita y queso ricotta rallado. La receta clásica catanese, símbolo de Sicilia.</div>
+          <div class="plato-tag">Gourmet · Vegetariana · Siciliana</div>
+        </div>
+
+        <div class="plato">
+          <div class="plato-icono">
+            <svg viewBox="0 0 24 24" fill="none" stroke="var(--rojo)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M12 2 L22 19 L2 19 Z"/>
+              <line x1="12" y1="2" x2="12" y2="19"/>
+              <circle cx="8" cy="13" r="1" fill="var(--rojo)" stroke="none"/>
+              <circle cx="16" cy="13" r="1" fill="var(--rojo)" stroke="none"/>
+              <circle cx="12" cy="8" r="1" fill="var(--rojo)" stroke="none"/>
+            </svg>
+          </div>
+          <div class="plato-nom">Pizza Siciliana</div>
+          <div class="plato-prc">desde $12</div>
+          <div class="plato-des">Salsa de tomate, mozzarella, anchoas, aceitunas kalamatas y alcaparras. Los sabores del Mediterráneo siciliano.</div>
+          <div class="plato-tag">Clásica · Mediterránea</div>
+        </div>
+
+        <div class="plato">
+          <div class="plato-icono">
+            <!-- Icono: arancino (croqueta triangular) -->
+            <svg viewBox="0 0 24 24" fill="none" stroke="var(--terracota)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M12 3 L20 18 Q20 21 17 21 L7 21 Q4 21 4 18 Z"/>
+              <circle cx="12" cy="13" r="2.5" fill="none"/>
+              <circle cx="12" cy="13" r="1" fill="var(--terracota)" stroke="none"/>
+            </svg>
+          </div>
+          <div class="plato-nom">Arancino Siciliano</div>
+          <div class="plato-prc">$4.00</div>
+          <div class="plato-des">Croqueta de arroz frita rellena. A elegir: Ragú alla Bolognese, Jamón y Queso, Berenjena o Espinaca y Mozzarella.</div>
+          <div class="plato-tag">Entrada · Típico siciliano</div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- PASTAS -->
+    <div class="mpanel" id="tab-pastas">
+      <div class="platos-g">
+
+        <div class="plato">
+          <div class="plato-icono">
+            <!-- Icono: pasta / spaghetti enrollado -->
+            <svg viewBox="0 0 24 24" fill="none" stroke="var(--terracota)" stroke-width="1.5" stroke-linecap="round">
+              <path d="M5 6 Q12 4 19 8 Q12 12 5 10 Q12 8 19 12 Q12 16 5 14"/>
+              <circle cx="12" cy="18" r="2"/>
+            </svg>
+          </div>
+          <div class="plato-nom">Pasta Katané</div>
+          <div class="plato-prc">$13.00</div>
+          <div class="plato-des">Pasta con prosciutto crudo, salsa rosada, queso azul, arúgula y tomate cherry. La firma del restaurante en versión pasta.</div>
+          <div class="plato-tag">Signature · De la casa</div>
+        </div>
+
+        <div class="plato">
+          <div class="plato-icono">
+            <svg viewBox="0 0 24 24" fill="none" stroke="var(--terracota)" stroke-width="1.5" stroke-linecap="round">
+              <path d="M5 6 Q12 4 19 8 Q12 12 5 10 Q12 8 19 12 Q12 16 5 14"/>
+              <circle cx="12" cy="18" r="2"/>
+            </svg>
+          </div>
+          <div class="plato-nom">Linguine allo Scoglio</div>
+          <div class="plato-prc">$16.00</div>
+          <div class="plato-des">Linguine con mixtos de mariscos, concha negra, almejas, langostino, tomate cherry, ajo, aceite de oliva y perejil.</div>
+          <div class="plato-tag">Del mar · Especialidad</div>
+        </div>
+
+        <div class="plato">
+          <div class="plato-icono">
+            <svg viewBox="0 0 24 24" fill="none" stroke="var(--terracota)" stroke-width="1.5" stroke-linecap="round">
+              <path d="M5 8 Q12 6 19 10 Q12 14 5 12"/>
+              <rect x="3" y="14" width="18" height="4" rx="2"/>
+              <line x1="7" y1="14" x2="7" y2="18"/>
+              <line x1="12" y1="14" x2="12" y2="18"/>
+              <line x1="17" y1="14" x2="17" y2="18"/>
+            </svg>
+          </div>
+          <div class="plato-nom">Lasagna di Carne</div>
+          <div class="plato-prc">$11.00</div>
+          <div class="plato-des">Con ragú alla bolognese, carne molida, salsa roja, mozzarella, queso parmesano y bechamel. Capas de sabor genuino.</div>
+          <div class="plato-tag">Clásica italiana</div>
+        </div>
+
+        <div class="plato">
+          <div class="plato-icono">
+            <svg viewBox="0 0 24 24" fill="none" stroke="var(--terracota)" stroke-width="1.5" stroke-linecap="round">
+              <path d="M5 6 Q12 4 19 8 Q12 12 5 10 Q12 8 19 12 Q12 16 5 14"/>
+              <circle cx="12" cy="18" r="2"/>
+            </svg>
+          </div>
+          <div class="plato-nom">Paccheri Alla Norma</div>
+          <div class="plato-prc">$11.00</div>
+          <div class="plato-des">Pasta Paccheri con salsa de tomate, berenjena, ajo, albahaca y queso ricotta rallado. La receta más siciliana de todas.</div>
+          <div class="plato-tag">Siciliana · Vegetariana</div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- MÁS -->
+    <div class="mpanel" id="tab-otros">
+      <div class="platos-g">
+
+        <div class="plato">
+          <div class="plato-icono">
+            <!-- Icono: risotto / cuenco con arroz -->
+            <svg viewBox="0 0 24 24" fill="none" stroke="var(--oliva)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M4 10 Q4 18 12 18 Q20 18 20 10 Z"/>
+              <line x1="4" y1="10" x2="20" y2="10"/>
+              <circle cx="9" cy="13" r="1" fill="var(--oliva)" stroke="none"/>
+              <circle cx="13" cy="12" r="1" fill="var(--oliva)" stroke="none"/>
+              <circle cx="15" cy="14.5" r=".8" fill="var(--oliva)" stroke="none"/>
+              <path d="M12 6 Q12 2 14 2"/>
+            </svg>
+          </div>
+          <div class="plato-nom">Risotto allo Scoglio</div>
+          <div class="plato-prc">$18.00</div>
+          <div class="plato-des">Mixtos de mariscos, mejillones, almejas, langostino, tomate cherry, ajo, perejil y aceite de oliva extra virgen.</div>
+          <div class="plato-tag">Risotto · Del mar</div>
+        </div>
+
+        <div class="plato">
+          <div class="plato-icono">
+            <!-- Icono: postre / tiramisú -->
+            <svg viewBox="0 0 24 24" fill="none" stroke="var(--limon)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="3" y="10" width="18" height="10" rx="2"/>
+              <path d="M3 14 Q12 12 21 14"/>
+              <rect x="5" y="6" width="14" height="4"/>
+              <line x1="9" y1="6" x2="9" y2="10"/>
+              <line x1="15" y1="6" x2="15" y2="10"/>
+            </svg>
+          </div>
+          <div class="plato-nom">Tiramisú Clásico</div>
+          <div class="plato-prc">$6.00</div>
+          <div class="plato-des">Galletas savoiardi, mascarpone, café, yema de huevos, licor marsala y cacao en polvo. La receta auténtica, sin adaptaciones.</div>
+          <div class="plato-tag">Postre clásico italiano</div>
+        </div>
+
+        <div class="plato">
+          <div class="plato-icono">
+            <!-- Icono: copa de vino -->
+            <svg viewBox="0 0 24 24" fill="none" stroke="var(--azul)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M6 3 L18 3 L15 12 Q14 16 12 17 Q10 16 9 12 Z"/>
+              <line x1="12" y1="17" x2="12" y2="21"/>
+              <line x1="8" y1="21" x2="16" y2="21"/>
+            </svg>
+          </div>
+          <div class="plato-nom">Aperol Spritz</div>
+          <div class="plato-prc">$7.00</div>
+          <div class="plato-des">Clásico italiano refrescante con Aperol, prosecco y soda. Cítrico, ligero y vibrante. El aperitivo de Sicilia en Panamá.</div>
+          <div class="plato-tag">Cóctel italiano · Aperitivo</div>
+        </div>
+
+        <div class="plato">
+          <div class="plato-icono">
+            <svg viewBox="0 0 24 24" fill="none" stroke="var(--terracota)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M4 10 Q4 18 12 18 Q20 18 20 10 Z"/>
+              <line x1="4" y1="10" x2="20" y2="10"/>
+              <circle cx="12" cy="14" r="2" fill="none"/>
+              <path d="M12 5 Q12 2 14 2"/>
+            </svg>
+          </div>
+          <div class="plato-nom">Risotto Funghi Porcini</div>
+          <div class="plato-prc">$17.00</div>
+          <div class="plato-des">Hongos porcini, chorizo italiano, ajo, perejil y queso parmesano. Un risotto con profundidad de sabor y carácter italiano.</div>
+          <div class="plato-tag">Risotto · Especialidad</div>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="menu-ver-mas rv">
+      <a href="https://katanepizza.com/menu" target="_blank" rel="noopener" class="btn-o">
+        Ver menú completo
+        <!-- Flecha artesanal SVG inline -->
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ══ EXPERIENCIA ══════════════════════════════════════════════ -->
+<section class="exp" id="experiencia">
+  <img class="exp-wm" src="katane_logo.png"/>
+  <div class="w" style="padding-block:var(--pad)">
+    <div class="exp-int">
+      <p class="eyebrow rv">L'esperienza Katané</p>
+      <h2 class="h2 rv" style="transition-delay:.1s">
+        Más que un restaurante,<br><em>una experiencia siciliana</em>
+      </h2>
+      <p class="exp-sub rv" style="transition-delay:.2s">
+        Katané no es solo pizza. Es la gastronomía siciliana en su forma más auténtica. Cada plato tiene una historia, cada receta tiene una familia detrás.
+      </p>
+      <div class="exp-cards">
+
+        <div class="exp-card rv" style="transition-delay:.1s">
+          <div class="exp-card-ico">
+            <!-- Icono: fachada / balcón siciliano -->
+            <svg width="32" height="32" viewBox="0 0 32 32" fill="none" stroke="rgba(250,245,234,0.7)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="4" y="12" width="24" height="18" rx="1"/>
+              <path d="M4 12 L16 3 L28 12"/>
+              <rect x="12" y="18" width="8" height="12" rx="1"/>
+              <!-- Balcón -->
+              <line x1="9"  y1="24" x2="9"  y2="18" stroke="rgba(184,148,32,0.6)"/>
+              <line x1="23" y1="24" x2="23" y2="18" stroke="rgba(184,148,32,0.6)"/>
+              <line x1="7"  y1="18" x2="25" y2="18" stroke="rgba(184,148,32,0.6)"/>
+              <path d="M 7 18 Q 8 15 9 18" fill="none" stroke="rgba(184,148,32,0.5)"/>
+              <path d="M 23 18 Q 24 15 25 18" fill="none" stroke="rgba(184,148,32,0.5)"/>
+            </svg>
+          </div>
+          <h3>Hospitalidad siciliana</h3>
+          <p>En Sicilia no hay extraños, solo amigos que aún no conocías. Cada cliente que entra a Katané es parte de la familia desde el primer momento.</p>
+        </div>
+
+        <div class="exp-card rv" style="transition-delay:.2s">
+          <div class="exp-card-ico">
+            <!-- Icono: tabla de madera / ingredientes -->
+            <svg width="32" height="32" viewBox="0 0 32 32" fill="none" stroke="rgba(250,245,234,0.7)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="3" y="11" width="26" height="14" rx="3"/>
+              <line x1="3" y1="16" x2="29" y2="16"/>
+              <circle cx="10" cy="21" r="2.5" fill="none"/>
+              <circle cx="16" cy="19" r="2" fill="none"/>
+              <circle cx="22" cy="21" r="1.5" fill="none"/>
+              <!-- Tomate SVG inline -->
+              <path d="M 10 14 Q 10 11 12 11" stroke="rgba(184,148,32,0.5)"/>
+            </svg>
+          </div>
+          <h3>Gastronomía auténtica</h3>
+          <p>Pizzas artesanales, pastas frescas, risottos, platos típicos y postres italianos. La cocina siciliana completa, no solo pizza.</p>
+        </div>
+
+        <div class="exp-card rv" style="transition-delay:.3s">
+          <div class="exp-card-ico">
+            <!-- Icono: familia / mesa -->
+            <svg width="32" height="32" viewBox="0 0 32 32" fill="none" stroke="rgba(250,245,234,0.7)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="4" y1="24" x2="28" y2="24"/>
+              <line x1="4" y1="24" x2="4" y2="28"/>
+              <line x1="28" y1="24" x2="28" y2="28"/>
+              <circle cx="10" cy="16" r="3"/>
+              <path d="M 5 24 Q 5 20 10 20 Q 15 20 15 24"/>
+              <circle cx="22" cy="16" r="3"/>
+              <path d="M 17 24 Q 17 20 22 20 Q 27 20 27 24"/>
+            </svg>
+          </div>
+          <h3>Para toda la familia</h3>
+          <p>Tres sucursales pensadas para reunir a las familias. Menú para adultos y niños, ambiente acogedor y el calor de la hospitalidad italiana.</p>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ VALORES ══════════════════════════════════════════════ -->
+<div class="franja"></div>
+<section class="valores" id="valores">
+  <div class="w" style="padding-block:var(--pad)">
+    <p class="eyebrow rv" style="justify-content:center">Lo que nos define</p>
+    <h2 class="h2 rv" style="transition-delay:.1s;text-align:center">
+      Los valores<br><em>de Katané</em>
+    </h2>
+    <div class="valores-g">
+
+      <div class="valor rv">
+        <div class="valor-ico">
+          <!-- Icono: cerámica / estrella maiolica -->
+          <svg viewBox="0 0 32 32" fill="none" stroke="var(--rojo)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="16" cy="16" r="12"/>
+            <circle cx="16" cy="16" r="7"/>
+            <line x1="16" y1="4" x2="16" y2="9"/>
+            <line x1="16" y1="23" x2="16" y2="28"/>
+            <line x1="4" y1="16" x2="9" y2="16"/>
+            <line x1="23" y1="16" x2="28" y2="16"/>
+            <circle cx="16" cy="16" r="2.5" fill="var(--rojo)" stroke="none"/>
+          </svg>
+        </div>
+        <h3>Autenticidad</h3>
+        <p>Fieles a la tradición siciliana sin compromisos.</p>
+      </div>
+
+      <div class="valor rv" style="transition-delay:.08s">
+        <div class="valor-ico">
+          <!-- Icono: hoja de olivo -->
+          <svg viewBox="0 0 32 32" fill="none" stroke="var(--oliva)" stroke-width="1.5" stroke-linecap="round">
+            <path d="M16 28 Q16 16 16 6"/>
+            <path d="M16 22 Q10 18 8 12 Q12 10 16 14"/>
+            <path d="M16 16 Q22 12 24 6 Q20 4 16 9"/>
+            <circle cx="9"  cy="11" r="1.2" fill="var(--oliva)" stroke="none"/>
+            <circle cx="23" cy="6"  r="1.2" fill="var(--oliva)" stroke="none"/>
+          </svg>
+        </div>
+        <h3>Calidad</h3>
+        <p>Ingredientes frescos y seleccionados con cuidado.</p>
+      </div>
+
+      <div class="valor rv" style="transition-delay:.16s">
+        <div class="valor-ico">
+          <!-- Icono: llama / pasión -->
+          <svg viewBox="0 0 32 32" fill="none" stroke="var(--terracota)" stroke-width="1.5" stroke-linecap="round">
+            <path d="M16 27 Q8 22 8 15 Q8 10 12 8 Q10 14 14 16 Q12 10 16 5 Q18 10 17 15 Q20 12 20 8 Q24 11 24 17 Q24 23 16 27 Z"/>
+          </svg>
+        </div>
+        <h3>Pasión</h3>
+        <p>Cocinamos con amor, como lo hace cada familia italiana.</p>
+      </div>
+
+      <div class="valor rv" style="transition-delay:.24s">
+        <div class="valor-ico">
+          <!-- Icono: manos / hospitalidad -->
+          <svg viewBox="0 0 32 32" fill="none" stroke="var(--limon)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M6 18 Q6 14 10 14 L14 14 L14 10 Q14 8 16 8 Q18 8 18 10 L18 16 L20 16 Q22 16 22 18 L22 22 Q22 26 18 26 L12 26 Q8 26 6 22 Z"/>
+            <path d="M18 16 L24 16 Q26 16 26 18 Q26 20 24 20 L22 20"/>
+          </svg>
+        </div>
+        <h3>Hospitalidad</h3>
+        <p>Cada cliente es parte de nuestra famiglia desde el primer momento.</p>
+      </div>
+
+      <div class="valor rv" style="transition-delay:.32s">
+        <div class="valor-ico">
+          <!-- Icono: espiga / trigo / tradición -->
+          <svg viewBox="0 0 32 32" fill="none" stroke="var(--warm)" stroke-width="1.5" stroke-linecap="round">
+            <line x1="16" y1="30" x2="16" y2="6"/>
+            <path d="M16 24 Q12 22 10 18 Q13 17 16 20"/>
+            <path d="M16 18 Q20 16 22 12 Q19 11 16 14"/>
+            <path d="M16 12 Q12 10 10 6 Q13 5 16 8"/>
+          </svg>
+        </div>
+        <h3>Tradición</h3>
+        <p>Honramos las raíces italianas que nos dieron origen.</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ══ SUCURSALES ══════════════════════════════════════════════ -->
+<div class="franja"></div>
+<section class="suc" id="sucursales">
+  <div class="w" style="padding-block:var(--pad)">
+    <div class="suc-hdr">
+      <p class="eyebrow rv">Dove siamo</p>
+      <h2 class="h2 rv" style="transition-delay:.1s">
+        Tres rincones<br><em>de Sicilia en Panamá</em>
+      </h2>
+    </div>
+    <div class="suc-g">
+
+      <!-- SUCURSAL 1: El Cangrejo -->
+      <div class="suc-card rv suc-foto-1">
+        <div class="suc-foto suc-foto-1">
+          <div class="suc-foto-bg"></div>
+          <div class="suc-foto-lbl"><!-- FOTO SUCURSAL EL CANGREJO --></div>
+        </div>
+        <div class="suc-body">
+          <div class="suc-ico">
+            <svg viewBox="0 0 24 24" fill="none" stroke="var(--rojo)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M12 2 Q18 2 18 9 Q18 15 12 22 Q6 15 6 9 Q6 2 12 2 Z"/>
+              <circle cx="12" cy="9" r="2.5"/>
+            </svg>
+          </div>
+          <div class="suc-nom">El Cangrejo</div>
+          <div class="suc-dir">Ciudad de Panamá<br>El Cangrejo</div>
+          <div class="suc-tel">6962-4549</div>
+          <div class="suc-hora">Lun — Dom · Horario a consultar</div>
+          <a href="https://wa.me/50769624549" class="suc-wa" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
+            Escribir por WhatsApp
+          </a>
+        </div>
+      </div>
+
+      <!-- SUCURSAL 2: San Francisco -->
+      <div class="suc-card rv suc-foto-2" style="transition-delay:.12s">
+        <div class="suc-foto suc-foto-2">
+          <div class="suc-foto-bg"></div>
+          <div class="suc-foto-lbl"><!-- FOTO SUCURSAL SAN FRANCISCO --></div>
+        </div>
+        <div class="suc-body">
+          <div class="suc-ico">
+            <svg viewBox="0 0 24 24" fill="none" stroke="var(--rojo)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M12 2 Q18 2 18 9 Q18 15 12 22 Q6 15 6 9 Q6 2 12 2 Z"/>
+              <circle cx="12" cy="9" r="2.5"/>
+            </svg>
+          </div>
+          <div class="suc-nom">San Francisco</div>
+          <div class="suc-dir">Ciudad de Panamá<br>San Francisco</div>
+          <div class="suc-tel">6955-8884</div>
+          <div class="suc-hora">Lun — Dom · Horario a consultar</div>
+          <a href="https://wa.me/50769558884" class="suc-wa" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
+            Escribir por WhatsApp
+          </a>
+        </div>
+      </div>
+
+      <!-- SUCURSAL 3: Costa del Este -->
+      <div class="suc-card rv suc-foto-3" style="transition-delay:.24s">
+        <div class="suc-foto suc-foto-3">
+          <div class="suc-foto-bg"></div>
+          <div class="suc-foto-lbl"><!-- FOTO SUCURSAL COSTA DEL ESTE --></div>
+        </div>
+        <div class="suc-body">
+          <div class="suc-ico">
+            <svg viewBox="0 0 24 24" fill="none" stroke="var(--rojo)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M12 2 Q18 2 18 9 Q18 15 12 22 Q6 15 6 9 Q6 2 12 2 Z"/>
+              <circle cx="12" cy="9" r="2.5"/>
+            </svg>
+          </div>
+          <div class="suc-nom">Costa del Este</div>
+          <div class="suc-dir">Ciudad de Panamá<br>Costa del Este</div>
+          <div class="suc-tel">6559-1711</div>
+          <div class="suc-hora">Lun — Dom · Horario a consultar</div>
+          <a href="https://wa.me/50765591711" class="suc-wa" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
+            Escribir por WhatsApp
+          </a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ══ CONTACTO ══════════════════════════════════════════════ -->
+<div class="franja"></div>
+<section class="cto" id="contacto">
+  <img class="cto-wm" src="logo_negro.png"/>
+  <div class="w" style="padding-block:var(--pad)">
+    <div class="cto-int">
+      <p class="eyebrow rv">Vieni a trovarci</p>
+      <h2 class="h2 rv" style="transition-delay:.1s">
+        Te esperamos<br><em>en la mesa</em>
+      </h2>
+      <p class="rv" style="transition-delay:.2s">Sin necesidad de reserva previa. Solo llega y la familia Katané se encarga del resto. Tres sucursales en Ciudad de Panamá.</p>
+      <div class="cto-btns rv" style="transition-delay:.3s">
+        <a href="https://katanepizza.com/menu" target="_blank" rel="noopener" class="btn-crema">Ver menú completo</a>
+        <a href="#sucursales" class="btn-tr">Ver sucursales →</a>
+      </div>
+      <div class="cto-suc rv" style="transition-delay:.4s">
+        <div class="cto-suc-item">
+          <h4>El Cangrejo</h4>
+          <a href="tel:+50769624549">6962-4549</a>
+          <a href="https://wa.me/50769624549" target="_blank">WhatsApp</a>
+        </div>
+        <div class="cto-suc-item">
+          <h4>San Francisco</h4>
+          <a href="tel:+50769558884">6955-8884</a>
+          <a href="https://wa.me/50769558884" target="_blank">WhatsApp</a>
+        </div>
+        <div class="cto-suc-item">
+          <h4>Costa del Este</h4>
+          <a href="tel:+50765591711">6559-1711</a>
+          <a href="https://wa.me/50765591711" target="_blank">WhatsApp</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ FOOTER ══════════════════════════════════════════════ -->
+<footer class="footer">
+  <div class="footer-g">
+    <div class="footer-m">
+      <img class="footer-logo" src="katane_logo.png"/>
+      <p>Restaurante siciliano auténtico en Panamá. Tres sucursales, una sola tradición desde 2015.</p>
+      <div class="footer-redes">
+        <!-- Instagram -->
+        <a href="#" class="rs" aria-label="Instagram">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r=".5" fill="currentColor"/></svg>
+        </a>
+        <!-- Facebook -->
+        <a href="#" class="rs" aria-label="Facebook">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+        </a>
+        <!-- TikTok -->
+        <a href="#" class="rs" aria-label="TikTok">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 12a4 4 0 1 0 4 4V4a5 5 0 0 0 5 5"/></svg>
+        </a>
+      </div>
+    </div>
+    <div class="footer-col">
+      <h4>Menú</h4>
+      <ul>
+        <li><a href="#menu-dest">Pizzas artesanales</a></li>
+        <li><a href="#menu-dest">Pastas frescas</a></li>
+        <li><a href="#menu-dest">Risottos</a></li>
+        <li><a href="#menu-dest">Postres italianos</a></li>
+        <li><a href="https://katanepizza.com/menu" target="_blank">Menú completo</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Katané</h4>
+      <ul>
+        <li><a href="#historia">Nuestra historia</a></li>
+        <li><a href="#masa">La masa artesanal</a></li>
+        <li><a href="#valores">Nuestros valores</a></li>
+        <li><a href="https://katanepizza.com/conocenos/" target="_blank">Conócenos</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Contacto</h4>
+      <ul>
+        <li><a href="tel:+50769624549">6962-4549 · El Cangrejo</a></li>
+        <li><a href="tel:+50769558884">6955-8884 · San Francisco</a></li>
+        <li><a href="tel:+50765591711">6559-1711 · Costa del Este</a></li>
+        <li><a href="mailto:katanepizza@gmail.com">katanepizza@gmail.com</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bot">
+    <p>© 2024 Katané Pizza, Panamá. Tutti i diritti riservati.</p>
+    <div style="display:flex;gap:1.5rem">
+      <a href="https://katanepizza.com/politica-de-privacidad/" target="_blank">Privacidad</a>
+      <a href="https://katanepizza.com/terminos-y-condiciones/" target="_blank">Términos</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+/* NAV SCROLL */
+const nav=document.getElementById('nav');
+window.addEventListener('scroll',()=>nav.classList.toggle('on',scrollY>55),{passive:true});
+
+/* HAMBURGUESA */
+const hb=document.getElementById('hambBtn'),mv=document.getElementById('mm');
+hb.addEventListener('click',()=>{
+  const o=mv.classList.toggle('open');
+  hb.classList.toggle('open',o);
+  hb.setAttribute('aria-expanded',String(o));
+  document.body.style.overflow=o?'hidden':'';
+});
+document.querySelectorAll('.lm').forEach(a=>a.addEventListener('click',()=>{
+  mv.classList.remove('open');hb.classList.remove('open');
+  hb.setAttribute('aria-expanded','false');document.body.style.overflow='';
+}));
+
+/* SCROLL REVEAL */
+const obs=new IntersectionObserver(es=>es.forEach(e=>{
+  if(e.isIntersecting){e.target.classList.add('on');obs.unobserve(e.target);}
+}),{threshold:.08,rootMargin:'0px 0px -20px 0px'});
+document.querySelectorAll('.rv,.rl,.rr').forEach(el=>obs.observe(el));
+
+/* TABS MENÚ */
+document.querySelectorAll('.mtab').forEach(t=>t.addEventListener('click',()=>{
+  document.querySelectorAll('.mtab').forEach(x=>{x.classList.remove('on');x.setAttribute('aria-selected','false');});
+  document.querySelectorAll('.mpanel').forEach(p=>p.classList.remove('on'));
+  t.classList.add('on');t.setAttribute('aria-selected','true');
+  const p=document.getElementById('tab-'+t.dataset.tab);
+  if(p)p.classList.add('on');
+}));
+
+/* SCROLL SUAVE */
+document.querySelectorAll('a[href^="#"]').forEach(a=>a.addEventListener('click',e=>{
+  const t=document.querySelector(a.getAttribute('href'));
+  if(!t)return;e.preventDefault();
+  window.scrollTo({top:t.getBoundingClientRect().top+scrollY-68,behavior:'smooth'});
+}));
+</script>
+</body>
+</html>

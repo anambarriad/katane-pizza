@@ -94,29 +94,23 @@
 </div>
 
 <!-- HERO -->
-<section class="hero">
-  <div class="hero-foto"></div>
-  <div class="hero-overlay"></div>
-  <div class="w" style="width:100%">
-    <div class="hero-body">
-      <div class="hero-logo"><img src="katane_logo.png" alt="Katané Pizza"/></div>
-      <p class="hero-nombre">Conócenos</p>
-      <h1 class="hero-eslogan">Una pizzería con alma siciliana</h1>
-      <p class="hero-sub">Tres sicilianos, un sueño y diez años de auténtica<br>tradición gastronómica en Panamá.</p>
-    </div>
+<section style="min-height:38vh;position:relative;display:flex;align-items:center;justify-content:center;overflow:hidden;background:#1a0e06">
+  <div style="position:absolute;inset:0;z-index:0">
+    <img src="pizza.jpg" alt="Sicilia" style="width:100%;height:100%;object-fit:cover;display:block;opacity:.45"/>
   </div>
-  <div class="hero-scroll" aria-hidden="true"><div class="scroll-l"></div><span>Scopri</span></div>
+  <div style="position:absolute;inset:0;z-index:1;background:linear-gradient(to bottom,rgba(26,14,6,.35) 0%,rgba(26,14,6,.65) 100%)"></div>
+  <div style="position:relative;z-index:2;text-align:center;padding:2rem var(--g);max-width:600px;margin-inline:auto;width:100%">
+    <p style="font-family:var(--ff-b);font-size:.68rem;font-weight:500;letter-spacing:.25em;text-transform:uppercase;color:rgba(250,245,234,.55);margin-bottom:1rem">Katané Pizza · Panamá</p>
+    <h1 style="font-family:var(--ff-d);font-size:clamp(2.2rem,5vw,4rem);font-weight:300;font-style:italic;color:#ffffff;line-height:1.1;letter-spacing:-.01em">Nuestra<br><span style="color:var(--limon)">historia</span></h1>
+    <div style="width:40px;height:1px;background:var(--limon);margin:1.25rem auto;opacity:.7"></div>
+    <p style="font-family:var(--ff-d);font-style:italic;font-size:1rem;color:rgba(250,245,234,.65)">Desde Catania hasta Panamá</p>
+  </div>
 </section>
 
-<div class="cinta" aria-hidden="true">
-  <div class="cinta-pista">
-    <span>La nostra storia</span><span class="sep">✦</span><span>Tradizione siciliana</span><span class="sep">✦</span><span>Famiglia</span><span class="sep">✦</span><span>Catania, Sicilia</span><span class="sep">✦</span><span>Panamá 2015</span><span class="sep">✦</span><span>Gastronomia autentica</span><span class="sep">✦</span><span>La nostra storia</span><span class="sep">✦</span><span>Tradizione siciliana</span><span class="sep">✦</span><span>Famiglia</span><span class="sep">✦</span><span>Catania, Sicilia</span><span class="sep">✦</span><span>Panamá 2015</span><span class="sep">✦</span><span>Gastronomia autentica</span><span class="sep">✦</span>
-  </div>
-</div>
 
 <!-- NUESTRO INICIO -->
 <div class="franja"></div>
-<section class="h-sec piedra-bg" id="inicio">
+<section class="h-sec piedra-bg" id="inicio" style="padding:clamp(4rem,8vw,7rem) 0;background:var(--crema)">
   <div class="w">
 
 <!-- Historia: foto vertical + texto + foto secundaria -->
@@ -138,9 +132,6 @@
         <div class="h-txt">
           <p class="eyebrow rv">Nuestro inicio</p>
           <h2 class="h2 rv" style="transition-delay:.1s">Tres amigos,<br><em>una isla, un sueño</em></h2>
-          <div class="div-balcon rv" style="transition-delay:.15s" aria-hidden="true">
-            <svg width="56" height="36" viewBox="0 0 56 36" fill="none"><rect x="0" y="32" width="56" height="2" fill="rgba(184,148,32,0.5)"/><line x1="8" y1="32" x2="8" y2="10" stroke="rgba(184,148,32,0.42)" stroke-width="1.5"/><line x1="28" y1="32" x2="28" y2="5" stroke="rgba(184,148,32,0.42)" stroke-width="1.5"/><line x1="48" y1="32" x2="48" y2="10" stroke="rgba(184,148,32,0.42)" stroke-width="1.5"/><path d="M 4 10 Q 8 4 12 10" fill="none" stroke="rgba(184,148,32,0.42)" stroke-width="1.5"/><path d="M 24 5 Q 28 -1 32 5" fill="none" stroke="rgba(184,148,32,0.42)" stroke-width="1.5"/><path d="M 44 10 Q 48 4 52 10" fill="none" stroke="rgba(184,148,32,0.42)" stroke-width="1.5"/></svg>
-          </div>
           <p class="h-p rv" style="transition-delay:.2s; text-align:justify">Katané Pizza nació del sueño de tres sicilianos que llegaron a Panamá con una idea clara: compartir la verdadera esencia de la cocina siciliana. Con esfuerzo, pasión y el deseo de traer a la mesa un pedacito de Italia, abrieron la primera sucursal en agosto de 2015 bajo el nombre de Speedy Pizza.</p>
           <p class="h-p rv" style="transition-delay:.28s"; text-align:justify>Desde Catania llegaron con la misma receta que sus madres y abuelas hacían en Sicilia. Sin atajos, sin compromisos: una masa que tarda 48 horas, ingredientes seleccionados y el calor de la hospitalidad italiana.</p>
           <p class="h-p rv" style="transition-delay:.35s; text-align:justify">Con el tiempo, nuevos socios se sumaron y el nombre evolucionó a <em>Katané</em> —el nombre griego de Catania— para honrar las raíces de donde todo nació.</p>
@@ -201,7 +192,7 @@
 
 <!-- NUESTRA MASA -->
 <div class="franja"></div>
-<section class="masa-art piedra-bg" id="masa">
+<section class="masa-art piedra-bg" id="masa" style="background:var(--crema)">
   <div class="w">
     <div class="h-sec-g inv" style="align-items:stretch">
       <div class="h-txt">
@@ -225,80 +216,25 @@
   </div>
 </section>
 
-<!-- MÁS QUE PIZZAS -->
-<div class="franja"></div>
-<section class="h-sec" id="gastronomia">
-  <div class="w">
-    <div style="text-align:center;max-width:700px;margin-inline:auto;margin-bottom:clamp(2.5rem,5vw,4rem)">
-      <p class="eyebrow rv" style="justify-content:center">Mucho más que pizzas</p>
-      <h2 class="h2 rv" style="transition-delay:.1s;text-align:center">La gastronomía siciliana<br><em>en toda su expresión</em></h2>
-      <p class="rv" style="transition-delay:.2s;font-size:1rem;color:var(--warm);line-height:1.9;margin-top:1rem;">Aunque la pizza es nuestro corazón, en Katané celebramos la gastronomía siciliana en todas sus formas. Pastas frescas, risottos, platos típicos y postres que endulzan cada visita.</p>
-    </div>
-    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem" class="rv" style="transition-delay:.3s">
-      <div style="padding:2rem;background:var(--arena);border:1px solid var(--arena-med);border-radius:3px;text-align:center">
-        <div style="font-size:2.5rem;margin-bottom:1rem">
-          <svg viewBox="0 0 48 48" width="48" height="48" fill="none" stroke="var(--terracota)" stroke-width="1.5" stroke-linecap="round" style="margin:0 auto"><path d="M8 10 Q24 6 40 12 Q24 18 8 14 Q24 10 40 16 Q24 22 8 18"/><circle cx="24" cy="34" r="4"/></svg>
-        </div>
-        <h3 style="font-family:var(--ff-d);font-size:1.3rem;font-weight:600;margin-bottom:.5rem">Pastas frescas</h3>
-        <p style="font-size:.88rem;color:var(--warm);line-height:1.7">Recetas clásicas y auténticas que conquistan cada mesa: Paccheri alla Norma, Pasta Katané, Lasagna di Carne y más.</p>
-      </div>
-      <div style="padding:2rem;background:var(--arena);border:1px solid var(--arena-med);border-radius:3px;text-align:center">
-        <div style="font-size:2.5rem;margin-bottom:1rem">
-          <svg viewBox="0 0 48 48" width="48" height="48" fill="none" stroke="var(--oliva)" stroke-width="1.5" stroke-linecap="round" style="margin:0 auto"><path d="M8 20 Q8 36 24 36 Q40 36 40 20 Z"/><line x1="8" y1="20" x2="40" y2="20"/><circle cx="18" cy="26" r="2" fill="var(--oliva)" stroke="none"/><circle cx="26" cy="24" r="2" fill="var(--oliva)" stroke="none"/><circle cx="30" cy="29" r="1.5" fill="var(--oliva)" stroke="none"/><path d="M24 12 Q24 4 28 4"/></svg>
-        </div>
-        <h3 style="font-family:var(--ff-d);font-size:1.3rem;font-weight:600;margin-bottom:.5rem">Risottos</h3>
-        <p style="font-size:.88rem;color:var(--warm);line-height:1.7">La perfección del arroz, cremosos y llenos de tradición. Risotto allo Scoglio, Funghi Porcini, Pulpo y más.</p>
-      </div>
-      <div style="padding:2rem;background:var(--arena);border:1px solid var(--arena-med);border-radius:3px;text-align:center">
-        <div style="font-size:2.5rem;margin-bottom:1rem">
-          <svg viewBox="0 0 48 48" width="48" height="48" fill="none" stroke="var(--limon)" stroke-width="1.5" stroke-linecap="round" style="margin:0 auto"><rect x="6" y="20" width="36" height="20" rx="3"/><path d="M6 28 Q24 24 42 28"/><rect x="10" y="12" width="28" height="8"/><line x1="18" y1="12" x2="18" y2="20"/><line x1="30" y1="12" x2="30" y2="20"/></svg>
-        </div>
-        <h3 style="font-family:var(--ff-d);font-size:1.3rem;font-weight:600;margin-bottom:.5rem">Postres sicilianos</h3>
-        <p style="font-size:.88rem;color:var(--warm);line-height:1.7">El dulce final perfecto: Cannolo Siciliano, Tiramisú della Nona, Panna Cotta, Granita al Limone y más.</p>
-      </div>
-    </div>
-    <div style="text-align:center;margin-top:2.5rem" class="rv"><a href="menu.html" class="btn-r">Ver el menú completo</a></div>
-  </div>
-</section>
 
 <!-- VALORES -->
 <div class="franja"></div>
-<section class="piedra-bg" id="valores" style="padding:var(--pad) 0">
+<section class="piedra-bg" id="valores" style="padding:var(--pad) 0;background:var(--piedra)">
   <div class="w">
     <p class="eyebrow rv" style="justify-content:center">Lo que nos define</p>
     <h2 class="h2 rv" style="transition-delay:.1s;text-align:center">Los valores<br><em>de Katané</em></h2>
     <div class="valores-g">
-      <div class="valor rv"><div class="valor-ico"><svg viewBox="0 0 32 32" fill="none" stroke="var(--rojo)" stroke-width="1.5" stroke-linecap="round"><circle cx="16" cy="16" r="12"/><circle cx="16" cy="16" r="7"/><line x1="16" y1="4" x2="16" y2="9"/><line x1="16" y1="23" x2="16" y2="28"/><line x1="4" y1="16" x2="9" y2="16"/><line x1="23" y1="16" x2="28" y2="16"/><circle cx="16" cy="16" r="2.5" fill="var(--rojo)" stroke="none"/></svg></div><h3>Autenticidad</h3><p>Fieles a la tradición siciliana sin compromisos.</p></div>
-      <div class="valor rv" style="transition-delay:.08s"><div class="valor-ico"><svg viewBox="0 0 32 32" fill="none" stroke="var(--oliva)" stroke-width="1.5" stroke-linecap="round"><path d="M16 28 Q16 16 16 6"/><path d="M16 22 Q10 18 8 12 Q12 10 16 14"/><path d="M16 16 Q22 12 24 6 Q20 4 16 9"/><circle cx="9" cy="11" r="1.2" fill="var(--oliva)" stroke="none"/><circle cx="23" cy="6" r="1.2" fill="var(--oliva)" stroke="none"/></svg></div><h3>Calidad</h3><p>Ingredientes frescos y seleccionados con cuidado.</p></div>
-      <div class="valor rv" style="transition-delay:.16s"><div class="valor-ico"><svg viewBox="0 0 32 32" fill="none" stroke="var(--terracota)" stroke-width="1.5" stroke-linecap="round"><path d="M16 27 Q8 22 8 15 Q8 10 12 8 Q10 14 14 16 Q12 10 16 5 Q18 10 17 15 Q20 12 20 8 Q24 11 24 17 Q24 23 16 27 Z"/></svg></div><h3>Pasión</h3><p>Cocinamos con amor, como lo hace cada familia italiana.</p></div>
-      <div class="valor rv" style="transition-delay:.24s"><div class="valor-ico"><svg viewBox="0 0 32 32" fill="none" stroke="var(--limon)" stroke-width="1.5" stroke-linecap="round"><path d="M6 18 Q6 14 10 14 L14 14 L14 10 Q14 8 16 8 Q18 8 18 10 L18 16 L20 16 Q22 16 22 18 L22 22 Q22 26 18 26 L12 26 Q8 26 6 22 Z"/><path d="M18 16 L24 16 Q26 16 26 18 Q26 20 24 20 L22 20"/></svg></div><h3>Hospitalidad</h3><p>Cada cliente es parte de nuestra famiglia.</p></div>
-      <div class="valor rv" style="transition-delay:.32s"><div class="valor-ico"><svg viewBox="0 0 32 32" fill="none" stroke="var(--warm)" stroke-width="1.5" stroke-linecap="round"><line x1="16" y1="30" x2="16" y2="6"/><path d="M16 24 Q12 22 10 18 Q13 17 16 20"/><path d="M16 18 Q20 16 22 12 Q19 11 16 14"/><path d="M16 12 Q12 10 10 6 Q13 5 16 8"/></svg></div><h3>Tradición</h3><p>Honramos las raíces italianas que nos dieron origen.</p></div>
+      <div class="valor rv"><h3>Autenticidad</h3><p>Fieles a la tradición siciliana sin compromisos.</p></div>
+      <div class="valor rv" style="transition-delay:.08s"><h3>Calidad</h3><p>Ingredientes frescos y seleccionados con cuidado.</p></div>
+      <div class="valor rv" style="transition-delay:.16s"><h3>Pasión</h3><p>Cocinamos con amor, como lo hace cada familia italiana.</p></div>
+      <div class="valor rv" style="transition-delay:.24s"><h3>Hospitalidad</h3><p>Cada cliente es parte de nuestra famiglia.</p></div>
+      <div class="valor rv" style="transition-delay:.32s"><h3>Tradición</h3><p>Honramos las raíces italianas que nos dieron origen.</p></div>
     </div>
   </div>
 </section>
 
-<!-- CTO -->
+
 <div class="franja"></div>
-<section class="cto">
-  <img class="cto-wm" src="katane_logo.png" alt="" aria-hidden="true"/>
-  <div class="w" style="padding-block:var(--pad)">
-    <div class="cto-int">
-      <p class="eyebrow rv">Vieni a trovarci</p>
-      <h2 class="h2 rv" style="transition-delay:.1s">Vive la experiencia<br><em>Katané</em></h2>
-      <p class="rv" style="transition-delay:.2s">Te invitamos a descubrir por qué en Katané, cada bocado sabe a Sicilia. Visítanos en cualquiera de nuestras tres sucursales.</p>
-      <div class="cto-btns rv" style="transition-delay:.3s">
-        <a href="menu.html" class="btn-r">Ver el menú</a>
-        <a href="contacto.html" class="btn-o">Reservar mesa →</a>
-      </div>
-      <div class="cto-suc rv" style="transition-delay:.4s">
-        <div class="cto-suc-item"><h4>El Cangrejo</h4><a href="tel:+50769624549">6962-4549</a><a href="https://wa.me/50769624549" target="_blank">WhatsApp</a></div>
-        <div class="cto-suc-item"><h4>San Francisco</h4><a href="tel:+50769558884">6955-8884</a><a href="https://wa.me/50769558884" target="_blank">WhatsApp</a></div>
-        <div class="cto-suc-item"><h4>Costa del Este</h4><a href="tel:+50765591711">6559-1711</a><a href="https://wa.me/50765591711" target="_blank">WhatsApp</a></div>
-      </div>
-    </div>
-  </div>
-</section>
-
 <footer class="footer">
   <div class="footer-g">
     <div class="footer-m"><img class="footer-logo" src="katane_logo.png" alt="Katané Pizza"/><p>Restaurante siciliano auténtico en Panamá. Tres sucursales, una sola tradición desde 2015.</p><div class="footer-redes"><a href="#" class="rs" aria-label="Instagram"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r=".5" fill="currentColor"/></svg></a><a href="#" class="rs" aria-label="Facebook"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg></a><a href="#" class="rs" aria-label="TikTok"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M9 12a4 4 0 1 0 4 4V4a5 5 0 0 0 5 5"/></svg></a></div></div>

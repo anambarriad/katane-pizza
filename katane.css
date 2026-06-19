@@ -25,7 +25,7 @@
   --ff-b: 'Jost', system-ui, sans-serif;
   --ff-s: 'Pacifico', cursive;
 
-  --pad:    clamp(4rem, 8vw, 7rem);
+  --pad:    clamp(3rem, 5vw, 5rem);
   --w:      1180px;
   --g:      clamp(1.25rem, 4vw, 3rem);
   --ease:   cubic-bezier(.25,.46,.45,.94);

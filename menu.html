@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="es">
 <head>
 <meta charset="UTF-8"/>
@@ -18,74 +18,153 @@
 }
 
 /* TABS MENÚ COMPLETO */
-.menu-nav {
-  background:var(--arena);
+.mtabs {
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:0;
+  background:var(--crema);
   border-bottom:1px solid var(--arena-med);
-  position:sticky; top:68px; z-index:100;
-  overflow-x:auto; white-space:nowrap;
+  position:sticky;
+  top:75px;
+  z-index:100;
+  padding:0 var(--g);
+  overflow-x:auto;
 }
-.menu-nav-inner {
-  display:flex; gap:0;
-  max-width:var(--w); margin-inline:auto;
-  padding-inline:var(--g);
+.mtab {
+  font-family:var(--ff-d);
+  font-size:1rem;
+  font-weight:400;
+  font-style:normal;
+  font-weight:500;
+  letter-spacing:.1em;
+  text-transform:uppercase;
+  font-family:var(--ff-b);
+  color:var(--warm);
+  padding:.9rem 1.6rem;
+  cursor:pointer;
+  white-space:nowrap;
+  position:relative;
+  transition:color .25s;
+  border:none;
+  background:transparent;
 }
-.mnav-tab {
-  padding:.85rem 1.5rem;
-  font-family:var(--ff-b); font-size:.72rem; font-weight:500;
-  letter-spacing:.08em; text-transform:uppercase;
-  color:var(--warm); border-bottom:2px solid transparent;
-  transition:color .25s, border-color .25s;
-  flex-shrink:0;
+.mtab::after {
+  content:'';
+  position:absolute;
+  bottom:0; left:1.4rem; right:1.4rem;
+  height:2px;
+  background:var(--rojo);
+  transform:scaleX(0);
+  transform-origin:center;
+  transition:transform .3s var(--ease);
+  border-radius:1px;
 }
-.mnav-tab.on, .mnav-tab:hover { color:var(--rojo); border-bottom-color:var(--rojo); }
+.mtab:hover { color:var(--tinta); }
+.mtab.on { color:var(--rojo); }
+.mtab.on::after { transform:scaleX(1); }
 
-/* SECCIÓN MENÚ */
-.menu-sec { padding:var(--pad) 0; }
-.menu-sec+.menu-sec { padding-top:0; }
-.mpanel-full { display:none; }
-.mpanel-full.on { display:block; }
-
-/* CABECERA DE CATEGORÍA */
-.cat-hdr {
-  display:flex; align-items:center; gap:1.5rem;
-  margin-bottom:clamp(1.5rem,3vw,2.5rem);
-  padding-bottom:1rem;
-  border-bottom:1px solid var(--arena-med);
+.menu-cat { margin-bottom:3rem; }
+.menu-cat-titulo {
+  font-family:var(--ff-d);
+  font-size:clamp(1.2rem,2vw,1.7rem);
+  font-weight:300;
+  font-style:italic;
+  color:var(--tinta);
+  text-align:center;
+  margin-bottom:.3rem;
 }
-.cat-hdr-ico { width:3rem; height:3rem; background:var(--rojo); border-radius:50%; display:flex; align-items:center; justify-content:center; flex-shrink:0; }
-.cat-hdr-ico svg { width:1.4rem; height:1.4rem; }
-.cat-hdr-txt h2 { font-family:var(--ff-d); font-size:clamp(1.5rem,2.5vw,2.2rem); font-weight:400; line-height:1.2; }
-.cat-hdr-txt h2 em { font-style:italic; color:var(--terracota); }
-.cat-hdr-txt p { font-size:.88rem; color:var(--warm); font-style:italic; margin-top:.2rem; }
-
-/* GRID PLATOS */
-.platos-g { display:grid; grid-template-columns:1fr 1fr; gap:1px; background:var(--arena-med); border:1px solid var(--arena-med); border-radius:3px; overflow:hidden; }
-.plato { background:var(--crema); padding:1.5rem 1.75rem; display:grid; grid-template-columns:auto 1fr auto; gap:.35rem 1rem; align-items:start; transition:background .25s; }
-.plato:hover { background:var(--arena); }
-.plato-icono { grid-column:1; grid-row:1/3; width:2.25rem; height:2.25rem; display:flex; align-items:center; justify-content:center; background:var(--arena); border-radius:50%; border:1px solid var(--arena-med); flex-shrink:0; align-self:center; }
-.plato-icono svg { width:1.1rem; height:1.1rem; }
-.plato-nom { font-family:var(--ff-d); font-size:1.05rem; font-weight:600; grid-column:2; }
-.plato-prc { font-family:var(--ff-d); font-size:1rem; font-weight:600; color:var(--terracota); white-space:nowrap; grid-column:3; grid-row:1; }
-.plato-des { font-size:.83rem; color:var(--warm); line-height:1.6; grid-column:2/-1; font-style:italic; }
-.plato-tag { grid-column:2; font-size:.62rem; letter-spacing:.1em; text-transform:uppercase; color:var(--oliva); font-family:var(--ff-b); font-weight:500; }
-
-/* Nota especial */
-.plato-nota { grid-column:1/-1; font-size:.72rem; color:var(--rojo); font-style:italic; margin-top:.25rem; }
-
-/* SEPARADOR SUBCATEGORÍA */
-.subcat {
-  margin-top:2.5rem; margin-bottom:1.25rem;
-  padding:.65rem 1rem;
-  background:var(--azul);
-  border-radius:2px;
+.menu-cat-sub {
+  text-align:center;
+  font-size:.68rem;
+  font-weight:500;
+  letter-spacing:.18em;
+  text-transform:uppercase;
+  color:var(--terracota);
+  font-family:var(--ff-b);
+  margin-bottom:1rem;
 }
-.subcat h3 { font-family:var(--ff-d); font-style:italic; font-size:1.1rem; color:rgba(250,245,234,.9); }
-
-@media(max-width:767px){
-  .platos-g { grid-template-columns:1fr; }
-  .menu-nav-inner { gap:0; }
-  .mnav-tab { padding:.75rem 1rem; font-size:.68rem; }
+.menu-cat-sep {
+  display:flex;
+  align-items:center;
+  gap:1rem;
+  margin-bottom:1.5rem;
 }
+.menu-cat-sep::before,
+.menu-cat-sep::after {
+  content:''; flex:1; height:1px;
+  background:var(--arena-med);
+}
+.menu-cat-sep span { font-size:.5rem; color:var(--limon); }
+.menu-grid {
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:1.5rem;
+}
+.menu-card {
+  background:var(--crema);
+  border:1px solid var(--arena-med);
+  border-radius:3px;
+  overflow:hidden;
+  transition:box-shadow .25s, transform .25s;
+}
+.menu-card:hover {
+  box-shadow:0 4px 20px rgba(40,24,8,.1);
+  transform:translateY(-3px);
+}
+.menu-card-foto {
+  aspect-ratio:4/3;
+  overflow:hidden;
+  position:relative;
+}
+.menu-card-foto img {
+  width:100%;height:100%;
+  object-fit:cover;display:block;
+  transition:transform .4s;
+}
+.menu-card:hover .menu-card-foto img { transform:scale(1.04); }
+.menu-card-body { padding:1.1rem 1.25rem 1.25rem; }
+.menu-card-cat {
+  font-family:var(--ff-b);
+  font-size:.62rem;
+  font-weight:500;
+  letter-spacing:.12em;
+  text-transform:uppercase;
+  color:var(--terracota);
+  margin-bottom:.4rem;
+}
+.menu-card-nom {
+  font-family:var(--ff-d);
+  font-size:1.1rem;
+  font-weight:600;
+  color:var(--tinta);
+  margin-bottom:.4rem;
+  line-height:1.25;
+}
+.menu-card-des {
+  font-size:.82rem;
+  color:var(--warm);
+  line-height:1.65;
+  font-style:italic;
+  margin-bottom:.75rem;
+}
+.menu-card-prc {
+  font-family:var(--ff-d);
+  font-size:1rem;
+  font-weight:600;
+  color:var(--terracota);
+}
+.ph-entrada { background:linear-gradient(145deg,#C8956A,#703818); }
+.ph-pizza-r { background:linear-gradient(145deg,#B83A18,#7A1008); }
+.ph-pizza-b { background:linear-gradient(145deg,#D4B896,#9A7850); }
+.ph-pizza-g { background:linear-gradient(145deg,#8B3018,#4A0808); }
+.ph-pasta { background:linear-gradient(145deg,#C8A050,#7A5010); }
+.ph-risotto { background:linear-gradient(145deg,#4E6438,#2A3818); }
+.ph-postre { background:linear-gradient(145deg,#C8956A,#905030); }
+.ph-bebida { background:linear-gradient(145deg,#2A5080,#1A2840); }
+@media(max-width:1024px){ .menu-grid { grid-template-columns:repeat(2,1fr); } }
+@media(max-width:600px){ .menu-grid { grid-template-columns:1fr; } }
+@media(max-width:767px){ .mtab { padding:.75rem 1rem; font-size:.8rem; } }
 </style>
 </head>
 <body>
@@ -113,333 +192,261 @@
 </div>
 
 <!-- HERO -->
-<section class="hero">
-  <div class="hero-foto"></div>
-  <div class="hero-overlay"></div>
-  <div class="w" style="width:100%">
-    <div class="hero-body">
-      <div class="hero-logo"><img src="katane_logo.png" alt="Katané Pizza"/></div>
-      <p class="hero-nombre">La cucina siciliana</p>
-      <h1 class="hero-eslogan">El auténtico sabor de Sicilia</h1>
-      <p class="hero-sub">Pizzas artesanales, pastas frescas, risottos y más.<br>Todo preparado con ingredientes frescos y tradición italiana.</p>
-    </div>
+<section style="min-height:95vh;position:relative;display:flex;align-items:center;justify-content:center;overflow:hidden;background:#1a0e06">
+  <div style="position:absolute;inset:0;z-index:0">
+    <img src="pizza.jpg" alt="Katané Menú" style="width:100%;height:100%;object-fit:cover;display:block;opacity:.55"/>
   </div>
-  <div class="hero-scroll" aria-hidden="true"><div class="scroll-l"></div><span>Ver menú</span></div>
+  <div style="position:absolute;inset:0;z-index:1;background:linear-gradient(to bottom,rgba(26,14,6,.3) 0%,rgba(26,14,6,.55) 60%,rgba(26,14,6,.75) 100%)"></div>
+  <div style="position:relative;z-index:2;text-align:center;padding:2rem var(--g);max-width:820px;margin-inline:auto">
+    <p style="font-family:var(--ff-b);font-size:.68rem;font-weight:500;letter-spacing:.25em;text-transform:uppercase;color:rgba(250,245,234,.6);margin-bottom:1.75rem">Katané Pizza · Panamá</p>
+    <h1 style="font-family:var(--ff-d);font-size:clamp(2.8rem,6.5vw,5.5rem);font-weight:300;font-style:italic;color:#ffffff;line-height:1.1;letter-spacing:-.01em;margin-bottom:1rem">Nuestra<br><span style="color:var(--limon)">carta</span></h1>
+    <div style="width:48px;height:1px;background:var(--limon);margin:1.5rem auto;opacity:.7"></div>
+    <p style="font-family:var(--ff-d);font-style:italic;font-size:clamp(1rem,1.8vw,1.25rem);color:rgba(250,245,234,.72);line-height:1.7;max-width:480px;margin-inline:auto">Ingredientes seleccionados,<br>recetas de siempre.</p>
+  </div>
 </section>
 
-<div class="cinta" aria-hidden="true">
-  <div class="cinta-pista">
-    <span>Pizza artesanal</span><span class="sep">✦</span><span>Pasta fresca</span><span class="sep">✦</span><span>Risotto cremoso</span><span class="sep">✦</span><span>Postres sicilianos</span><span class="sep">✦</span><span>Vinos italianos</span><span class="sep">✦</span><span>Ingredienti freschi</span><span class="sep">✦</span><span>Fermentazione lenta</span><span class="sep">✦</span>
-    <span>Pizza artesanal</span><span class="sep">✦</span><span>Pasta fresca</span><span class="sep">✦</span><span>Risotto cremoso</span><span class="sep">✦</span><span>Postres sicilianos</span><span class="sep">✦</span><span>Vinos italianos</span><span class="sep">✦</span><span>Ingredienti freschi</span><span class="sep">✦</span><span>Fermentazione lenta</span><span class="sep">✦</span>
-  </div>
-</div>
+
 
 <!-- NAVEGACIÓN DE CATEGORÍAS -->
-<nav class="menu-nav" aria-label="Categorías del menú">
-  <div class="menu-nav-inner">
-    <button class="mnav-tab on" data-cat="entradas">Entradas</button>
-    <button class="mnav-tab" data-cat="pizzas">Pizzas</button>
-    <button class="mnav-tab" data-cat="pastas">Pastas</button>
-    <button class="mnav-tab" data-cat="risottos">Risottos</button>
-    <button class="mnav-tab" data-cat="ensaladas">Ensaladas</button>
-    <button class="mnav-tab" data-cat="postres">Postres</button>
-    <button class="mnav-tab" data-cat="bebidas">Bebidas</button>
-  </div>
+<nav class="mtabs" aria-label="Categorías del menú">
+  <button class="mtab on" data-sec="sec-entradas">Entradas</button>
+  <button class="mtab" data-sec="sec-pizzas">Pizzas</button>
+  <button class="mtab" data-sec="sec-pastas">Pastas</button>
+  <button class="mtab" data-sec="sec-risottos">Risottos</button>
+  <button class="mtab" data-sec="sec-ensaladas">Ensaladas</button>
+  <button class="mtab" data-sec="sec-postres">Postres</button>
+  <button class="mtab" data-sec="sec-bebidas">Bebidas</button>
 </nav>
 
 <div class="franja"></div>
 
-<!-- ENTRADAS -->
-<div class="mpanel-full on" id="cat-entradas">
-  <section class="menu-sec piedra-bg">
-    <div class="w" style="padding-block:var(--pad)">
-      <div class="cat-hdr rv">
-        <div class="cat-hdr-ico"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.5" stroke-linecap="round"><path d="M12 3 L20 18 Q20 21 17 21 L7 21 Q4 21 4 18 Z"/><circle cx="12" cy="13" r="2.5" fill="none"/></svg></div>
-        <div class="cat-hdr-txt"><h2>Entradas — <em>Antipasti</em></h2><p>Empieza tu experiencia con el auténtico sabor de Sicilia.</p></div>
-      </div>
-      <div class="platos-g rv" style="transition-delay:.1s">
-        <div class="plato"><div class="plato-icono"><svg viewBox="0 0 24 24" fill="none" stroke="var(--terracota)" stroke-width="1.5" stroke-linecap="round"><path d="M12 3 L20 18 Q20 21 17 21 L7 21 Q4 21 4 18 Z"/><circle cx="12" cy="13" r="1" fill="var(--terracota)" stroke="none"/></svg></div><div class="plato-nom">Arancino</div><div class="plato-prc">$4.00</div><div class="plato-des">Croqueta de arroz frita y rellena (1 unidad). A elegir: Ragú alla Bolognese, Jamón y Queso, Berenjena, o Espinaca y Mozzarella.</div><div class="plato-tag">Típico siciliano · 1 unidad</div></div>
-        <div class="plato"><div class="plato-icono"><svg viewBox="0 0 24 24" fill="none" stroke="var(--terracota)" stroke-width="1.5" stroke-linecap="round"><path d="M5 8 Q12 4 19 8"/><rect x="3" y="8" width="18" height="3" rx="1"/><line x1="6" y1="11" x2="5" y2="20"/><line x1="18" y1="11" x2="19" y2="20"/></svg></div><div class="plato-nom">Papas Fritas</div><div class="plato-prc">$4.50</div><div class="plato-des">Crujientes y doraditas papas fritas, con sal.</div><div class="plato-tag">Entrada clásica</div></div>
-        <div class="plato"><div class="plato-icono"><svg viewBox="0 0 24 24" fill="none" stroke="var(--terracota)" stroke-width="1.5" stroke-linecap="round"><path d="M3 8 Q12 4 21 8 L21 10 Q12 14 3 10 Z"/><line x1="3" y1="10" x2="3" y2="16"/><line x1="21" y1="10" x2="21" y2="16"/><path d="M3 16 Q12 20 21 16"/></svg></div><div class="plato-nom">Focaccia de Ajo</div><div class="plato-prc">$7.00</div><div class="plato-des">Focaccia con aceite de oliva extra virgen, ajo y orégano.</div><div class="plato-tag">Pan artesanal</div></div>
-        <div class="plato"><div class="plato-icono"><svg viewBox="0 0 24 24" fill="none" stroke="var(--terracota)" stroke-width="1.5" stroke-linecap="round"><circle cx="12" cy="12" r="8"/><circle cx="9" cy="10" r="1.5" fill="none"/><circle cx="15" cy="10" r="1.5" fill="none"/><path d="M9 15 Q12 18 15 15"/></svg></div><div class="plato-nom">Antipasto Croccante</div><div class="plato-prc">$8.00</div><div class="plato-des">Croquetas mixtas fritas.</div><div class="plato-tag">Para compartir</div></div>
-        <div class="plato"><div class="plato-icono"><svg viewBox="0 0 24 24" fill="none" stroke="var(--terracota)" stroke-width="1.5" stroke-linecap="round"><path d="M3 8 Q12 4 21 8 L21 10 Q12 14 3 10 Z"/><circle cx="8" cy="7" r="1.5" fill="var(--rojo)" stroke="none"/><circle cx="14" cy="6" r="1.5" fill="var(--rojo)" stroke="none"/></svg></div><div class="plato-nom">Bruschetta Clásica</div><div class="plato-prc">$8.00</div><div class="plato-des">Pan rústico con mezcla de tomate con ajo, orégano y sal.</div><div class="plato-tag">Clásica italiana</div></div>
-        <div class="plato"><div class="plato-icono"><svg viewBox="0 0 24 24" fill="none" stroke="var(--terracota)" stroke-width="1.5" stroke-linecap="round"><path d="M3 8 Q12 4 21 8 L21 10 Q12 14 3 10 Z"/><circle cx="9" cy="7" r="1.5" fill="var(--rojo)" stroke="none"/><circle cx="15" cy="6" r="1.5" fill="var(--rojo)" stroke="none"/></svg></div><div class="plato-nom">Bruschetta Gourmet</div><div class="plato-prc">$10.00</div><div class="plato-des">Pan rústico con mezcla de tomate con ajo, stracciatella, orégano y sal.</div><div class="plato-tag">Gourmet</div></div>
-        <div class="plato"><div class="plato-icono"><svg viewBox="0 0 24 24" fill="none" stroke="var(--oliva)" stroke-width="1.5" stroke-linecap="round"><circle cx="12" cy="12" r="8"/><circle cx="12" cy="12" r="4" fill="none"/><line x1="12" y1="4" x2="12" y2="8"/></svg></div><div class="plato-nom">Caprese</div><div class="plato-prc">$10.00</div><div class="plato-des">Rodajas de tomate, mozzarella fresca, albahaca y aceite de oliva extra virgen.</div><div class="plato-tag">Vegetariana · Fresca</div></div>
-        <div class="plato"><div class="plato-icono"><svg viewBox="0 0 24 24" fill="none" stroke="var(--terracota)" stroke-width="1.5" stroke-linecap="round"><path d="M3 8 Q12 4 21 8 L21 10 Q12 14 3 10 Z"/></svg></div><div class="plato-nom">Focaccia Mortadella</div><div class="plato-prc">$12.50</div><div class="plato-des">Mortadela, aceite de oliva extra virgen, pesto, orégano y sal.</div><div class="plato-tag">Especialidad</div></div>
-        <div class="plato"><div class="plato-icono"><svg viewBox="0 0 24 24" fill="none" stroke="var(--azul)" stroke-width="1.5" stroke-linecap="round"><path d="M4 10 Q4 18 12 18 Q20 18 20 10 Z"/><line x1="4" y1="10" x2="20" y2="10"/><circle cx="9" cy="14" r="1" fill="var(--azul)" stroke="none"/><circle cx="15" cy="13" r="1" fill="var(--azul)" stroke="none"/></svg></div><div class="plato-nom">Impepata Di Cozze e Vongole</div><div class="plato-prc">$13.00</div><div class="plato-des">Salteado de mejillones, almejas, tomate, ajo, perejil y pimienta roja. Incluye pan.</div><div class="plato-tag">Del mar · Incluye pan</div></div>
-      </div>
+<div class="piedra-bg">
+<div class="w" style="padding-block:clamp(2rem,4vw,3.5rem)">
+
+  <!-- ENTRADAS -->
+  <div class="menu-cat" id="sec-entradas">
+    <h2 class="menu-cat-titulo">Entradas</h2>
+    <div class="menu-cat-sep"><span>✦</span></div>
+    <div class="menu-grid">
+      <div class="menu-card"><div class="menu-card-foto ph-entrada"></div><div class="menu-card-body"><div class="menu-card-cat">Entrada</div><div class="menu-card-nom">Arancino</div><p class="menu-card-des">Croqueta de arroz frita rellena. A elegir: Ragú alla Bolognese, Jamón y Queso, Berenjena o Espinaca y Mozzarella.</p><div class="menu-card-prc">$4.00</div></div></div>
+      <div class="menu-card"><div class="menu-card-foto ph-entrada"></div><div class="menu-card-body"><div class="menu-card-cat">Entrada</div><div class="menu-card-nom">Bruschetta</div><p class="menu-card-des">Pan tostado con tomate fresco, ajo, albahaca y aceite de oliva.</p><div class="menu-card-prc">$6.00</div></div></div>
+      <div class="menu-card"><div class="menu-card-foto ph-entrada"></div><div class="menu-card-body"><div class="menu-card-cat">Entrada</div><div class="menu-card-nom">Tabla de Embutidos</div><p class="menu-card-des">Selección de embutidos italianos con quesos y focaccia artesanal.</p><div class="menu-card-prc">$14.00</div></div></div>
+      <div class="menu-card"><div class="menu-card-foto ph-entrada"></div><div class="menu-card-body"><div class="menu-card-cat">Entrada</div><div class="menu-card-nom">Arancino</div><p class="menu-card-des">Croqueta de arroz frita rellena. A elegir: Ragú alla Bolognese, Jamón y Queso, Berenjena o Espinaca y Mozzarella.</p><div class="menu-card-prc">$4.00</div></div></div>
+      <div class="menu-card"><div class="menu-card-foto ph-entrada"></div><div class="menu-card-body"><div class="menu-card-cat">Entrada</div><div class="menu-card-nom">Bruschetta</div><p class="menu-card-des">Pan tostado con tomate fresco, ajo, albahaca y aceite de oliva.</p><div class="menu-card-prc">$6.00</div></div></div>
+      <div class="menu-card"><div class="menu-card-foto ph-entrada"></div><div class="menu-card-body"><div class="menu-card-cat">Entrada</div><div class="menu-card-nom">Tabla de Embutidos</div><p class="menu-card-des">Selección de embutidos italianos con quesos y focaccia artesanal.</p><div class="menu-card-prc">$14.00</div></div></div>
+      <div class="menu-card"><div class="menu-card-foto ph-entrada"></div><div class="menu-card-body"><div class="menu-card-cat">Entrada</div><div class="menu-card-nom">Arancino</div><p class="menu-card-des">Croqueta de arroz frita rellena. A elegir: Ragú alla Bolognese, Jamón y Queso, Berenjena o Espinaca y Mozzarella.</p><div class="menu-card-prc">$4.00</div></div></div>
+      <div class="menu-card"><div class="menu-card-foto ph-entrada"></div><div class="menu-card-body"><div class="menu-card-cat">Entrada</div><div class="menu-card-nom">Bruschetta</div><p class="menu-card-des">Pan tostado con tomate fresco, ajo, albahaca y aceite de oliva.</p><div class="menu-card-prc">$6.00</div></div></div>
+      <div class="menu-card"><div class="menu-card-foto ph-entrada"></div><div class="menu-card-body"><div class="menu-card-cat">Entrada</div><div class="menu-card-nom">Tabla de Embutidos</div><p class="menu-card-des">Selección de embutidos italianos con quesos y focaccia artesanal.</p><div class="menu-card-prc">$14.00</div></div></div>
+      
     </div>
-  </section>
+  </div>
+
+  <!-- PIZZAS ROJAS -->
+  <div class="menu-cat" id="sec-pizzas">
+    <h2 class="menu-cat-titulo">Pizzas Rojas</h2>
+    <div class="menu-cat-sep"><span>✦</span></div>
+    <div class="menu-grid">
+      <div class="menu-card"><div class="menu-card-foto ph-pizza-r"></div><div class="menu-card-body"><div class="menu-card-cat">Pizza Roja</div><div class="menu-card-nom">Margherita</div><p class="menu-card-des">Salsa de tomate, mozzarella y albahaca fresca. La clásica italiana.</p><div class="menu-card-prc">desde $9.00</div></div></div>
+      <div class="menu-card"><div class="menu-card-foto ph-pizza-r"></div><div class="menu-card-body"><div class="menu-card-cat">Pizza Roja</div><div class="menu-card-nom">Siciliana</div><p class="menu-card-des">Salsa de tomate, mozzarella, anchoas, aceitunas kalamatas y alcaparras.</p><div class="menu-card-prc">desde $12.00</div></div></div>
+      <div class="menu-card"><div class="menu-card-foto ph-pizza-r"></div><div class="menu-card-body"><div class="menu-card-cat">Pizza Roja</div><div class="menu-card-nom">Diavola</div><p class="menu-card-des">Salsa de tomate, mozzarella y salame picante italiano.</p><div class="menu-card-prc">desde $12.00</div></div></div>
+      <div class="menu-card"><div class="menu-card-foto ph-pizza-r"></div><div class="menu-card-body"><div class="menu-card-cat">Pizza Roja</div><div class="menu-card-nom">Napolitana</div><p class="menu-card-des">Salsa de tomate, mozzarella, anchoas, alcaparras y orégano.</p><div class="menu-card-prc">desde $11.00</div></div></div>
+      <div class="menu-card"><div class="menu-card-foto ph-pizza-r"></div><div class="menu-card-body"><div class="menu-card-cat">Pizza Roja</div><div class="menu-card-nom">Vegetariana</div><p class="menu-card-des">Salsa de tomate, mozzarella, pimentones, hongos, cebolla, tomate cherry y aceitunas kalamatas.</p><div class="menu-card-prc">desde $12.00</div></div></div>
+      <div class="menu-card"><div class="menu-card-foto ph-pizza-r"></div><div class="menu-card-body"><div class="menu-card-cat">Pizza Roja</div><div class="menu-card-nom">Capricciosa</div><p class="menu-card-des">Salsa de tomate, mozzarella, jamón, champiñones, alcachofas y aceitunas.</p><div class="menu-card-prc">desde $13.00</div></div></div>
+      <div class="menu-card"><div class="menu-card-foto ph-pizza-r"></div><div class="menu-card-body"><div class="menu-card-cat">Pizza Roja</div><div class="menu-card-nom">Margherita</div><p class="menu-card-des">Salsa de tomate, mozzarella y albahaca fresca. La clásica italiana.</p><div class="menu-card-prc">desde $9.00</div></div></div>
+      <div class="menu-card"><div class="menu-card-foto ph-pizza-r"></div><div class="menu-card-body"><div class="menu-card-cat">Pizza Roja</div><div class="menu-card-nom">Siciliana</div><p class="menu-card-des">Salsa de tomate, mozzarella, anchoas, aceitunas kalamatas y alcaparras.</p><div class="menu-card-prc">desde $12.00</div></div></div>
+      <div class="menu-card"><div class="menu-card-foto ph-pizza-r"></div><div class="menu-card-body"><div class="menu-card-cat">Pizza Roja</div><div class="menu-card-nom">Diavola</div><p class="menu-card-des">Salsa de tomate, mozzarella y salame picante italiano.</p><div class="menu-card-prc">desde $12.00</div></div></div>
+      <div class="menu-card"><div class="menu-card-foto ph-pizza-r"></div><div class="menu-card-body"><div class="menu-card-cat">Pizza Roja</div><div class="menu-card-nom">Napolitana</div><p class="menu-card-des">Salsa de tomate, mozzarella, anchoas, alcaparras y orégano.</p><div class="menu-card-prc">desde $11.00</div></div></div>
+      <div class="menu-card"><div class="menu-card-foto ph-pizza-r"></div><div class="menu-card-body"><div class="menu-card-cat">Pizza Roja</div><div class="menu-card-nom">Vegetariana</div><p class="menu-card-des">Salsa de tomate, mozzarella, pimentones, hongos, cebolla, tomate cherry y aceitunas kalamatas.</p><div class="menu-card-prc">desde $12.00</div></div></div>
+      <div class="menu-card"><div class="menu-card-foto ph-pizza-r"></div><div class="menu-card-body"><div class="menu-card-cat">Pizza Roja</div><div class="menu-card-nom">Capricciosa</div><p class="menu-card-des">Salsa de tomate, mozzarella, jamón, champiñones, alcachofas y aceitunas.</p><div class="menu-card-prc">desde $13.00</div></div></div>
+      <div class="menu-card"><div class="menu-card-foto ph-pizza-r"></div><div class="menu-card-body"><div class="menu-card-cat">Pizza Roja</div><div class="menu-card-nom">Margherita</div><p class="menu-card-des">Salsa de tomate, mozzarella y albahaca fresca. La clásica italiana.</p><div class="menu-card-prc">desde $9.00</div></div></div>
+      <div class="menu-card"><div class="menu-card-foto ph-pizza-r"></div><div class="menu-card-body"><div class="menu-card-cat">Pizza Roja</div><div class="menu-card-nom">Siciliana</div><p class="menu-card-des">Salsa de tomate, mozzarella, anchoas, aceitunas kalamatas y alcaparras.</p><div class="menu-card-prc">desde $12.00</div></div></div>
+      <div class="menu-card"><div class="menu-card-foto ph-pizza-r"></div><div class="menu-card-body"><div class="menu-card-cat">Pizza Roja</div><div class="menu-card-nom">Diavola</div><p class="menu-card-des">Salsa de tomate, mozzarella y salame picante italiano.</p><div class="menu-card-prc">desde $12.00</div></div></div>
+      <div class="menu-card"><div class="menu-card-foto ph-pizza-r"></div><div class="menu-card-body"><div class="menu-card-cat">Pizza Roja</div><div class="menu-card-nom">Napolitana</div><p class="menu-card-des">Salsa de tomate, mozzarella, anchoas, alcaparras y orégano.</p><div class="menu-card-prc">desde $11.00</div></div></div>
+      <div class="menu-card"><div class="menu-card-foto ph-pizza-r"></div><div class="menu-card-body"><div class="menu-card-cat">Pizza Roja</div><div class="menu-card-nom">Vegetariana</div><p class="menu-card-des">Salsa de tomate, mozzarella, pimentones, hongos, cebolla, tomate cherry y aceitunas kalamatas.</p><div class="menu-card-prc">desde $12.00</div></div></div>
+      <div class="menu-card"><div class="menu-card-foto ph-pizza-r"></div><div class="menu-card-body"><div class="menu-card-cat">Pizza Roja</div><div class="menu-card-nom">Capricciosa</div><p class="menu-card-des">Salsa de tomate, mozzarella, jamón, champiñones, alcachofas y aceitunas.</p><div class="menu-card-prc">desde $13.00</div></div></div>
+      <div class="menu-card"><div class="menu-card-foto ph-pizza-r"></div><div class="menu-card-body"><div class="menu-card-cat">Pizza Roja</div><div class="menu-card-nom">Vegetariana</div><p class="menu-card-des">Salsa de tomate, mozzarella, pimentones, hongos, cebolla, tomate cherry y aceitunas kalamatas.</p><div class="menu-card-prc">desde $12.00</div></div></div>
+      <div class="menu-card"><div class="menu-card-foto ph-pizza-r"></div><div class="menu-card-body"><div class="menu-card-cat">Pizza Roja</div><div class="menu-card-nom">Capricciosa</div><p class="menu-card-des">Salsa de tomate, mozzarella, jamón, champiñones, alcachofas y aceitunas.</p><div class="menu-card-prc">desde $13.00</div></div></div>
+    </div>
+  </div>
+
+  <!-- PIZZAS BLANCAS -->
+  <div class="menu-cat" id="sec-pizzas-b">
+    <h2 class="menu-cat-titulo">Pizzas Blancas</h2>
+    <div class="menu-cat-sep"><span>✦</span></div>
+    <div class="menu-grid">
+      <div class="menu-card"><div class="menu-card-foto ph-pizza-b"></div><div class="menu-card-body"><div class="menu-card-cat">Pizza Blanca</div><div class="menu-card-nom">Quattro Formaggi</div><p class="menu-card-des">Mozzarella, parmesano, gorgonzola y queso crema.</p><div class="menu-card-prc">desde $13.00</div></div></div>
+      <div class="menu-card"><div class="menu-card-foto ph-pizza-b"></div><div class="menu-card-body"><div class="menu-card-cat">Pizza Blanca</div><div class="menu-card-nom">Pesto</div><p class="menu-card-des">Pesto italiano, mozzarella, tomate cherry y parmesano.</p><div class="menu-card-prc">desde $12.00</div></div></div>
+      <div class="menu-card"><div class="menu-card-foto ph-pizza-b"></div><div class="menu-card-body"><div class="menu-card-cat">Pizza Blanca</div><div class="menu-card-nom">Prosciutto e Rucola</div><p class="menu-card-des">Mozzarella, prosciutto crudo, arúgula y parmesano.</p><div class="menu-card-prc">desde $14.00</div></div></div>
+      <div class="menu-card"><div class="menu-card-foto ph-pizza-b"></div><div class="menu-card-body"><div class="menu-card-cat">Pizza Blanca</div><div class="menu-card-nom">Quattro Formaggi</div><p class="menu-card-des">Mozzarella, parmesano, gorgonzola y queso crema.</p><div class="menu-card-prc">desde $13.00</div></div></div>
+      <div class="menu-card"><div class="menu-card-foto ph-pizza-b"></div><div class="menu-card-body"><div class="menu-card-cat">Pizza Blanca</div><div class="menu-card-nom">Pesto</div><p class="menu-card-des">Pesto italiano, mozzarella, tomate cherry y parmesano.</p><div class="menu-card-prc">desde $12.00</div></div></div>
+      <div class="menu-card"><div class="menu-card-foto ph-pizza-b"></div><div class="menu-card-body"><div class="menu-card-cat">Pizza Blanca</div><div class="menu-card-nom">Prosciutto e Rucola</div><p class="menu-card-des">Mozzarella, prosciutto crudo, arúgula y parmesano.</p><div class="menu-card-prc">desde $14.00</div></div></div>
+      <div class="menu-card"><div class="menu-card-foto ph-pizza-b"></div><div class="menu-card-body"><div class="menu-card-cat">Pizza Blanca</div><div class="menu-card-nom">Quattro Formaggi</div><p class="menu-card-des">Mozzarella, parmesano, gorgonzola y queso crema.</p><div class="menu-card-prc">desde $13.00</div></div></div>
+    </div>
+  </div>
+
+  <!-- PIZZAS GOURMET -->
+  <div class="menu-cat" id="sec-pizzas-g">
+    <h2 class="menu-cat-titulo">Pizzas Gourmet</h2>
+    <div class="menu-cat-sep"><span>✦</span></div>
+    <div class="menu-grid">
+      <div class="menu-card"><div class="menu-card-foto ph-pizza-g"></div><div class="menu-card-body"><div class="menu-card-cat">Gourmet · Signature</div><div class="menu-card-nom">Gourmet Katané</div><p class="menu-card-des">Salsa de tomate, mozzarella, prosciutto crudo, tomate cherry, queso crema, arúgula y parmesano.</p><div class="menu-card-prc">desde $17.00</div></div></div>
+      <div class="menu-card"><div class="menu-card-foto ph-pizza-g"></div><div class="menu-card-body"><div class="menu-card-cat">Gourmet · Siciliana</div><div class="menu-card-nom">Gourmet Norma</div><p class="menu-card-des">Salsa de tomate, mozzarella, berenjena frita y queso ricotta rallado.</p><div class="menu-card-prc">desde $15.00</div></div></div>
+      <div class="menu-card"><div class="menu-card-foto ph-pizza-g"></div><div class="menu-card-body"><div class="menu-card-cat">Gourmet · Signature</div><div class="menu-card-nom">Gourmet Katané</div><p class="menu-card-des">Salsa de tomate, mozzarella, prosciutto crudo, tomate cherry, queso crema, arúgula y parmesano.</p><div class="menu-card-prc">desde $17.00</div></div></div>
+      <div class="menu-card"><div class="menu-card-foto ph-pizza-g"></div><div class="menu-card-body"><div class="menu-card-cat">Gourmet · Siciliana</div><div class="menu-card-nom">Gourmet Norma</div><p class="menu-card-des">Salsa de tomate, mozzarella, berenjena frita y queso ricotta rallado.</p><div class="menu-card-prc">desde $15.00</div></div></div>
+      <div class="menu-card"><div class="menu-card-foto ph-pizza-g"></div><div class="menu-card-body"><div class="menu-card-cat">Gourmet · Signature</div><div class="menu-card-nom">Gourmet Katané</div><p class="menu-card-des">Salsa de tomate, mozzarella, prosciutto crudo, tomate cherry, queso crema, arúgula y parmesano.</p><div class="menu-card-prc">desde $17.00</div></div></div>
+      <div class="menu-card"><div class="menu-card-foto ph-pizza-g"></div><div class="menu-card-body"><div class="menu-card-cat">Gourmet · Siciliana</div><div class="menu-card-nom">Gourmet Norma</div><p class="menu-card-des">Salsa de tomate, mozzarella, berenjena frita y queso ricotta rallado.</p><div class="menu-card-prc">desde $15.00</div></div></div>
+    </div>
+  </div>
+
+  <!-- PASTAS -->
+  <div class="menu-cat" id="sec-pastas">
+    <h2 class="menu-cat-titulo">Pastas</h2>
+    <div class="menu-cat-sep"><span>✦</span></div>
+    <div class="menu-grid">
+      <div class="menu-card"><div class="menu-card-foto ph-pasta"></div><div class="menu-card-body"><div class="menu-card-cat">Pasta · Signature</div><div class="menu-card-nom">Pasta Katané</div><p class="menu-card-des">Pasta con prosciutto crudo, salsa rosada, queso azul, arúgula y tomate cherry.</p><div class="menu-card-prc">$13.00</div></div></div>
+      <div class="menu-card"><div class="menu-card-foto ph-pasta"></div><div class="menu-card-body"><div class="menu-card-cat">Pasta · Del Mar</div><div class="menu-card-nom">Linguine allo Scoglio</div><p class="menu-card-des">Linguine con mixtos de mariscos, almejas, langostino, tomate cherry, ajo y aceite de oliva.</p><div class="menu-card-prc">$16.00</div></div></div>
+      <div class="menu-card"><div class="menu-card-foto ph-pasta"></div><div class="menu-card-body"><div class="menu-card-cat">Pasta · Siciliana</div><div class="menu-card-nom">Paccheri Alla Norma</div><p class="menu-card-des">Pasta Paccheri con salsa de tomate, berenjena, ajo, albahaca y queso ricotta rallado.</p><div class="menu-card-prc">$11.00</div></div></div>
+      <div class="menu-card"><div class="menu-card-foto ph-pasta"></div><div class="menu-card-body"><div class="menu-card-cat">Pasta · Clásica</div><div class="menu-card-nom">Lasagna di Carne</div><p class="menu-card-des">Ragú alla bolognese, carne molida, salsa roja, mozzarella, parmesano y bechamel.</p><div class="menu-card-prc">$11.00</div></div></div>
+      <div class="menu-card"><div class="menu-card-foto ph-pasta"></div><div class="menu-card-body"><div class="menu-card-cat">Pasta · Clásica</div><div class="menu-card-nom">Pasta Amatriciana</div><p class="menu-card-des">Salsa de tomate, queso parmesano, tocino y pimienta roja.</p><div class="menu-card-prc">$10.00</div></div></div>
+      <div class="menu-card"><div class="menu-card-foto ph-pasta"></div><div class="menu-card-body"><div class="menu-card-cat">Pasta · Clásica</div><div class="menu-card-nom">Pasta Carbonara</div><p class="menu-card-des">Pasta con panceta, yema de huevo, parmesano y pimienta negra.</p><div class="menu-card-prc">$11.00</div></div></div>
+      <div class="menu-card"><div class="menu-card-foto ph-pasta"></div><div class="menu-card-body"><div class="menu-card-cat">Pasta · Signature</div><div class="menu-card-nom">Pasta Katané</div><p class="menu-card-des">Pasta con prosciutto crudo, salsa rosada, queso azul, arúgula y tomate cherry.</p><div class="menu-card-prc">$13.00</div></div></div>
+      <div class="menu-card"><div class="menu-card-foto ph-pasta"></div><div class="menu-card-body"><div class="menu-card-cat">Pasta · Del Mar</div><div class="menu-card-nom">Linguine allo Scoglio</div><p class="menu-card-des">Linguine con mixtos de mariscos, almejas, langostino, tomate cherry, ajo y aceite de oliva.</p><div class="menu-card-prc">$16.00</div></div></div>
+      <div class="menu-card"><div class="menu-card-foto ph-pasta"></div><div class="menu-card-body"><div class="menu-card-cat">Pasta · Siciliana</div><div class="menu-card-nom">Paccheri Alla Norma</div><p class="menu-card-des">Pasta Paccheri con salsa de tomate, berenjena, ajo, albahaca y queso ricotta rallado.</p><div class="menu-card-prc">$11.00</div></div></div>
+      <div class="menu-card"><div class="menu-card-foto ph-pasta"></div><div class="menu-card-body"><div class="menu-card-cat">Pasta · Clásica</div><div class="menu-card-nom">Lasagna di Carne</div><p class="menu-card-des">Ragú alla bolognese, carne molida, salsa roja, mozzarella, parmesano y bechamel.</p><div class="menu-card-prc">$11.00</div></div></div>
+      <div class="menu-card"><div class="menu-card-foto ph-pasta"></div><div class="menu-card-body"><div class="menu-card-cat">Pasta · Clásica</div><div class="menu-card-nom">Pasta Amatriciana</div><p class="menu-card-des">Salsa de tomate, queso parmesano, tocino y pimienta roja.</p><div class="menu-card-prc">$10.00</div></div></div>
+      <div class="menu-card"><div class="menu-card-foto ph-pasta"></div><div class="menu-card-body"><div class="menu-card-cat">Pasta · Clásica</div><div class="menu-card-nom">Pasta Carbonara</div><p class="menu-card-des">Pasta con panceta, yema de huevo, parmesano y pimienta negra.</p><div class="menu-card-prc">$11.00</div></div></div>
+    </div>
+  </div>
+
+  <!-- RISOTTOS -->
+  <div class="menu-cat" id="sec-risottos">
+    <h2 class="menu-cat-titulo">Risottos</h2>
+    <div class="menu-cat-sep"><span>✦</span></div>
+    <div class="menu-grid">
+      <div class="menu-card"><div class="menu-card-foto ph-risotto"></div><div class="menu-card-body"><div class="menu-card-cat">Risotto · Del Mar</div><div class="menu-card-nom">Risotto allo Scoglio</div><p class="menu-card-des">Mixtos de mariscos, mejillones, almejas, langostino, tomate cherry, ajo y aceite de oliva.</p><div class="menu-card-prc">$18.00</div></div></div>
+      <div class="menu-card"><div class="menu-card-foto ph-risotto"></div><div class="menu-card-body"><div class="menu-card-cat">Risotto · Especialidad</div><div class="menu-card-nom">Risotto Funghi Porcini</div><p class="menu-card-des">Hongos porcini, chorizo italiano, ajo, perejil y queso parmesano.</p><div class="menu-card-prc">$17.00</div></div></div>
+      <div class="menu-card"><div class="menu-card-foto ph-risotto"></div><div class="menu-card-body"><div class="menu-card-cat">Risotto · Del Mar</div><div class="menu-card-nom">Risotto allo Scoglio</div><p class="menu-card-des">Mixtos de mariscos, mejillones, almejas, langostino, tomate cherry, ajo y aceite de oliva.</p><div class="menu-card-prc">$18.00</div></div></div>
+    </div>
+  </div>
+
+  <!-- ENSALADAS -->
+  <div class="menu-cat" id="sec-ensaladas">
+    <h2 class="menu-cat-titulo">Ensaladas</h2>
+    <div class="menu-cat-sep"><span>✦</span></div>
+    <div class="menu-grid">
+      <div class="menu-card"><div class="menu-card-foto ph-entrada"></div><div class="menu-card-body"><div class="menu-card-cat">Ensalada</div><div class="menu-card-nom">Ensalada Katané</div><p class="menu-card-des">Arúgula, tomate cherry, parmesano, prosciutto crudo y aceite de oliva.</p><div class="menu-card-prc">$10.00</div></div></div>
+      <div class="menu-card"><div class="menu-card-foto ph-entrada"></div><div class="menu-card-body"><div class="menu-card-cat">Ensalada</div><div class="menu-card-nom">Ensalada Caprese</div><p class="menu-card-des">Tomate fresco, mozzarella, albahaca y aceite de oliva.</p><div class="menu-card-prc">$9.00</div></div></div>
+      <div class="menu-card"><div class="menu-card-foto ph-entrada"></div><div class="menu-card-body"><div class="menu-card-cat">Ensalada</div><div class="menu-card-nom">Ensalada Katané</div><p class="menu-card-des">Arúgula, tomate cherry, parmesano, prosciutto crudo y aceite de oliva.</p><div class="menu-card-prc">$10.00</div></div></div>
+      <div class="menu-card"><div class="menu-card-foto ph-entrada"></div><div class="menu-card-body"><div class="menu-card-cat">Ensalada</div><div class="menu-card-nom">Ensalada Caprese</div><p class="menu-card-des">Tomate fresco, mozzarella, albahaca y aceite de oliva.</p><div class="menu-card-prc">$9.00</div></div></div>
+    </div>
+  </div>
+
+  <!-- MENÚ KIDS -->
+  <div class="menu-cat" id="sec-ensaladas">
+    <h2 class="menu-cat-titulo">Menú Kids</h2>
+    <div class="menu-cat-sep"><span>✦</span></div>
+    <div class="menu-grid">
+      <div class="menu-card"><div class="menu-card-foto ph-entrada"></div><div class="menu-card-body"><div class="menu-card-cat">Ensalada</div><div class="menu-card-nom">Ensalada Katané</div><p class="menu-card-des">Arúgula, tomate cherry, parmesano, prosciutto crudo y aceite de oliva.</p><div class="menu-card-prc">$10.00</div></div></div>
+      <div class="menu-card"><div class="menu-card-foto ph-entrada"></div><div class="menu-card-body"><div class="menu-card-cat">Ensalada</div><div class="menu-card-nom">Ensalada Caprese</div><p class="menu-card-des">Tomate fresco, mozzarella, albahaca y aceite de oliva.</p><div class="menu-card-prc">$9.00</div></div></div>
+      <div class="menu-card"><div class="menu-card-foto ph-entrada"></div><div class="menu-card-body"><div class="menu-card-cat">Ensalada</div><div class="menu-card-nom">Ensalada Katané</div><p class="menu-card-des">Arúgula, tomate cherry, parmesano, prosciutto crudo y aceite de oliva.</p><div class="menu-card-prc">$10.00</div></div></div>
+      <div class="menu-card"><div class="menu-card-foto ph-entrada"></div><div class="menu-card-body"><div class="menu-card-cat">Ensalada</div><div class="menu-card-nom">Ensalada Caprese</div><p class="menu-card-des">Tomate fresco, mozzarella, albahaca y aceite de oliva.</p><div class="menu-card-prc">$9.00</div></div></div>
+      <div class="menu-card"><div class="menu-card-foto ph-entrada"></div><div class="menu-card-body"><div class="menu-card-cat">Ensalada</div><div class="menu-card-nom">Ensalada Caprese</div><p class="menu-card-des">Tomate fresco, mozzarella, albahaca y aceite de oliva.</p><div class="menu-card-prc">$9.00</div></div></div>
+    </div>
+  </div>
+
+
+  <!-- POSTRES -->
+  <div class="menu-cat" id="sec-postres">
+    <h2 class="menu-cat-titulo">Postres</h2>
+    <div class="menu-cat-sep"><span>✦</span></div>
+    <div class="menu-grid">
+      <div class="menu-card"><div class="menu-card-foto ph-postre"></div><div class="menu-card-body"><div class="menu-card-cat">Postre · Clásico</div><div class="menu-card-nom">Tiramisú Clásico</div><p class="menu-card-des">Galletas savoiardi, mascarpone, café, yema de huevos, licor marsala y cacao en polvo.</p><div class="menu-card-prc">$6.00</div></div></div>
+      <div class="menu-card"><div class="menu-card-foto ph-postre"></div><div class="menu-card-body"><div class="menu-card-cat">Postre · Especial</div><div class="menu-card-nom">Tiramisú de Pistacho</div><p class="menu-card-des">Versión especial del tiramisú clásico con crema de pistacho siciliano.</p><div class="menu-card-prc">$7.00</div></div></div>
+      <div class="menu-card"><div class="menu-card-foto ph-postre"></div><div class="menu-card-body"><div class="menu-card-cat">Postre · Italiano</div><div class="menu-card-nom">Pannacotta</div><p class="menu-card-des">Crema italiana con coulis de frutos rojos.</p><div class="menu-card-prc">$6.00</div></div></div>
+      <div class="menu-card"><div class="menu-card-foto ph-postre"></div><div class="menu-card-body"><div class="menu-card-cat">Postre · Clásico</div><div class="menu-card-nom">Tiramisú Clásico</div><p class="menu-card-des">Galletas savoiardi, mascarpone, café, yema de huevos, licor marsala y cacao en polvo.</p><div class="menu-card-prc">$6.00</div></div></div>
+      <div class="menu-card"><div class="menu-card-foto ph-postre"></div><div class="menu-card-body"><div class="menu-card-cat">Postre · Especial</div><div class="menu-card-nom">Tiramisú de Pistacho</div><p class="menu-card-des">Versión especial del tiramisú clásico con crema de pistacho siciliano.</p><div class="menu-card-prc">$7.00</div></div></div>
+      <div class="menu-card"><div class="menu-card-foto ph-postre"></div><div class="menu-card-body"><div class="menu-card-cat">Postre · Italiano</div><div class="menu-card-nom">Pannacotta</div><p class="menu-card-des">Crema italiana con coulis de frutos rojos.</p><div class="menu-card-prc">$6.00</div></div></div>
+      <div class="menu-card"><div class="menu-card-foto ph-postre"></div><div class="menu-card-body"><div class="menu-card-cat">Postre · Clásico</div><div class="menu-card-nom">Tiramisú Clásico</div><p class="menu-card-des">Galletas savoiardi, mascarpone, café, yema de huevos, licor marsala y cacao en polvo.</p><div class="menu-card-prc">$6.00</div></div></div>
+      <div class="menu-card"><div class="menu-card-foto ph-postre"></div><div class="menu-card-body"><div class="menu-card-cat">Postre · Especial</div><div class="menu-card-nom">Tiramisú de Pistacho</div><p class="menu-card-des">Versión especial del tiramisú clásico con crema de pistacho siciliano.</p><div class="menu-card-prc">$7.00</div></div></div>
+      <div class="menu-card"><div class="menu-card-foto ph-postre"></div><div class="menu-card-body"><div class="menu-card-cat">Postre · Italiano</div><div class="menu-card-nom">Pannacotta</div><p class="menu-card-des">Crema italiana con coulis de frutos rojos.</p><div class="menu-card-prc">$6.00</div></div></div>
+    </div>
+  </div>
+
+  <!-- BEBIDAS -->
+  <div class="menu-cat" id="sec-bebidas">
+    <h2 class="menu-cat-titulo">Bebidas</h2>
+    <div class="menu-cat-sep"><span>✦</span></div>
+    <div class="menu-grid">
+      <div class="menu-card"><div class="menu-card-foto ph-bebida"></div><div class="menu-card-body"><div class="menu-card-cat">Cóctel · Italiano</div><div class="menu-card-nom">Aperol Spritz</div><p class="menu-card-des">Aperol, prosecco y soda. El aperitivo clásico italiano.</p><div class="menu-card-prc">$7.00</div></div></div>
+      <div class="menu-card"><div class="menu-card-foto ph-bebida"></div><div class="menu-card-body"><div class="menu-card-cat">Cerveza · Artesanal</div><div class="menu-card-nom">Wena Vaina</div><p class="menu-card-des">Cerveza artesanal panameña. Refrescante y ligera.</p><div class="menu-card-prc">$4.00</div></div></div>
+      <div class="menu-card"><div class="menu-card-foto ph-bebida"></div><div class="menu-card-body"><div class="menu-card-cat">Bebida · Sin alcohol</div><div class="menu-card-nom">Limonada Italiana</div><p class="menu-card-des">Limón fresco, agua con gas y menta. Refrescante y natural.</p><div class="menu-card-prc">$4.00</div></div></div>
+      <div class="menu-card"><div class="menu-card-foto ph-bebida"></div><div class="menu-card-body"><div class="menu-card-cat">Cóctel · Italiano</div><div class="menu-card-nom">Aperol Spritz</div><p class="menu-card-des">Aperol, prosecco y soda. El aperitivo clásico italiano.</p><div class="menu-card-prc">$7.00</div></div></div>
+      <div class="menu-card"><div class="menu-card-foto ph-bebida"></div><div class="menu-card-body"><div class="menu-card-cat">Cerveza · Artesanal</div><div class="menu-card-nom">Wena Vaina</div><p class="menu-card-des">Cerveza artesanal panameña. Refrescante y ligera.</p><div class="menu-card-prc">$4.00</div></div></div>
+      <div class="menu-card"><div class="menu-card-foto ph-bebida"></div><div class="menu-card-body"><div class="menu-card-cat">Bebida · Sin alcohol</div><div class="menu-card-nom">Limonada Italiana</div><p class="menu-card-des">Limón fresco, agua con gas y menta. Refrescante y natural.</p><div class="menu-card-prc">$4.00</div></div></div>
+      <div class="menu-card"><div class="menu-card-foto ph-bebida"></div><div class="menu-card-body"><div class="menu-card-cat">Cóctel · Italiano</div><div class="menu-card-nom">Aperol Spritz</div><p class="menu-card-des">Aperol, prosecco y soda. El aperitivo clásico italiano.</p><div class="menu-card-prc">$7.00</div></div></div>
+    </div>
+    </div>
+
+     <!-- CERVEZAS -->
+  <div class="menu-cat" id="sec-bebidas">
+    <h2 class="menu-cat-titulo">Cervezas</h2>
+    <div class="menu-cat-sep"><span>✦</span></div>
+    <div class="menu-grid">
+      <div class="menu-card"><div class="menu-card-foto ph-bebida"></div><div class="menu-card-body"><div class="menu-card-cat">Cóctel · Italiano</div><div class="menu-card-nom">Aperol Spritz</div><p class="menu-card-des">Aperol, prosecco y soda. El aperitivo clásico italiano.</p><div class="menu-card-prc">$7.00</div></div></div>
+      <div class="menu-card"><div class="menu-card-foto ph-bebida"></div><div class="menu-card-body"><div class="menu-card-cat">Cerveza · Artesanal</div><div class="menu-card-nom">Wena Vaina</div><p class="menu-card-des">Cerveza artesanal panameña. Refrescante y ligera.</p><div class="menu-card-prc">$4.00</div></div></div>
+      <div class="menu-card"><div class="menu-card-foto ph-bebida"></div><div class="menu-card-body"><div class="menu-card-cat">Bebida · Sin alcohol</div><div class="menu-card-nom">Limonada Italiana</div><p class="menu-card-des">Limón fresco, agua con gas y menta. Refrescante y natural.</p><div class="menu-card-prc">$4.00</div></div></div>
+      <div class="menu-card"><div class="menu-card-foto ph-bebida"></div><div class="menu-card-body"><div class="menu-card-cat">Cóctel · Italiano</div><div class="menu-card-nom">Aperol Spritz</div><p class="menu-card-des">Aperol, prosecco y soda. El aperitivo clásico italiano.</p><div class="menu-card-prc">$7.00</div></div></div>
+      <div class="menu-card"><div class="menu-card-foto ph-bebida"></div><div class="menu-card-body"><div class="menu-card-cat">Cerveza · Artesanal</div><div class="menu-card-nom">Wena Vaina</div><p class="menu-card-des">Cerveza artesanal panameña. Refrescante y ligera.</p><div class="menu-card-prc">$4.00</div></div></div>
+      <div class="menu-card"><div class="menu-card-foto ph-bebida"></div><div class="menu-card-body"><div class="menu-card-cat">Bebida · Sin alcohol</div><div class="menu-card-nom">Limonada Italiana</div><p class="menu-card-des">Limón fresco, agua con gas y menta. Refrescante y natural.</p><div class="menu-card-prc">$4.00</div></div></div>
+    </div>
+    </div>
+
+     <!-- CÓCTELES -->
+  <div class="menu-cat" id="sec-bebidas">
+    <h2 class="menu-cat-titulo">Cócteles</h2>
+    <div class="menu-cat-sep"><span>✦</span></div>
+    <div class="menu-grid">
+      <div class="menu-card"><div class="menu-card-foto ph-bebida"></div><div class="menu-card-body"><div class="menu-card-cat">Cóctel · Italiano</div><div class="menu-card-nom">Aperol Spritz</div><p class="menu-card-des">Aperol, prosecco y soda. El aperitivo clásico italiano.</p><div class="menu-card-prc">$7.00</div></div></div>
+      <div class="menu-card"><div class="menu-card-foto ph-bebida"></div><div class="menu-card-body"><div class="menu-card-cat">Cerveza · Artesanal</div><div class="menu-card-nom">Wena Vaina</div><p class="menu-card-des">Cerveza artesanal panameña. Refrescante y ligera.</p><div class="menu-card-prc">$4.00</div></div></div>
+      <div class="menu-card"><div class="menu-card-foto ph-bebida"></div><div class="menu-card-body"><div class="menu-card-cat">Bebida · Sin alcohol</div><div class="menu-card-nom">Limonada Italiana</div><p class="menu-card-des">Limón fresco, agua con gas y menta. Refrescante y natural.</p><div class="menu-card-prc">$4.00</div></div></div>
+      <div class="menu-card"><div class="menu-card-foto ph-bebida"></div><div class="menu-card-body"><div class="menu-card-cat">Cóctel · Italiano</div><div class="menu-card-nom">Aperol Spritz</div><p class="menu-card-des">Aperol, prosecco y soda. El aperitivo clásico italiano.</p><div class="menu-card-prc">$7.00</div></div></div>
+      <div class="menu-card"><div class="menu-card-foto ph-bebida"></div><div class="menu-card-body"><div class="menu-card-cat">Cerveza · Artesanal</div><div class="menu-card-nom">Wena Vaina</div><p class="menu-card-des">Cerveza artesanal panameña. Refrescante y ligera.</p><div class="menu-card-prc">$4.00</div></div></div>
+      <div class="menu-card"><div class="menu-card-foto ph-bebida"></div><div class="menu-card-body"><div class="menu-card-cat">Bebida · Sin alcohol</div><div class="menu-card-nom">Limonada Italiana</div><p class="menu-card-des">Limón fresco, agua con gas y menta. Refrescante y natural.</p><div class="menu-card-prc">$4.00</div></div></div>
+      <div class="menu-card"><div class="menu-card-foto ph-bebida"></div><div class="menu-card-body"><div class="menu-card-cat">Cóctel · Italiano</div><div class="menu-card-nom">Aperol Spritz</div><p class="menu-card-des">Aperol, prosecco y soda. El aperitivo clásico italiano.</p><div class="menu-card-prc">$7.00</div></div></div>
+      <div class="menu-card"><div class="menu-card-foto ph-bebida"></div><div class="menu-card-body"><div class="menu-card-cat">Cerveza · Artesanal</div><div class="menu-card-nom">Wena Vaina</div><p class="menu-card-des">Cerveza artesanal panameña. Refrescante y ligera.</p><div class="menu-card-prc">$4.00</div></div></div>
+      <div class="menu-card"><div class="menu-card-foto ph-bebida"></div><div class="menu-card-body"><div class="menu-card-cat">Bebida · Sin alcohol</div><div class="menu-card-nom">Limonada Italiana</div><p class="menu-card-des">Limón fresco, agua con gas y menta. Refrescante y natural.</p><div class="menu-card-prc">$4.00</div></div></div>
+      <div class="menu-card"><div class="menu-card-foto ph-bebida"></div><div class="menu-card-body"><div class="menu-card-cat">Cóctel · Italiano</div><div class="menu-card-nom">Aperol Spritz</div><p class="menu-card-des">Aperol, prosecco y soda. El aperitivo clásico italiano.</p><div class="menu-card-prc">$7.00</div></div></div>
+    </div>
+    </div>
+
+       <!-- VINOS -->
+  <div class="menu-cat" id="sec-bebidas">
+    <h2 class="menu-cat-titulo">Vinos</h2>
+    <div class="menu-cat-sep"><span>✦</span></div>
+    <div class="menu-grid">
+      <div class="menu-card"><div class="menu-card-foto ph-bebida"></div><div class="menu-card-body"><div class="menu-card-cat">Cóctel · Italiano</div><div class="menu-card-nom">Aperol Spritz</div><p class="menu-card-des">Aperol, prosecco y soda. El aperitivo clásico italiano.</p><div class="menu-card-prc">$7.00</div></div></div>
+      <div class="menu-card"><div class="menu-card-foto ph-bebida"></div><div class="menu-card-body"><div class="menu-card-cat">Cerveza · Artesanal</div><div class="menu-card-nom">Wena Vaina</div><p class="menu-card-des">Cerveza artesanal panameña. Refrescante y ligera.</p><div class="menu-card-prc">$4.00</div></div></div>
+      <div class="menu-card"><div class="menu-card-foto ph-bebida"></div><div class="menu-card-body"><div class="menu-card-cat">Bebida · Sin alcohol</div><div class="menu-card-nom">Limonada Italiana</div><p class="menu-card-des">Limón fresco, agua con gas y menta. Refrescante y natural.</p><div class="menu-card-prc">$4.00</div></div></div>
+      <div class="menu-card"><div class="menu-card-foto ph-bebida"></div><div class="menu-card-body"><div class="menu-card-cat">Cóctel · Italiano</div><div class="menu-card-nom">Aperol Spritz</div><p class="menu-card-des">Aperol, prosecco y soda. El aperitivo clásico italiano.</p><div class="menu-card-prc">$7.00</div></div></div>
+      <div class="menu-card"><div class="menu-card-foto ph-bebida"></div><div class="menu-card-body"><div class="menu-card-cat">Cerveza · Artesanal</div><div class="menu-card-nom">Wena Vaina</div><p class="menu-card-des">Cerveza artesanal panameña. Refrescante y ligera.</p><div class="menu-card-prc">$4.00</div></div></div>
+      <div class="menu-card"><div class="menu-card-foto ph-bebida"></div><div class="menu-card-body"><div class="menu-card-cat">Bebida · Sin alcohol</div><div class="menu-card-nom">Limonada Italiana</div><p class="menu-card-des">Limón fresco, agua con gas y menta. Refrescante y natural.</p><div class="menu-card-prc">$4.00</div></div></div>
+    </div>
+    </div>
+
+       <!-- BEBIDAS CALIENTES -->
+  <div class="menu-cat" id="sec-bebidas">
+    <h2 class="menu-cat-titulo">Bebidas Calientes</h2>
+    <div class="menu-cat-sep"><span>✦</span></div>
+    <div class="menu-grid">
+      <div class="menu-card"><div class="menu-card-foto ph-bebida"></div><div class="menu-card-body"><div class="menu-card-cat">Cóctel · Italiano</div><div class="menu-card-nom">Aperol Spritz</div><p class="menu-card-des">Aperol, prosecco y soda. El aperitivo clásico italiano.</p><div class="menu-card-prc">$7.00</div></div></div>
+      <div class="menu-card"><div class="menu-card-foto ph-bebida"></div><div class="menu-card-body"><div class="menu-card-cat">Cerveza · Artesanal</div><div class="menu-card-nom">Wena Vaina</div><p class="menu-card-des">Cerveza artesanal panameña. Refrescante y ligera.</p><div class="menu-card-prc">$4.00</div></div></div>
+      <div class="menu-card"><div class="menu-card-foto ph-bebida"></div><div class="menu-card-body"><div class="menu-card-cat">Bebida · Sin alcohol</div><div class="menu-card-nom">Limonada Italiana</div><p class="menu-card-des">Limón fresco, agua con gas y menta. Refrescante y natural.</p><div class="menu-card-prc">$4.00</div></div></div>
+      <div class="menu-card"><div class="menu-card-foto ph-bebida"></div><div class="menu-card-body"><div class="menu-card-cat">Cóctel · Italiano</div><div class="menu-card-nom">Aperol Spritz</div><p class="menu-card-des">Aperol, prosecco y soda. El aperitivo clásico italiano.</p><div class="menu-card-prc">$7.00</div></div></div>
+    </div>
+    </div>
+  </div>
+
 </div>
-
-<!-- PIZZAS -->
-<div class="mpanel-full" id="cat-pizzas">
-  <section class="menu-sec piedra-bg">
-    <div class="w" style="padding-block:var(--pad)">
-      <div class="cat-hdr rv">
-        <div class="cat-hdr-ico"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.5" stroke-linecap="round"><path d="M12 2 L22 19 L2 19 Z"/><line x1="12" y1="2" x2="12" y2="19"/><circle cx="9" cy="14" r="1.5" fill="white" stroke="none"/></svg></div>
-        <div class="cat-hdr-txt"><h2>Pizzas — <em>Artigianali</em></h2><p>Masa de fermentación lenta 48 horas, horneadas al momento.</p></div>
-      </div>
-
-      <div class="subcat"><h3>Pizzas Rojas — Base de salsa de tomate</h3></div>
-      <div class="platos-g rv" style="transition-delay:.1s">
-        <div class="plato"><div class="plato-icono"><svg viewBox="0 0 24 24" fill="none" stroke="var(--rojo)" stroke-width="1.5" stroke-linecap="round"><path d="M12 2 L22 19 L2 19 Z"/><line x1="12" y1="2" x2="12" y2="19"/></svg></div><div class="plato-nom">Pizza Napolitana</div><div class="plato-prc">$9 / $13</div><div class="plato-des">Salsa de tomate, orégano y ajo.</div><div class="plato-tag">14" Mediana / 16" Familiar</div></div>
-        <div class="plato"><div class="plato-icono"><svg viewBox="0 0 24 24" fill="none" stroke="var(--rojo)" stroke-width="1.5" stroke-linecap="round"><path d="M12 2 L22 19 L2 19 Z"/><line x1="12" y1="2" x2="12" y2="19"/><circle cx="9" cy="14" r="1" fill="var(--rojo)" stroke="none"/></svg></div><div class="plato-nom">Pizza Margarita</div><div class="plato-prc">$10 / $14</div><div class="plato-des">Salsa de tomate, mozzarella y albahaca.</div><div class="plato-tag">14" Mediana / 16" Familiar</div></div>
-        <div class="plato"><div class="plato-icono"><svg viewBox="0 0 24 24" fill="none" stroke="var(--rojo)" stroke-width="1.5" stroke-linecap="round"><path d="M12 2 L22 19 L2 19 Z"/><line x1="12" y1="2" x2="12" y2="19"/></svg></div><div class="plato-nom">Pizza Margarita Bufalina</div><div class="plato-prc">$13</div><div class="plato-des">Salsa de tomate, mozzarella de búfala y albahaca.</div><div class="plato-tag">Solo 14" Mediana</div></div>
-        <div class="plato"><div class="plato-icono"><svg viewBox="0 0 24 24" fill="none" stroke="var(--rojo)" stroke-width="1.5" stroke-linecap="round"><path d="M12 2 L22 19 L2 19 Z"/><line x1="12" y1="2" x2="12" y2="19"/><circle cx="8" cy="13" r="1" fill="var(--rojo)" stroke="none"/><circle cx="16" cy="13" r="1" fill="var(--rojo)" stroke="none"/></svg></div><div class="plato-nom">Pizza de Pepperoni</div><div class="plato-prc">$11 / $15</div><div class="plato-des">Salsa de tomate, mozzarella y pepperoni.</div><div class="plato-tag">14" Mediana / 16" Familiar</div></div>
-        <div class="plato"><div class="plato-icono"><svg viewBox="0 0 24 24" fill="none" stroke="var(--rojo)" stroke-width="1.5" stroke-linecap="round"><path d="M12 2 L22 19 L2 19 Z"/><line x1="12" y1="2" x2="12" y2="19"/></svg></div><div class="plato-nom">Pizza de Jamón</div><div class="plato-prc">$11 / $15</div><div class="plato-des">Salsa de tomate, mozzarella y jamón cocido.</div><div class="plato-tag">14" Mediana / 16" Familiar</div></div>
-        <div class="plato"><div class="plato-icono"><svg viewBox="0 0 24 24" fill="none" stroke="var(--rojo)" stroke-width="1.5" stroke-linecap="round"><path d="M12 2 L22 19 L2 19 Z"/><line x1="12" y1="2" x2="12" y2="19"/></svg></div><div class="plato-nom">Pizza Panamá</div><div class="plato-prc">$11 / $15</div><div class="plato-des">Salsa de tomate, mozzarella y pollo.</div><div class="plato-tag">14" Mediana / 16" Familiar</div></div>
-        <div class="plato"><div class="plato-icono"><svg viewBox="0 0 24 24" fill="none" stroke="var(--rojo)" stroke-width="1.5" stroke-linecap="round"><path d="M12 2 L22 19 L2 19 Z"/><line x1="12" y1="2" x2="12" y2="19"/></svg></div><div class="plato-nom">Pizza Romana</div><div class="plato-prc">$11 / $15</div><div class="plato-des">Salsa de tomate, mozzarella y anchoas.</div><div class="plato-tag">14" Mediana / 16" Familiar</div></div>
-        <div class="plato"><div class="plato-icono"><svg viewBox="0 0 24 24" fill="none" stroke="var(--rojo)" stroke-width="1.5" stroke-linecap="round"><path d="M12 2 L22 19 L2 19 Z"/><line x1="12" y1="2" x2="12" y2="19"/><circle cx="9" cy="14" r="1" fill="var(--rojo)" stroke="none"/><circle cx="15" cy="11" r="1" fill="var(--rojo)" stroke="none"/><circle cx="11" cy="9" r="1" fill="var(--rojo)" stroke="none"/></svg></div><div class="plato-nom">Pizza Siciliana</div><div class="plato-prc">$12 / $16</div><div class="plato-des">Salsa de tomate, mozzarella, anchoas, aceitunas kalamatas y alcaparras.</div><div class="plato-tag">14" Mediana / 16" Familiar · Clásica siciliana</div></div>
-        <div class="plato"><div class="plato-icono"><svg viewBox="0 0 24 24" fill="none" stroke="var(--rojo)" stroke-width="1.5" stroke-linecap="round"><path d="M12 2 L22 19 L2 19 Z"/><line x1="12" y1="2" x2="12" y2="19"/></svg></div><div class="plato-nom">Pizza Hawaiana</div><div class="plato-prc">$12 / $16</div><div class="plato-des">Salsa de tomate, mozzarella, piña fresca y jamón cocido.</div><div class="plato-tag">14" Mediana / 16" Familiar</div></div>
-        <div class="plato"><div class="plato-icono"><svg viewBox="0 0 24 24" fill="none" stroke="var(--rojo)" stroke-width="1.5" stroke-linecap="round"><path d="M12 2 L22 19 L2 19 Z"/><line x1="12" y1="2" x2="12" y2="19"/></svg></div><div class="plato-nom">Pizza de Maíz</div><div class="plato-prc">$12 / $16</div><div class="plato-des">Salsa de tomate, mozzarella, maíz y tocino.</div><div class="plato-tag">14" Mediana / 16" Familiar</div></div>
-        <div class="plato"><div class="plato-icono"><svg viewBox="0 0 24 24" fill="none" stroke="var(--oliva)" stroke-width="1.5" stroke-linecap="round"><path d="M12 2 L22 19 L2 19 Z"/><line x1="12" y1="2" x2="12" y2="19"/><circle cx="9" cy="13" r="1" fill="var(--oliva)" stroke="none"/></svg></div><div class="plato-nom">Pizza de Pesto</div><div class="plato-prc">$13 / $17</div><div class="plato-des">Salsa de tomate, mozzarella, pesto de la casa, tomate cherry y queso parmesano.</div><div class="plato-tag">14" Mediana / 16" Familiar · Vegetariana</div></div>
-        <div class="plato"><div class="plato-icono"><svg viewBox="0 0 24 24" fill="none" stroke="var(--rojo)" stroke-width="1.5" stroke-linecap="round"><path d="M12 2 L22 19 L2 19 Z"/><line x1="12" y1="2" x2="12" y2="19"/></svg></div><div class="plato-nom">Pizza Italia</div><div class="plato-prc">$14 / $18</div><div class="plato-des">Salsa de tomate, mozzarella, prosciutto crudo, tomate cherry y queso parmesano.</div><div class="plato-tag">14" Mediana / 16" Familiar</div></div>
-        <div class="plato"><div class="plato-icono"><svg viewBox="0 0 24 24" fill="none" stroke="var(--rojo)" stroke-width="1.5" stroke-linecap="round"><path d="M12 2 L22 19 L2 19 Z"/><line x1="12" y1="2" x2="12" y2="19"/></svg></div><div class="plato-nom">Pizza Pollo y BBQ</div><div class="plato-prc">$14 / $18</div><div class="plato-des">Salsa de tomate, mozzarella, pollo, salsa bbq, cebolla y tocino.</div><div class="plato-tag">14" Mediana / 16" Familiar</div></div>
-        <div class="plato"><div class="plato-icono"><svg viewBox="0 0 24 24" fill="none" stroke="var(--oliva)" stroke-width="1.5" stroke-linecap="round"><path d="M12 2 L22 19 L2 19 Z"/><line x1="12" y1="2" x2="12" y2="19"/></svg></div><div class="plato-nom">Pizza Vegetariana</div><div class="plato-prc">$14 / $18</div><div class="plato-des">Salsa de tomate, mozzarella, pimentones, hongos, cebolla, tomate cherry y aceitunas kalamatas.</div><div class="plato-tag">14" Mediana / 16" Familiar · Vegetariana</div></div>
-        <div class="plato"><div class="plato-icono"><svg viewBox="0 0 24 24" fill="none" stroke="var(--rojo)" stroke-width="1.5" stroke-linecap="round"><path d="M12 2 L22 19 L2 19 Z"/><line x1="12" y1="2" x2="12" y2="19"/></svg></div><div class="plato-nom">Pizza Rústica</div><div class="plato-prc">$14 / $18</div><div class="plato-des">Salsa de tomate, mozzarella, chorizo italiano, papas al horno, cebolla y romero.</div><div class="plato-tag">14" Mediana / 16" Familiar</div></div>
-        <div class="plato"><div class="plato-icono"><svg viewBox="0 0 24 24" fill="none" stroke="var(--rojo)" stroke-width="1.5" stroke-linecap="round"><path d="M12 2 L22 19 L2 19 Z"/><line x1="12" y1="2" x2="12" y2="19"/></svg></div><div class="plato-nom">Pizza 4 Estaciones</div><div class="plato-prc">$14 / $18</div><div class="plato-des">Alcachofas, jamón cocido, aceitunas kalamatas y hongos. Dividida por sabores.</div><div class="plato-tag">14" Mediana / 16" Familiar</div></div>
-        <div class="plato"><div class="plato-icono"><svg viewBox="0 0 24 24" fill="none" stroke="var(--rojo)" stroke-width="1.5" stroke-linecap="round"><path d="M12 2 L22 19 L2 19 Z"/><line x1="12" y1="2" x2="12" y2="19"/></svg></div><div class="plato-nom">Pizza Caprichosa</div><div class="plato-prc">$14 / $18</div><div class="plato-des">Salsa de tomate, mozzarella, alcachofas, jamón cocido y hongos.</div><div class="plato-tag">14" Mediana / 16" Familiar</div></div>
-        <div class="plato"><div class="plato-icono"><svg viewBox="0 0 24 24" fill="none" stroke="var(--rojo)" stroke-width="1.5" stroke-linecap="round"><path d="M12 2 L22 19 L2 19 Z"/><line x1="12" y1="2" x2="12" y2="19"/></svg></div><div class="plato-nom">Pizza Parma</div><div class="plato-prc">$14 / $18</div><div class="plato-des">Salsa de tomate, mozzarella, hongos frescos, prosciutto crudo y queso parmesano.</div><div class="plato-tag">14" Mediana / 16" Familiar</div></div>
-        <div class="plato"><div class="plato-icono"><svg viewBox="0 0 24 24" fill="none" stroke="var(--rojo)" stroke-width="1.5" stroke-linecap="round"><path d="M12 2 L22 19 L2 19 Z"/><line x1="12" y1="2" x2="12" y2="19"/></svg></div><div class="plato-nom">Pizza Carnívora</div><div class="plato-prc">$15 / $19</div><div class="plato-des">Salsa de tomate, mozzarella, pepperoni, chorizo italiano y jamón cocido.</div><div class="plato-tag">14" Mediana / 16" Familiar</div></div>
-        <div class="plato"><div class="plato-icono"><svg viewBox="0 0 24 24" fill="none" stroke="var(--rojo)" stroke-width="1.5" stroke-linecap="round"><path d="M12 2 L22 19 L2 19 Z"/><line x1="12" y1="2" x2="12" y2="19"/></svg></div><div class="plato-nom">Pizza Combinación</div><div class="plato-prc">$16 / $20</div><div class="plato-des">Pepperoni, chorizo italiano, pimentones, aceitunas kalamatas, cebolla y hongos.</div><div class="plato-tag">14" Mediana / 16" Familiar</div></div>
-      </div>
-
-      <div class="subcat" style="margin-top:3rem"><h3>Pizzas Blancas — Sin salsa de tomate</h3></div>
-      <div class="platos-g rv" style="transition-delay:.15s">
-        <div class="plato"><div class="plato-icono"><svg viewBox="0 0 24 24" fill="none" stroke="var(--warm)" stroke-width="1.5" stroke-linecap="round"><path d="M12 2 L22 19 L2 19 Z"/><line x1="12" y1="2" x2="12" y2="19"/></svg></div><div class="plato-nom">Pizza 5 Quesos</div><div class="plato-prc">$14 / $18</div><div class="plato-des">Mozzarella, queso azul, queso suizo, queso crema philadelphia, queso parmesano y pimienta negra.</div><div class="plato-tag">14" Mediana / 16" Familiar · Sin tomate</div></div>
-        <div class="plato"><div class="plato-icono"><svg viewBox="0 0 24 24" fill="none" stroke="var(--warm)" stroke-width="1.5" stroke-linecap="round"><path d="M12 2 L22 19 L2 19 Z"/><line x1="12" y1="2" x2="12" y2="19"/></svg></div><div class="plato-nom">Pizza Carbonara</div><div class="plato-prc">$14 / $18</div><div class="plato-des">Mozzarella, tocino, huevo revuelto, queso parmesano y pimienta negra.</div><div class="plato-tag">14" Mediana / 16" Familiar · Sin tomate</div></div>
-        <div class="plato"><div class="plato-icono"><svg viewBox="0 0 24 24" fill="none" stroke="var(--oliva)" stroke-width="1.5" stroke-linecap="round"><path d="M12 2 L22 19 L2 19 Z"/><line x1="12" y1="2" x2="12" y2="19"/></svg></div><div class="plato-nom">Pizza Pollo Pesto</div><div class="plato-prc">$14 / $18</div><div class="plato-des">Mozzarella, pollo y pesto de la casa.</div><div class="plato-tag">14" Mediana / 16" Familiar · Sin tomate</div></div>
-        <div class="plato"><div class="plato-icono"><svg viewBox="0 0 24 24" fill="none" stroke="var(--azul)" stroke-width="1.5" stroke-linecap="round"><path d="M12 2 L22 19 L2 19 Z"/><line x1="12" y1="2" x2="12" y2="19"/></svg></div><div class="plato-nom">Pizza de Camarón</div><div class="plato-prc">$14 / $18</div><div class="plato-des">Mozzarella, camarones, crema de leche, ajo y perejil.</div><div class="plato-tag">14" Mediana / 16" Familiar · Del mar</div></div>
-        <div class="plato"><div class="plato-icono"><svg viewBox="0 0 24 24" fill="none" stroke="var(--warm)" stroke-width="1.5" stroke-linecap="round"><path d="M12 2 L22 19 L2 19 Z"/><line x1="12" y1="2" x2="12" y2="19"/></svg></div><div class="plato-nom">Pizza Full Carnívora</div><div class="plato-prc">$16 / $20</div><div class="plato-des">Mozzarella, pollo, tocino, pepperoni, chorizo italiano y jamón cocido.</div><div class="plato-tag">14" Mediana / 16" Familiar</div></div>
-        <div class="plato"><div class="plato-icono"><svg viewBox="0 0 24 24" fill="none" stroke="var(--warm)" stroke-width="1.5" stroke-linecap="round"><path d="M12 2 L22 19 L2 19 Z"/><line x1="12" y1="2" x2="12" y2="19"/></svg></div><div class="plato-nom">Pizza de Mortadela</div><div class="plato-prc">$17 / $21</div><div class="plato-des">Burrata, mozzarella, mortadela y pesto.</div><div class="plato-tag">14" Mediana / 16" Familiar</div></div>
-        <div class="plato"><div class="plato-icono"><svg viewBox="0 0 24 24" fill="none" stroke="var(--azul)" stroke-width="1.5" stroke-linecap="round"><path d="M12 2 L22 19 L2 19 Z"/><line x1="12" y1="2" x2="12" y2="19"/></svg></div><div class="plato-nom">Pizza Riquezas del Mar</div><div class="plato-prc">$22</div><div class="plato-des">Salsa blanca, mozzarella, calamares, camarones, almejas, mejillones y tomate cherry.</div><div class="plato-tag">Solo 14" · Solo consumo en local</div><div class="plato-nota">⚠ No disponible para delivery</div></div>
-      </div>
-
-      <div class="subcat" style="margin-top:3rem"><h3>Pizzas Gourmet — Creaciones exclusivas</h3></div>
-      <div class="platos-g rv" style="transition-delay:.2s">
-        <div class="plato"><div class="plato-icono"><svg viewBox="0 0 24 24" fill="none" stroke="var(--limon)" stroke-width="1.5" stroke-linecap="round"><path d="M12 2 L22 19 L2 19 Z"/><line x1="12" y1="2" x2="12" y2="19"/><circle cx="9" cy="14" r="1" fill="var(--limon)" stroke="none"/></svg></div><div class="plato-nom">Pizza Gourmet Norma</div><div class="plato-prc">$15 / $19</div><div class="plato-des">Salsa de tomate, mozzarella, berenjena y queso ricotta rallado.</div><div class="plato-tag">14" Mediana / 16" Familiar · Siciliana · Vegetariana</div></div>
-        <div class="plato"><div class="plato-icono"><svg viewBox="0 0 24 24" fill="none" stroke="var(--limon)" stroke-width="1.5" stroke-linecap="round"><path d="M12 2 L22 19 L2 19 Z"/><line x1="12" y1="2" x2="12" y2="19"/></svg></div><div class="plato-nom">Pizza Gourmet Parmigiana</div><div class="plato-prc">$15 / $19</div><div class="plato-des">Salsa de tomate, mozzarella, berenjena, huevo, jamón cocido y queso parmesano.</div><div class="plato-tag">14" Mediana / 16" Familiar</div></div>
-        <div class="plato"><div class="plato-icono"><svg viewBox="0 0 24 24" fill="none" stroke="var(--limon)" stroke-width="1.5" stroke-linecap="round"><path d="M12 2 L22 19 L2 19 Z"/><line x1="12" y1="2" x2="12" y2="19"/></svg></div><div class="plato-nom">Pizza Gourmet Salmón</div><div class="plato-prc">$16 / $20</div><div class="plato-des">Salsa rosada, mozzarella, salmón ahumado, queso crema philadelphia, cebolla y alcaparras.</div><div class="plato-tag">14" Mediana / 16" Familiar</div></div>
-        <div class="plato"><div class="plato-icono"><svg viewBox="0 0 24 24" fill="none" stroke="var(--limon)" stroke-width="1.5" stroke-linecap="round"><path d="M12 2 L22 19 L2 19 Z"/><line x1="12" y1="2" x2="12" y2="19"/></svg></div><div class="plato-nom">Pizza Gourmet Limón</div><div class="plato-prc">$16 / $20</div><div class="plato-des">Salsa de tomate, mozzarella, jamón cocido, queso crema, hongos, limón rallado y limón amarillo.</div><div class="plato-tag">14" Mediana / 16" Familiar</div></div>
-        <div class="plato"><div class="plato-icono"><svg viewBox="0 0 24 24" fill="none" stroke="var(--limon)" stroke-width="1.5" stroke-linecap="round"><path d="M12 2 L22 19 L2 19 Z"/><line x1="12" y1="2" x2="12" y2="19"/></svg></div><div class="plato-nom">Pizza Gourmet Ajo Rojo</div><div class="plato-prc">$16 / $20</div><div class="plato-des">Salsa de tomate, mozzarella, aceitunas kalamatas y mezcla de tomate cherry, albahaca, ajo, aceite de oliva y sal (todo crudo).</div><div class="plato-tag">14" Mediana / 16" Familiar · Vegana disponible</div></div>
-        <div class="plato"><div class="plato-icono"><svg viewBox="0 0 24 24" fill="none" stroke="var(--limon)" stroke-width="1.5" stroke-linecap="round"><path d="M12 2 L22 19 L2 19 Z"/><line x1="12" y1="2" x2="12" y2="19"/><circle cx="9" cy="14" r="1.5" fill="var(--limon)" stroke="none"/><circle cx="15" cy="11" r="1" fill="var(--limon)" stroke="none"/></svg></div><div class="plato-nom">Pizza Gourmet Katané</div><div class="plato-prc">$17 / $21</div><div class="plato-des">Salsa de tomate, mozzarella, prosciutto crudo, tomate cherry, queso crema philadelphia, arúgula y queso parmesano. La pizza de la casa.</div><div class="plato-tag">14" Mediana / 16" Familiar · Signature</div></div>
-      </div>
-
-      <div class="subcat" style="margin-top:3rem"><h3>Calzones — Cerrados y abiertos</h3></div>
-      <div class="platos-g rv" style="transition-delay:.25s">
-        <div class="plato"><div class="plato-icono"><svg viewBox="0 0 24 24" fill="none" stroke="var(--rojo)" stroke-width="1.5" stroke-linecap="round"><path d="M4 12 Q4 4 12 4 Q20 4 20 12 L20 20 L4 20 Z"/></svg></div><div class="plato-nom">Calzone de Pepperoni</div><div class="plato-prc">$12</div><div class="plato-des">Salsa de tomate, mozzarella y pepperoni.</div><div class="plato-tag">Calzone cerrado</div></div>
-        <div class="plato"><div class="plato-icono"><svg viewBox="0 0 24 24" fill="none" stroke="var(--rojo)" stroke-width="1.5" stroke-linecap="round"><path d="M4 12 Q4 4 12 4 Q20 4 20 12 L20 20 L4 20 Z"/></svg></div><div class="plato-nom">Calzone de Jamón</div><div class="plato-prc">$12</div><div class="plato-des">Salsa de tomate, mozzarella y jamón cocido.</div><div class="plato-tag">Calzone cerrado</div></div>
-        <div class="plato"><div class="plato-icono"><svg viewBox="0 0 24 24" fill="none" stroke="var(--rojo)" stroke-width="1.5" stroke-linecap="round"><path d="M4 12 Q4 4 12 4 Q20 4 20 12 L20 20 L4 20 Z"/></svg></div><div class="plato-nom">Calzone Combinación</div><div class="plato-prc">$16</div><div class="plato-des">Pepperoni, chorizo italiano, pimentones, aceitunas kalamatas, cebolla y hongos.</div><div class="plato-tag">Calzone cerrado</div></div>
-        <div class="plato"><div class="plato-icono"><svg viewBox="0 0 24 24" fill="none" stroke="var(--rojo)" stroke-width="1.5" stroke-linecap="round"><path d="M4 12 Q4 4 12 4 Q20 4 20 12 L20 20 L4 20 Z"/></svg></div><div class="plato-nom">Calzone Carnivora</div><div class="plato-prc">$16</div><div class="plato-des">Pepperoni, chorizo italiano y jamón cocido.</div><div class="plato-tag">Calzone cerrado</div></div>
-        <div class="plato"><div class="plato-icono"><svg viewBox="0 0 24 24" fill="none" stroke="var(--warm)" stroke-width="1.5" stroke-linecap="round"><path d="M3 6 Q12 2 21 6 L21 18 L3 18 Z"/></svg></div><div class="plato-nom">Calzone Abierto Taormina</div><div class="plato-prc">$15</div><div class="plato-des">Jamón serrano, stracciatella y rúcula fresca.</div><div class="plato-tag">Calzone abierto · Gourmet</div></div>
-        <div class="plato"><div class="plato-icono"><svg viewBox="0 0 24 24" fill="none" stroke="var(--warm)" stroke-width="1.5" stroke-linecap="round"><path d="M3 6 Q12 2 21 6 L21 18 L3 18 Z"/></svg></div><div class="plato-nom">Calzone Abierto Ortigia</div><div class="plato-prc">$15</div><div class="plato-des">Mortadela, burrata y lechuga rizada.</div><div class="plato-tag">Calzone abierto · Gourmet</div></div>
-        <div class="plato"><div class="plato-icono"><svg viewBox="0 0 24 24" fill="none" stroke="var(--warm)" stroke-width="1.5" stroke-linecap="round"><path d="M3 6 Q12 2 21 6 L21 18 L3 18 Z"/></svg></div><div class="plato-nom">Calzone Abierto Etna</div><div class="plato-prc">$15</div><div class="plato-des">Mozzarella fresca, pomodoro en rodajas y albahaca.</div><div class="plato-tag">Calzone abierto · Vegetariano</div></div>
-      </div>
-
-      <div class="subcat" style="margin-top:3rem"><h3>Menú Kids — Para los más pequeños</h3></div>
-      <div class="platos-g rv" style="transition-delay:.3s">
-        <div class="plato"><div class="plato-icono"><svg viewBox="0 0 24 24" fill="none" stroke="var(--terracota)" stroke-width="1.5" stroke-linecap="round"><path d="M12 2 L22 19 L2 19 Z"/><line x1="12" y1="2" x2="12" y2="19"/></svg></div><div class="plato-nom">Pizza Kids de Queso</div><div class="plato-prc">$9.00</div><div class="plato-des">Pizza con salsa de tomate y mozzarella. Tamaño 10". Incluye papas fritas.</div><div class="plato-tag">Kids · 10" · Con papas fritas</div></div>
-        <div class="plato"><div class="plato-icono"><svg viewBox="0 0 24 24" fill="none" stroke="var(--terracota)" stroke-width="1.5" stroke-linecap="round"><path d="M12 2 L22 19 L2 19 Z"/><line x1="12" y1="2" x2="12" y2="19"/></svg></div><div class="plato-nom">Pizza Kids de Jamón</div><div class="plato-prc">$9.00</div><div class="plato-des">Salsa de tomate, mozzarella y jamón. Tamaño 10". Incluye papas fritas.</div><div class="plato-tag">Kids · 10" · Con papas fritas</div></div>
-        <div class="plato"><div class="plato-icono"><svg viewBox="0 0 24 24" fill="none" stroke="var(--terracota)" stroke-width="1.5" stroke-linecap="round"><path d="M12 2 L22 19 L2 19 Z"/><line x1="12" y1="2" x2="12" y2="19"/></svg></div><div class="plato-nom">Pizza Kids de Pepperoni</div><div class="plato-prc">$9.00</div><div class="plato-des">Salsa de tomate, mozzarella y pepperoni. Tamaño 10". Incluye papas fritas.</div><div class="plato-tag">Kids · 10" · Con papas fritas</div></div>
-      </div>
-    </div>
-  </section>
-</div>
-
-<!-- PASTAS -->
-<div class="mpanel-full" id="cat-pastas">
-  <section class="menu-sec piedra-bg">
-    <div class="w" style="padding-block:var(--pad)">
-      <div class="cat-hdr rv">
-        <div class="cat-hdr-ico"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.5" stroke-linecap="round"><path d="M5 6 Q12 4 19 8 Q12 12 5 10 Q12 8 19 12 Q12 16 5 14"/><circle cx="12" cy="18" r="2"/></svg></div>
-        <div class="cat-hdr-txt"><h2>Pastas — <em>Frescas y tradicionales</em></h2><p>El alma de la cocina siciliana, servida con tradición y pasión.</p></div>
-      </div>
-
-      <div class="subcat"><h3>Pastas Clásicas</h3></div>
-      <div class="platos-g rv" style="transition-delay:.1s">
-        <div class="plato"><div class="plato-icono"><svg viewBox="0 0 24 24" fill="none" stroke="var(--terracota)" stroke-width="1.5" stroke-linecap="round"><path d="M5 6 Q12 4 19 8 Q12 12 5 10 Q12 8 19 12 Q12 16 5 14"/><circle cx="12" cy="18" r="2"/></svg></div><div class="plato-nom">Pasta Napoletana</div><div class="plato-prc">$10.00</div><div class="plato-des">Pasta en salsa de tomate, aceite de oliva extra virgen y albahaca.</div><div class="plato-tag">Clásica · Vegetariana</div></div>
-        <div class="plato"><div class="plato-icono"><svg viewBox="0 0 24 24" fill="none" stroke="var(--oliva)" stroke-width="1.5" stroke-linecap="round"><path d="M5 6 Q12 4 19 8 Q12 12 5 10 Q12 8 19 12 Q12 16 5 14"/><circle cx="12" cy="18" r="2"/></svg></div><div class="plato-nom">Pasta Pesto</div><div class="plato-prc">$10.00</div><div class="plato-des">Pasta con pesto de albahaca de la casa.</div><div class="plato-tag">Clásica · Vegetariana</div></div>
-        <div class="plato"><div class="plato-icono"><svg viewBox="0 0 24 24" fill="none" stroke="var(--terracota)" stroke-width="1.5" stroke-linecap="round"><path d="M5 6 Q12 4 19 8 Q12 12 5 10 Q12 8 19 12 Q12 16 5 14"/><circle cx="12" cy="18" r="2"/></svg></div><div class="plato-nom">Paccheri Alla Norma</div><div class="plato-prc">$11.00</div><div class="plato-des">Pasta Paccheri con salsa de tomate, berenjena, ajo, albahaca y queso ricotta rallado.</div><div class="plato-tag">Siciliana · Vegetariana</div></div>
-        <div class="plato"><div class="plato-icono"><svg viewBox="0 0 24 24" fill="none" stroke="var(--terracota)" stroke-width="1.5" stroke-linecap="round"><path d="M5 6 Q12 4 19 8 Q12 12 5 10 Q12 8 19 12 Q12 16 5 14"/><circle cx="12" cy="18" r="2"/></svg></div><div class="plato-nom">Pasta Amatriciana</div><div class="plato-prc">$11.00</div><div class="plato-des">Pasta en salsa de tomate, queso parmesano, tocino y pimienta roja.</div><div class="plato-tag">Clásica romana</div></div>
-        <div class="plato"><div class="plato-icono"><svg viewBox="0 0 24 24" fill="none" stroke="var(--terracota)" stroke-width="1.5" stroke-linecap="round"><path d="M5 6 Q12 4 19 8 Q12 12 5 10 Q12 8 19 12 Q12 16 5 14"/><circle cx="12" cy="18" r="2"/></svg></div><div class="plato-nom">Pasta Carbonara</div><div class="plato-prc">$11.00</div><div class="plato-des">Pasta con tocino, huevo, queso parmesano y pimienta negra.</div><div class="plato-tag">Clásica romana</div></div>
-        <div class="plato"><div class="plato-icono"><svg viewBox="0 0 24 24" fill="none" stroke="var(--terracota)" stroke-width="1.5" stroke-linecap="round"><path d="M5 6 Q12 4 19 8 Q12 12 5 10 Q12 8 19 12 Q12 16 5 14"/><circle cx="12" cy="18" r="2"/></svg></div><div class="plato-nom">Pasta Ragú alla Bolognese</div><div class="plato-prc">$11.00</div><div class="plato-des">Pasta en salsa de tomate, carne molida de res y cerdo con pimienta negra.</div><div class="plato-tag">Clásica italiana</div></div>
-        <div class="plato"><div class="plato-icono"><svg viewBox="0 0 24 24" fill="none" stroke="var(--terracota)" stroke-width="1.5" stroke-linecap="round"><path d="M5 6 Q12 4 19 8 Q12 12 5 10 Q12 8 19 12 Q12 16 5 14"/><circle cx="12" cy="18" r="2"/></svg></div><div class="plato-nom">Pasta Prosciutto e Funghi</div><div class="plato-prc">$11.00</div><div class="plato-des">Pasta con jamón cocido, hongos frescos, crema de leche y pimienta negra.</div><div class="plato-tag">Clásica</div></div>
-        <div class="plato"><div class="plato-icono"><svg viewBox="0 0 24 24" fill="none" stroke="var(--terracota)" stroke-width="1.5" stroke-linecap="round"><path d="M5 6 Q12 4 19 8 Q12 12 5 10 Q12 8 19 12 Q12 16 5 14"/><circle cx="12" cy="18" r="2"/></svg></div><div class="plato-nom">Pasta Alfredo con Pollo</div><div class="plato-prc">$11.00</div><div class="plato-des">Pasta con pollo y crema de leche.</div><div class="plato-tag">Clásica</div></div>
-        <div class="plato"><div class="plato-icono"><svg viewBox="0 0 24 24" fill="none" stroke="var(--warm)" stroke-width="1.5" stroke-linecap="round"><path d="M5 6 Q12 4 19 8 Q12 12 5 10 Q12 8 19 12 Q12 16 5 14"/><circle cx="12" cy="18" r="2"/></svg></div><div class="plato-nom">Pasta Alfredo con Hongos</div><div class="plato-prc">$12.00</div><div class="plato-des">Pasta con hongos en crema de leche, pimienta negra y aceite de trufa.</div><div class="plato-tag">Especialidad · Aceite de trufa</div></div>
-        <div class="plato"><div class="plato-icono"><svg viewBox="0 0 24 24" fill="none" stroke="var(--warm)" stroke-width="1.5" stroke-linecap="round"><path d="M5 6 Q12 4 19 8 Q12 12 5 10 Q12 8 19 12 Q12 16 5 14"/><circle cx="12" cy="18" r="2"/></svg></div><div class="plato-nom">Pasta Puttanesca</div><div class="plato-prc">$12.00</div><div class="plato-des">Pasta en salsa de tomate, anchoas, ajo, alcaparras, aceitunas negras, perejil y pimienta roja.</div><div class="plato-tag">Mediterránea intensa</div></div>
-        <div class="plato"><div class="plato-icono"><svg viewBox="0 0 24 24" fill="none" stroke="var(--oliva)" stroke-width="1.5" stroke-linecap="round"><path d="M5 6 Q12 4 19 8 Q12 12 5 10 Q12 8 19 12 Q12 16 5 14"/><circle cx="12" cy="18" r="2"/></svg></div><div class="plato-nom">Pasta Pollo Pesto</div><div class="plato-prc">$12.00</div><div class="plato-des">Pasta con pollo, pesto de la casa, cebolla, crema de leche y tomate cherry.</div><div class="plato-tag">Especialidad</div></div>
-        <div class="plato"><div class="plato-icono"><svg viewBox="0 0 24 24" fill="none" stroke="var(--limon)" stroke-width="1.5" stroke-linecap="round"><path d="M5 6 Q12 4 19 8 Q12 12 5 10 Q12 8 19 12 Q12 16 5 14"/><circle cx="12" cy="18" r="2"/></svg></div><div class="plato-nom">Pasta Katané</div><div class="plato-prc">$13.00</div><div class="plato-des">Pasta con prosciutto crudo, salsa rosada, queso azul, arúgula y tomate cherry.</div><div class="plato-tag">Signature · De la casa</div></div>
-      </div>
-
-      <div class="subcat" style="margin-top:3rem"><h3>Pastas del Mar</h3></div>
-      <div class="platos-g rv" style="transition-delay:.15s">
-        <div class="plato"><div class="plato-icono"><svg viewBox="0 0 24 24" fill="none" stroke="var(--azul)" stroke-width="1.5" stroke-linecap="round"><path d="M5 6 Q12 4 19 8 Q12 12 5 10 Q12 8 19 12 Q12 16 5 14"/><circle cx="12" cy="18" r="2"/></svg></div><div class="plato-nom">Farfalle al Salmone</div><div class="plato-prc">$14.00</div><div class="plato-des">Pasta tipo farfalle con salmón ahumado, tomate cherry, alcaparras, cebolla, salsa rosada y perejil.</div><div class="plato-tag">Del mar</div></div>
-        <div class="plato"><div class="plato-icono"><svg viewBox="0 0 24 24" fill="none" stroke="var(--azul)" stroke-width="1.5" stroke-linecap="round"><path d="M5 6 Q12 4 19 8 Q12 12 5 10 Q12 8 19 12 Q12 16 5 14"/><circle cx="12" cy="18" r="2"/></svg></div><div class="plato-nom">Linguine con Vongole</div><div class="plato-prc">$14.00</div><div class="plato-des">Pasta tipo linguine con almejas, tomate cherry, ajo, pimienta roja, aceite de oliva y perejil.</div><div class="plato-tag">Del mar · Clásica</div></div>
-        <div class="plato"><div class="plato-icono"><svg viewBox="0 0 24 24" fill="none" stroke="var(--azul)" stroke-width="1.5" stroke-linecap="round"><path d="M5 6 Q12 4 19 8 Q12 12 5 10 Q12 8 19 12 Q12 16 5 14"/><circle cx="12" cy="18" r="2"/></svg></div><div class="plato-nom">Alfredo con Gamberetti</div><div class="plato-prc">$14.00</div><div class="plato-des">Pasta en salsa blanca con camarones, ajo y perejil.</div><div class="plato-tag">Del mar</div></div>
-        <div class="plato"><div class="plato-icono"><svg viewBox="0 0 24 24" fill="none" stroke="var(--azul)" stroke-width="1.5" stroke-linecap="round"><path d="M5 6 Q12 4 19 8 Q12 12 5 10 Q12 8 19 12 Q12 16 5 14"/><circle cx="12" cy="18" r="2"/></svg></div><div class="plato-nom">Linguine allo Scoglio</div><div class="plato-prc">$16.00</div><div class="plato-des">Pasta tipo linguine con mixtos de mariscos, concha negra, almejas, langostino, tomate cherry, ajo, pimienta roja y aceite de oliva.</div><div class="plato-tag">Del mar · Especialidad</div></div>
-        <div class="plato"><div class="plato-icono"><svg viewBox="0 0 24 24" fill="none" stroke="var(--azul)" stroke-width="1.5" stroke-linecap="round"><path d="M5 6 Q12 4 19 8 Q12 12 5 10 Q12 8 19 12 Q12 16 5 14"/><circle cx="12" cy="18" r="2"/></svg></div><div class="plato-nom">Linguine Don Gaetano</div><div class="plato-prc">$16.00</div><div class="plato-des">Linguine con langostinos, tomate cherry, ajo, pimienta roja, salsa rosada y perejil.</div><div class="plato-tag">Del mar · Especialidad</div></div>
-        <div class="plato"><div class="plato-icono"><svg viewBox="0 0 24 24" fill="none" stroke="var(--azul)" stroke-width="1.5" stroke-linecap="round"><path d="M5 6 Q12 4 19 8 Q12 12 5 10 Q12 8 19 12 Q12 16 5 14"/><circle cx="12" cy="18" r="2"/></svg></div><div class="plato-nom">Linguine con Gamberoni</div><div class="plato-prc">$16.00</div><div class="plato-des">Linguine con langostinos, tomate cherry, ajo, pimienta roja, zucchini y aceite de oliva.</div><div class="plato-tag">Del mar</div></div>
-        <div class="plato"><div class="plato-icono"><svg viewBox="0 0 24 24" fill="none" stroke="var(--azul)" stroke-width="1.5" stroke-linecap="round"><path d="M5 6 Q12 4 19 8 Q12 12 5 10 Q12 8 19 12 Q12 16 5 14"/><circle cx="12" cy="18" r="2"/></svg></div><div class="plato-nom">Linguine con Pulpo</div><div class="plato-prc">$16.00</div><div class="plato-des">Linguine con pulpo, crema de parmesano, ajo, pimienta roja, tomate cherry y perejil.</div><div class="plato-tag">Del mar · Especialidad</div></div>
-      </div>
-
-      <div class="subcat" style="margin-top:3rem"><h3>Pastas Frescas</h3></div>
-      <div class="platos-g rv" style="transition-delay:.2s">
-        <div class="plato"><div class="plato-icono"><svg viewBox="0 0 24 24" fill="none" stroke="var(--warm)" stroke-width="1.5" stroke-linecap="round"><rect x="4" y="8" width="16" height="8" rx="4"/><line x1="4" y1="12" x2="20" y2="12"/></svg></div><div class="plato-nom">Ravioli al Formaggio</div><div class="plato-prc">$14.00</div><div class="plato-des">Ravioli relleno con queso. En salsa napolitana o boloñesa.</div><div class="plato-tag">Pasta fresca · A elegir salsa</div></div>
-        <div class="plato"><div class="plato-icono"><svg viewBox="0 0 24 24" fill="none" stroke="var(--oliva)" stroke-width="1.5" stroke-linecap="round"><rect x="4" y="8" width="16" height="8" rx="4"/><line x1="4" y1="12" x2="20" y2="12"/></svg></div><div class="plato-nom">Ravioli Spinaci e Ricotta</div><div class="plato-prc">$14.00</div><div class="plato-des">Ravioli relleno de espinaca y queso ricotta. En salsa napolitana o boloñesa.</div><div class="plato-tag">Pasta fresca · Vegetariana</div></div>
-        <div class="plato"><div class="plato-icono"><svg viewBox="0 0 24 24" fill="none" stroke="var(--warm)" stroke-width="1.5" stroke-linecap="round"><circle cx="12" cy="12" r="6"/><circle cx="7" cy="12" r="3"/><circle cx="17" cy="12" r="3"/></svg></div><div class="plato-nom">Gnocchi al Ragú</div><div class="plato-prc">$14.00</div><div class="plato-des">Gnocchi hechos con harina y papa, en salsa boloñesa.</div><div class="plato-tag">Pasta fresca</div></div>
-        <div class="plato"><div class="plato-icono"><svg viewBox="0 0 24 24" fill="none" stroke="var(--oliva)" stroke-width="1.5" stroke-linecap="round"><circle cx="12" cy="12" r="6"/><circle cx="7" cy="12" r="3"/><circle cx="17" cy="12" r="3"/></svg></div><div class="plato-nom">Gnocchi al Pesto</div><div class="plato-prc">$14.00</div><div class="plato-des">Gnocchi hechos con harina y papa, en salsa pesto de albahaca de la casa.</div><div class="plato-tag">Pasta fresca · Vegetariana</div></div>
-        <div class="plato"><div class="plato-icono"><svg viewBox="0 0 24 24" fill="none" stroke="var(--azul)" stroke-width="1.5" stroke-linecap="round"><rect x="4" y="8" width="16" height="8" rx="4"/><line x1="4" y1="12" x2="20" y2="12"/></svg></div><div class="plato-nom">Ravioli di Salmone e Ricotta</div><div class="plato-prc">$16.00</div><div class="plato-des">Ravioli relleno de salmón, en salsa blanca, con alcaparras, tomate cherry, cebolla y perejil.</div><div class="plato-tag">Pasta fresca · Del mar</div></div>
-      </div>
-
-      <div class="subcat" style="margin-top:3rem"><h3>Lasañas</h3></div>
-      <div class="platos-g rv" style="transition-delay:.25s">
-        <div class="plato"><div class="plato-icono"><svg viewBox="0 0 24 24" fill="none" stroke="var(--terracota)" stroke-width="1.5" stroke-linecap="round"><path d="M5 8 Q12 6 19 10 Q12 14 5 12"/><rect x="3" y="14" width="18" height="4" rx="2"/><line x1="7" y1="14" x2="7" y2="18"/><line x1="12" y1="14" x2="12" y2="18"/><line x1="17" y1="14" x2="17" y2="18"/></svg></div><div class="plato-nom">Lasagna di Carne</div><div class="plato-prc">$11.00</div><div class="plato-des">Ragú alla bolognese, carne molida, salsa roja, mozzarella, queso parmesano y bechamel.</div><div class="plato-tag">Clásica italiana</div></div>
-        <div class="plato"><div class="plato-icono"><svg viewBox="0 0 24 24" fill="none" stroke="var(--warm)" stroke-width="1.5" stroke-linecap="round"><path d="M5 8 Q12 6 19 10 Q12 14 5 12"/><rect x="3" y="14" width="18" height="4" rx="2"/></svg></div><div class="plato-nom">Lasagna di Pollo</div><div class="plato-prc">$11.00</div><div class="plato-des">Pollo, tocino, bechamel, mozzarella y queso parmesano. En salsa blanca.</div><div class="plato-tag">Salsa blanca</div></div>
-        <div class="plato"><div class="plato-icono"><svg viewBox="0 0 24 24" fill="none" stroke="var(--oliva)" stroke-width="1.5" stroke-linecap="round"><path d="M5 8 Q12 6 19 10 Q12 14 5 12"/><rect x="3" y="14" width="18" height="4" rx="2"/></svg></div><div class="plato-nom">Lasagna Parmigiana Vegetariana</div><div class="plato-prc">$11.00</div><div class="plato-des">Sin pasta, con berenjenas, salsa de tomate, mozzarella, guisantes, huevo, queso parmesano y albahaca.</div><div class="plato-tag">Vegetariana · Sin pasta</div></div>
-      </div>
-
-      <div class="subcat" style="margin-top:3rem"><h3>Platos Especiales de la Casa</h3></div>
-      <div class="platos-g rv" style="transition-delay:.3s">
-        <div class="plato"><div class="plato-icono"><svg viewBox="0 0 24 24" fill="none" stroke="var(--terracota)" stroke-width="1.5" stroke-linecap="round"><path d="M5 6 Q12 4 19 8 Q12 12 5 10 Q12 8 19 12 Q12 16 5 14"/><circle cx="12" cy="18" r="2"/></svg></div><div class="plato-nom">Spaghetti della Nonna</div><div class="plato-prc">$15.00</div><div class="plato-des">Spaghetti en salsa napolitana y albóndigas de res.</div><div class="plato-tag">Plato especial · Receta de la nona</div></div>
-        <div class="plato"><div class="plato-icono"><svg viewBox="0 0 24 24" fill="none" stroke="var(--warm)" stroke-width="1.5" stroke-linecap="round"><rect x="3" y="14" width="18" height="6" rx="2"/><path d="M6 14 L8 8 L16 8 L18 14"/></svg></div><div class="plato-nom">Milanesa di Pollo con Fettuccine</div><div class="plato-prc">$15.00</div><div class="plato-des">Milanesa de pollo apanada y frita con pasta fettuccine en salsa Alfredo.</div><div class="plato-tag">Plato especial</div></div>
-        <div class="plato"><div class="plato-icono"><svg viewBox="0 0 24 24" fill="none" stroke="var(--warm)" stroke-width="1.5" stroke-linecap="round"><rect x="3" y="14" width="18" height="6" rx="2"/><path d="M6 14 L8 8 L16 8 L18 14"/></svg></div><div class="plato-nom">Milanesa di Carne y Pasta</div><div class="plato-prc">$16.00</div><div class="plato-des">Milanesa de carne apanada y frita con pasta al óleo, ajo y peperoncino.</div><div class="plato-tag">Plato especial</div></div>
-        <div class="plato"><div class="plato-icono"><svg viewBox="0 0 24 24" fill="none" stroke="var(--azul)" stroke-width="1.5" stroke-linecap="round"><path d="M5 6 Q12 4 19 8 Q12 12 5 10 Q12 8 19 12 Q12 16 5 14"/><circle cx="12" cy="18" r="2"/></svg></div><div class="plato-nom">Salmone e Ravioli</div><div class="plato-prc">$17.00</div><div class="plato-des">Cola de salmón 7oz con raviolis frescos rellenos de salmón y queso ricotta. Salsa blanca, alcaparras, tomate cherry y cebolla.</div><div class="plato-tag">Plato especial · Del mar</div></div>
-      </div>
-
-      <div class="subcat" style="margin-top:3rem"><h3>Menú Kids — Pasta</h3></div>
-      <div class="platos-g rv" style="transition-delay:.35s">
-        <div class="plato"><div class="plato-icono"><svg viewBox="0 0 24 24" fill="none" stroke="var(--terracota)" stroke-width="1.5" stroke-linecap="round"><path d="M5 6 Q12 4 19 8 Q12 12 5 10"/></svg></div><div class="plato-nom">Pasta Kids al Pomodoro</div><div class="plato-prc">$8.00</div><div class="plato-des">Pasta en salsa de tomate para niños, porción de 100 gramos.</div><div class="plato-tag">Kids · 100g</div></div>
-        <div class="plato"><div class="plato-icono"><svg viewBox="0 0 24 24" fill="none" stroke="var(--terracota)" stroke-width="1.5" stroke-linecap="round"><path d="M5 6 Q12 4 19 8 Q12 12 5 10"/></svg></div><div class="plato-nom">Pasta Kids en Salsa Rosada</div><div class="plato-prc">$8.00</div><div class="plato-des">Pasta en salsa rosada para niños, porción de 100 gramos.</div><div class="plato-tag">Kids · 100g</div></div>
-      </div>
-    </div>
-  </section>
-</div>
-
-<!-- RISOTTOS -->
-<div class="mpanel-full" id="cat-risottos">
-  <section class="menu-sec piedra-bg">
-    <div class="w" style="padding-block:var(--pad)">
-      <div class="cat-hdr rv">
-        <div class="cat-hdr-ico"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.5" stroke-linecap="round"><path d="M4 10 Q4 18 12 18 Q20 18 20 10 Z"/><line x1="4" y1="10" x2="20" y2="10"/><circle cx="9" cy="13" r="1" fill="white" stroke="none"/><circle cx="13" cy="12" r="1" fill="white" stroke="none"/></svg></div>
-        <div class="cat-hdr-txt"><h2>Risottos — <em>Cremosos y tradicionales</em></h2><p>La perfección del arroz, llenos de tradición italiana.</p></div>
-      </div>
-      <div class="platos-g rv" style="transition-delay:.1s">
-        <div class="plato"><div class="plato-icono"><svg viewBox="0 0 24 24" fill="none" stroke="var(--warm)" stroke-width="1.5" stroke-linecap="round"><path d="M4 10 Q4 18 12 18 Q20 18 20 10 Z"/><line x1="4" y1="10" x2="20" y2="10"/><circle cx="9" cy="13" r="1" fill="var(--warm)" stroke="none"/><circle cx="13" cy="12" r="1" fill="var(--warm)" stroke="none"/><path d="M12 6 Q12 2 14 2"/></svg></div><div class="plato-nom">Risotto Funghi Porcini</div><div class="plato-prc">$17.00</div><div class="plato-des">Hongos porcini, chorizo italiano, ajo, perejil y queso parmesano.</div><div class="plato-tag">Especialidad · Profundidad de sabor</div></div>
-        <div class="plato"><div class="plato-icono"><svg viewBox="0 0 24 24" fill="none" stroke="var(--azul)" stroke-width="1.5" stroke-linecap="round"><path d="M4 10 Q4 18 12 18 Q20 18 20 10 Z"/><line x1="4" y1="10" x2="20" y2="10"/><circle cx="9" cy="13" r="1" fill="var(--azul)" stroke="none"/><circle cx="15" cy="14" r="1" fill="var(--azul)" stroke="none"/><path d="M12 6 Q12 2 14 2"/></svg></div><div class="plato-nom">Risotto allo Scoglio</div><div class="plato-prc">$18.00</div><div class="plato-des">Mixtos de mariscos, mejillones, almejas, langostino, tomate cherry, ajo, perejil y aceite de oliva extra virgen.</div><div class="plato-tag">Del mar · Especialidad</div></div>
-        <div class="plato"><div class="plato-icono"><svg viewBox="0 0 24 24" fill="none" stroke="var(--azul)" stroke-width="1.5" stroke-linecap="round"><path d="M4 10 Q4 18 12 18 Q20 18 20 10 Z"/><line x1="4" y1="10" x2="20" y2="10"/><circle cx="12" cy="14" r="2" fill="none"/><path d="M12 6 Q12 2 14 2"/></svg></div><div class="plato-nom">Risotto de Pulpo</div><div class="plato-prc">$18.00</div><div class="plato-des">Pulpo, tomate cherry, ajo, perejil y crema de parmesano.</div><div class="plato-tag">Del mar · Gourmet</div></div>
-      </div>
-    </div>
-  </section>
-</div>
-
-<!-- ENSALADAS -->
-<div class="mpanel-full" id="cat-ensaladas">
-  <section class="menu-sec piedra-bg">
-    <div class="w" style="padding-block:var(--pad)">
-      <div class="cat-hdr rv">
-        <div class="cat-hdr-ico"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.5" stroke-linecap="round"><path d="M12 3 Q8 8 4 10 Q8 16 12 21 Q16 16 20 10 Q16 8 12 3 Z"/></svg></div>
-        <div class="cat-hdr-txt"><h2>Ensaladas — <em>Frescas y mediterráneas</em></h2><p>Frescas, coloridas y llenas de sabor.</p></div>
-      </div>
-      <div class="platos-g rv" style="transition-delay:.1s">
-        <div class="plato"><div class="plato-icono"><svg viewBox="0 0 24 24" fill="none" stroke="var(--oliva)" stroke-width="1.5" stroke-linecap="round"><path d="M12 3 Q8 8 4 10 Q8 16 12 21 Q16 16 20 10 Q16 8 12 3 Z"/></svg></div><div class="plato-nom">Ensalada Mediterránea</div><div class="plato-prc">$10.00</div><div class="plato-des">Queso feta, lechuga nacional, berenjena, pepino, aceitunas kalamatas, tomate cherry y hongos.</div><div class="plato-tag">Vegetariana · Mediterránea</div></div>
-        <div class="plato"><div class="plato-icono"><svg viewBox="0 0 24 24" fill="none" stroke="var(--oliva)" stroke-width="1.5" stroke-linecap="round"><path d="M12 3 Q8 8 4 10 Q8 16 12 21 Q16 16 20 10 Q16 8 12 3 Z"/></svg></div><div class="plato-nom">Ensalada Tía Maria</div><div class="plato-prc">$11.00</div><div class="plato-des">Pollo a la plancha sobre una cama de lechuga romana, zucchini a la parrilla y pimentón con lluvia de queso parmesano.</div><div class="plato-tag">Con pollo</div></div>
-        <div class="plato"><div class="plato-icono"><svg viewBox="0 0 24 24" fill="none" stroke="var(--azul)" stroke-width="1.5" stroke-linecap="round"><path d="M12 3 Q8 8 4 10 Q8 16 12 21 Q16 16 20 10 Q16 8 12 3 Z"/></svg></div><div class="plato-nom">Ensalada Trinacria</div><div class="plato-prc">$12.00</div><div class="plato-des">Salmón o pulpo, apio, aceitunas verdes, arúgula y pimentón.</div><div class="plato-tag">Del mar · A elegir proteína</div></div>
-        <div class="plato"><div class="plato-icono"><svg viewBox="0 0 24 24" fill="none" stroke="var(--limon)" stroke-width="1.5" stroke-linecap="round"><path d="M12 3 Q8 8 4 10 Q8 16 12 21 Q16 16 20 10 Q16 8 12 3 Z"/></svg></div><div class="plato-nom">Ensalada Italiana</div><div class="plato-prc">$15.00</div><div class="plato-des">Burrata, jamón serrano, arúgula, tomates cherry y vinagre balsámico.</div><div class="plato-tag">Gourmet · Burrata</div></div>
-      </div>
-
-      <div class="subcat" style="margin-top:2.5rem"><h3>Pizza Burgers</h3></div>
-      <div class="platos-g rv" style="transition-delay:.15s">
-        <div class="plato"><div class="plato-icono"><svg viewBox="0 0 24 24" fill="none" stroke="var(--terracota)" stroke-width="1.5" stroke-linecap="round"><rect x="3" y="14" width="18" height="5" rx="3"/><path d="M5 14 Q12 8 19 14"/><rect x="3" y="19" width="18" height="3" rx="2"/></svg></div><div class="plato-nom">Katachorizo Burger</div><div class="plato-prc">$13.00</div><div class="plato-des">1/2 lb. de carne preparada con chorizo italiano, cebolla caramelizada, pimentones asados, lechuga, queso suizo y crema de pimentones.</div><div class="plato-tag">Pizza Burger</div></div>
-        <div class="plato"><div class="plato-icono"><svg viewBox="0 0 24 24" fill="none" stroke="var(--terracota)" stroke-width="1.5" stroke-linecap="round"><rect x="3" y="14" width="18" height="5" rx="3"/><path d="M5 14 Q12 8 19 14"/><rect x="3" y="19" width="18" height="3" rx="2"/></svg></div><div class="plato-nom">Katangus Burger</div><div class="plato-prc">$14.00</div><div class="plato-des">1/2 lb. de carne de angus, lechuga, cebolla caramelizada, queso suizo y salsa de hongos trufada.</div><div class="plato-tag">Pizza Burger · Angus</div></div>
-        <div class="plato"><div class="plato-icono"><svg viewBox="0 0 24 24" fill="none" stroke="var(--oliva)" stroke-width="1.5" stroke-linecap="round"><rect x="3" y="14" width="18" height="5" rx="3"/><path d="M5 14 Q12 8 19 14"/><rect x="3" y="19" width="18" height="3" rx="2"/></svg></div><div class="plato-nom">Parmigiana Burger</div><div class="plato-prc">$14.00</div><div class="plato-des">Pizza Burger vegetariana. Consulta ingredientes con el mesero.</div><div class="plato-tag">Pizza Burger · Vegetariana</div></div>
-      </div>
-    </div>
-  </section>
-</div>
-
-<!-- POSTRES -->
-<div class="mpanel-full" id="cat-postres">
-  <section class="menu-sec piedra-bg">
-    <div class="w" style="padding-block:var(--pad)">
-      <div class="cat-hdr rv">
-        <div class="cat-hdr-ico"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.5" stroke-linecap="round"><rect x="3" y="10" width="18" height="10" rx="2"/><path d="M3 14 Q12 12 21 14"/><rect x="5" y="6" width="14" height="4"/></svg></div>
-        <div class="cat-hdr-txt"><h2>Postres — <em>Dolci siciliani</em></h2><p>El dulce final perfecto para tu experiencia italiana siciliana.</p></div>
-      </div>
-      <div class="platos-g rv" style="transition-delay:.1s">
-        <div class="plato"><div class="plato-icono"><svg viewBox="0 0 24 24" fill="none" stroke="var(--limon)" stroke-width="1.5" stroke-linecap="round"><circle cx="12" cy="14" r="6"/><path d="M9 8 Q12 4 15 8"/></svg></div><div class="plato-nom">Panna Cotta de Fresa</div><div class="plato-prc">$5.00</div><div class="plato-des">Postre típico italiano de crema de leche y mermelada de fresa.</div><div class="plato-tag">Postre clásico italiano</div></div>
-        <div class="plato"><div class="plato-icono"><svg viewBox="0 0 24 24" fill="none" stroke="var(--limon)" stroke-width="1.5" stroke-linecap="round"><circle cx="12" cy="14" r="6"/><path d="M9 8 Q12 4 15 8"/></svg></div><div class="plato-nom">Panna Cotta de Nutella</div><div class="plato-prc">$5.00</div><div class="plato-des">Postre típico italiano de crema de leche y nutella.</div><div class="plato-tag">Postre clásico italiano</div></div>
-        <div class="plato"><div class="plato-icono"><svg viewBox="0 0 24 24" fill="none" stroke="var(--limon)" stroke-width="1.5" stroke-linecap="round"><circle cx="12" cy="14" r="6"/><path d="M9 8 Q12 4 15 8"/></svg></div><div class="plato-nom">Panna Cotta de Pistacho</div><div class="plato-prc">$6.00</div><div class="plato-des">Postre típico italiano de crema de leche y crema de pistacho.</div><div class="plato-tag">Especialidad · Pistacho</div></div>
-        <div class="plato"><div class="plato-icono"><svg viewBox="0 0 24 24" fill="none" stroke="var(--warm)" stroke-width="1.5" stroke-linecap="round"><rect x="3" y="10" width="18" height="10" rx="2"/><path d="M3 14 Q12 12 21 14"/><rect x="5" y="6" width="14" height="4"/><line x1="9" y1="6" x2="9" y2="10"/><line x1="15" y1="6" x2="15" y2="10"/></svg></div><div class="plato-nom">Tiramisú Clásico</div><div class="plato-prc">$6.00</div><div class="plato-des">Galletas savoiardi, mascarpone, café, yema de huevos, licor marsala y cacao en polvo. La receta auténtica.</div><div class="plato-tag">Clásico italiano</div></div>
-        <div class="plato"><div class="plato-icono"><svg viewBox="0 0 24 24" fill="none" stroke="var(--oliva)" stroke-width="1.5" stroke-linecap="round"><rect x="3" y="10" width="18" height="10" rx="2"/><path d="M3 14 Q12 12 21 14"/><rect x="5" y="6" width="14" height="4"/></svg></div><div class="plato-nom">Tiramisú de Pistacho</div><div class="plato-prc">$8.00</div><div class="plato-des">Galletas savoiardi, mascarpone, yema de huevos y crema de pistacho.</div><div class="plato-tag">Especialidad · Pistacho</div></div>
-        <div class="plato"><div class="plato-icono"><svg viewBox="0 0 24 24" fill="none" stroke="var(--terracota)" stroke-width="1.5" stroke-linecap="round"><path d="M12 3 L20 18 Q20 21 17 21 L7 21 Q4 21 4 18 Z"/></svg></div><div class="plato-nom">Chupadedos de Nutella</div><div class="plato-prc">$7.00</div><div class="plato-des">10 unidades de masa frita con nutella y azúcar en polvo.</div><div class="plato-tag">10 unidades · Masa frita</div></div>
-        <div class="plato"><div class="plato-icono"><svg viewBox="0 0 24 24" fill="none" stroke="var(--limon)" stroke-width="1.5" stroke-linecap="round"><path d="M12 3 L20 18 Q20 21 17 21 L7 21 Q4 21 4 18 Z"/></svg></div><div class="plato-nom">Chupadedos de Miel</div><div class="plato-prc">$7.00</div><div class="plato-des">10 unidades de masa frita con miel, ralladura de naranja y canela.</div><div class="plato-tag">10 unidades · Masa frita</div></div>
-        <div class="plato"><div class="plato-icono"><svg viewBox="0 0 24 24" fill="none" stroke="var(--warm)" stroke-width="1.5" stroke-linecap="round"><circle cx="12" cy="14" r="6"/><path d="M9 8 Q12 4 15 8"/></svg></div><div class="plato-nom">Bigné Sicilianos</div><div class="plato-prc">$7.00</div><div class="plato-des">4 unidades de masa horneada, rellena de crema pastelera y topping.</div><div class="plato-tag">4 unidades · Siciliano</div></div>
-        <div class="plato"><div class="plato-icono"><svg viewBox="0 0 24 24" fill="none" stroke="var(--rojo)" stroke-width="1.5" stroke-linecap="round"><path d="M12 2 L22 19 L2 19 Z"/><line x1="12" y1="2" x2="12" y2="19"/></svg></div><div class="plato-nom">Pizza de Nutella</div><div class="plato-prc">$10.00</div><div class="plato-des">Pizza de 12" con nutella, almendras tostadas y picadas con azúcar en polvo.</div><div class="plato-tag">Pizza dulce · 12"</div></div>
-      </div>
-    </div>
-  </section>
-</div>
-
-<!-- BEBIDAS -->
-<div class="mpanel-full" id="cat-bebidas">
-  <section class="menu-sec piedra-bg">
-    <div class="w" style="padding-block:var(--pad)">
-      <div class="cat-hdr rv">
-        <div class="cat-hdr-ico"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.5" stroke-linecap="round"><path d="M6 3 L18 3 L15 12 Q14 16 12 17 Q10 16 9 12 Z"/><line x1="12" y1="17" x2="12" y2="21"/><line x1="8" y1="21" x2="16" y2="21"/></svg></div>
-        <div class="cat-hdr-txt"><h2>Bebidas — <em>Vinos, cócteles y más</em></h2><p>Vinos, cócteles, cervezas, refrescos, jugos, cafés y más.</p></div>
-      </div>
-
-      <div class="subcat"><h3>Bebidas sin alcohol</h3></div>
-      <div class="platos-g rv" style="transition-delay:.1s">
-        <div class="plato"><div class="plato-icono"><svg viewBox="0 0 24 24" fill="none" stroke="var(--terracota)" stroke-width="1.5" stroke-linecap="round"><rect x="7" y="2" width="10" height="20" rx="3"/><line x1="7" y1="7" x2="17" y2="7"/></svg></div><div class="plato-nom">Sodas</div><div class="plato-prc">$2.50</div><div class="plato-des">Lata 354ml. Coca Cola, Coca Cola Zero, Fresa, Naranja, Uva o Canada Dry.</div><div class="plato-tag">A elegir sabor</div></div>
-        <div class="plato"><div class="plato-icono"><svg viewBox="0 0 24 24" fill="none" stroke="var(--limon)" stroke-width="1.5" stroke-linecap="round"><rect x="7" y="2" width="10" height="20" rx="3"/><line x1="7" y1="7" x2="17" y2="7"/></svg></div><div class="plato-nom">Sodas San Pellegrino</div><div class="plato-prc">$2.75</div><div class="plato-des">Clementina, Aranciata Rossa, Aranciata, Limonata, Limone y Menta y más.</div><div class="plato-tag">Italiana · A elegir sabor</div></div>
-        <div class="plato"><div class="plato-icono"><svg viewBox="0 0 24 24" fill="none" stroke="var(--oliva)" stroke-width="1.5" stroke-linecap="round"><rect x="7" y="2" width="10" height="20" rx="3"/></svg></div><div class="plato-nom">Té Frío</div><div class="plato-prc">$2.75</div><div class="plato-des">Botella de té frío saborizado. Limón o Durazno.</div><div class="plato-tag">A elegir sabor</div></div>
-        <div class="plato"><div class="plato-icono"><svg viewBox="0 0 24 24" fill="none" stroke="var(--terracota)" stroke-width="1.5" stroke-linecap="round"><path d="M6 3 L18 3 L15 12 Q14 16 12 17 Q10 16 9 12 Z"/><line x1="12" y1="17" x2="12" y2="21"/><line x1="8" y1="21" x2="16" y2="21"/></svg></div><div class="plato-nom">Jugos Naturales</div><div class="plato-prc">$4.00</div><div class="plato-des">Raspadura con Limón, Fresa con Piña, Maracuyá o Frutos Rojos.</div><div class="plato-tag">Natural · A elegir sabor</div></div>
-        <div class="plato"><div class="plato-icono"><svg viewBox="0 0 24 24" fill="none" stroke="var(--azul)" stroke-width="1.5" stroke-linecap="round"><rect x="7" y="2" width="10" height="20" rx="3"/></svg></div><div class="plato-nom">Agua Mineral Natural</div><div class="plato-prc">$1.75</div><div class="plato-des">Botella de agua mineral natural de 600ml.</div><div class="plato-tag">600ml</div></div>
-        <div class="plato"><div class="plato-icono"><svg viewBox="0 0 24 24" fill="none" stroke="var(--azul)" stroke-width="1.5" stroke-linecap="round"><rect x="7" y="2" width="10" height="20" rx="3"/></svg></div><div class="plato-nom">Agua Mineral con Gas</div><div class="plato-prc">$2.75 / $4.75</div><div class="plato-des">Botella de agua mineral con gas. Disponible en 500ml o 1 litro.</div><div class="plato-tag">500ml o 1 litro</div></div>
-      </div>
-
-      <div class="subcat" style="margin-top:2.5rem"><h3>Cervezas</h3></div>
-      <div class="platos-g rv" style="transition-delay:.15s">
-        <div class="plato"><div class="plato-icono"><svg viewBox="0 0 24 24" fill="none" stroke="var(--limon)" stroke-width="1.5" stroke-linecap="round"><rect x="6" y="4" width="12" height="18" rx="2"/><line x1="6" y1="8" x2="18" y2="8"/><path d="M18 10 Q22 10 22 14 Q22 18 18 18"/></svg></div><div class="plato-nom">Cerveza Peroni</div><div class="plato-prc">$5.00</div><div class="plato-des">Cerveza italiana elegante, perfil fresco, ligeramente amargo con notas cítricas.</div><div class="plato-tag">Italiana · Premium</div></div>
-        <div class="plato"><div class="plato-icono"><svg viewBox="0 0 24 24" fill="none" stroke="var(--limon)" stroke-width="1.5" stroke-linecap="round"><rect x="6" y="4" width="12" height="18" rx="2"/><line x1="6" y1="8" x2="18" y2="8"/></svg></div><div class="plato-nom">Cerveza Stella Artois</div><div class="plato-prc">$5.00</div><div class="plato-des">Lager belga premium de sabor limpio y bien balanceado.</div><div class="plato-tag">Belga · Premium</div></div>
-        <div class="plato"><div class="plato-icono"><svg viewBox="0 0 24 24" fill="none" stroke="var(--oliva)" stroke-width="1.5" stroke-linecap="round"><rect x="6" y="4" width="12" height="18" rx="2"/><line x1="6" y1="8" x2="18" y2="8"/></svg></div><div class="plato-nom">Cerveza Artesanal Wena Vaina</div><div class="plato-prc">$4.00</div><div class="plato-des">Selección de cervezas artesanales locales panameñas.</div><div class="plato-tag">Artesanal · 2x1 Lun–Jue</div></div>
-        <div class="plato"><div class="plato-icono"><svg viewBox="0 0 24 24" fill="none" stroke="var(--warm)" stroke-width="1.5" stroke-linecap="round"><rect x="6" y="4" width="12" height="18" rx="2"/><line x1="6" y1="8" x2="18" y2="8"/></svg></div><div class="plato-nom">Cerveza Gluten Free</div><div class="plato-prc">$4.00</div><div class="plato-des">Cerveza sin gluten, ligera y fácil de digerir.</div><div class="plato-tag">Sin gluten</div></div>
-        <div class="plato"><div class="plato-icono"><svg viewBox="0 0 24 24" fill="none" stroke="var(--warm)" stroke-width="1.5" stroke-linecap="round"><rect x="6" y="4" width="12" height="18" rx="2"/><line x1="6" y1="8" x2="18" y2="8"/></svg></div><div class="plato-nom">Cerveza Heineken</div><div class="plato-prc">$3.50</div><div class="plato-des">Lager premium de sabor equilibrado y refrescante.</div><div class="plato-tag">Premium</div></div>
-        <div class="plato"><div class="plato-icono"><svg viewBox="0 0 24 24" fill="none" stroke="var(--warm)" stroke-width="1.5" stroke-linecap="round"><rect x="6" y="4" width="12" height="18" rx="2"/><line x1="6" y1="8" x2="18" y2="8"/></svg></div><div class="plato-nom">Cerveza Corona</div><div class="plato-prc">$3.50</div><div class="plato-des">Cerveza clara y ligera, ideal fría con un toque de limón.</div><div class="plato-tag">Refrescante</div></div>
-      </div>
-
-      <div class="subcat" style="margin-top:2.5rem"><h3>Cócteles</h3></div>
-      <div class="platos-g rv" style="transition-delay:.2s">
-        <div class="plato"><div class="plato-icono"><svg viewBox="0 0 24 24" fill="none" stroke="var(--terracota)" stroke-width="1.5" stroke-linecap="round"><path d="M6 3 L18 3 L15 12 Q14 16 12 17 Q10 16 9 12 Z"/><line x1="12" y1="17" x2="12" y2="21"/><line x1="8" y1="21" x2="16" y2="21"/></svg></div><div class="plato-nom">Aperol Spritz</div><div class="plato-prc">$7.00</div><div class="plato-des">Aperol, prosecco y soda. Sabor cítrico, ligero y vibrante. El aperitivo clásico italiano.</div><div class="plato-tag">Cóctel italiano · Aperitivo</div></div>
-        <div class="plato"><div class="plato-icono"><svg viewBox="0 0 24 24" fill="none" stroke="var(--azul)" stroke-width="1.5" stroke-linecap="round"><path d="M6 3 L18 3 L15 12 Q14 16 12 17 Q10 16 9 12 Z"/><line x1="12" y1="17" x2="12" y2="21"/><line x1="8" y1="21" x2="16" y2="21"/></svg></div><div class="plato-nom">Gin & Tonic</div><div class="plato-prc">$7.00</div><div class="plato-des">Ginebra y agua tónica, fresco y aromático con notas botánicas.</div><div class="plato-tag">Cóctel premium</div></div>
-        <div class="plato"><div class="plato-icono"><svg viewBox="0 0 24 24" fill="none" stroke="var(--limon)" stroke-width="1.5" stroke-linecap="round"><path d="M6 3 L18 3 L15 12 Q14 16 12 17 Q10 16 9 12 Z"/><line x1="12" y1="17" x2="12" y2="21"/><line x1="8" y1="21" x2="16" y2="21"/></svg></div><div class="plato-nom">Cóctel Margarita</div><div class="plato-prc">$7.00</div><div class="plato-des">Tequila, limón y un toque de sal. Refrescante y cítrica.</div><div class="plato-tag">Cóctel clásico</div></div>
-        <div class="plato"><div class="plato-icono"><svg viewBox="0 0 24 24" fill="none" stroke="var(--oliva)" stroke-width="1.5" stroke-linecap="round"><path d="M6 3 L18 3 L15 12 Q14 16 12 17 Q10 16 9 12 Z"/><line x1="12" y1="17" x2="12" y2="21"/><line x1="8" y1="21" x2="16" y2="21"/></svg></div><div class="plato-nom">Mojito</div><div class="plato-prc">$7.00</div><div class="plato-des">Ron, hierbabuena, limón y soda. Ligero y aromático.</div><div class="plato-tag">Cóctel clásico</div></div>
-        <div class="plato"><div class="plato-icono"><svg viewBox="0 0 24 24" fill="none" stroke="var(--terracota)" stroke-width="1.5" stroke-linecap="round"><path d="M6 3 L18 3 L15 12 Q14 16 12 17 Q10 16 9 12 Z"/><line x1="12" y1="17" x2="12" y2="21"/><line x1="8" y1="21" x2="16" y2="21"/></svg></div><div class="plato-nom">Cuba Libre</div><div class="plato-prc">$7.00</div><div class="plato-des">Ron, cola y limón. Refrescante y equilibrado.</div><div class="plato-tag">Cóctel clásico</div></div>
-        <div class="plato"><div class="plato-icono"><svg viewBox="0 0 24 24" fill="none" stroke="var(--rojo)" stroke-width="1.5" stroke-linecap="round"><path d="M6 3 L18 3 L15 12 Q14 16 12 17 Q10 16 9 12 Z"/><line x1="12" y1="17" x2="12" y2="21"/><line x1="8" y1="21" x2="16" y2="21"/></svg></div><div class="plato-nom">Negroni</div><div class="plato-prc">$8.00</div><div class="plato-des">Ginebra, vermut rojo y Campari. Intenso, amargo y elegante.</div><div class="plato-tag">Cóctel italiano · Sofisticado</div></div>
-        <div class="plato"><div class="plato-icono"><svg viewBox="0 0 24 24" fill="none" stroke="var(--terracota)" stroke-width="1.5" stroke-linecap="round"><path d="M6 3 L18 3 L15 12 Q14 16 12 17 Q10 16 9 12 Z"/><line x1="12" y1="17" x2="12" y2="21"/></svg></div><div class="plato-nom">Copa de Sangría</div><div class="plato-prc">$7.00</div><div class="plato-des">Tinta o blanca. Vino con frutas frescas. También disponible en jarra ($20).</div><div class="plato-tag">Copa / Jarra · Tinta o blanca</div></div>
-      </div>
-
-      <div class="subcat" style="margin-top:2.5rem"><h3>Vinos</h3></div>
-      <div class="platos-g rv" style="transition-delay:.25s">
-        <div class="plato"><div class="plato-icono"><svg viewBox="0 0 24 24" fill="none" stroke="var(--rojo)" stroke-width="1.5" stroke-linecap="round"><path d="M6 3 L18 3 L15 12 Q14 16 12 17 Q10 16 9 12 Z"/><line x1="12" y1="17" x2="12" y2="21"/><line x1="8" y1="21" x2="16" y2="21"/></svg></div><div class="plato-nom">Copa de Vino Tinto</div><div class="plato-prc">$7.00</div><div class="plato-des">Vino tinto de perfil suave y equilibrado con notas frutales.</div><div class="plato-tag">Copa</div></div>
-        <div class="plato"><div class="plato-icono"><svg viewBox="0 0 24 24" fill="none" stroke="var(--limon)" stroke-width="1.5" stroke-linecap="round"><path d="M6 3 L18 3 L15 12 Q14 16 12 17 Q10 16 9 12 Z"/><line x1="12" y1="17" x2="12" y2="21"/><line x1="8" y1="21" x2="16" y2="21"/></svg></div><div class="plato-nom">Copa de Vino Blanco</div><div class="plato-prc">$7.00</div><div class="plato-des">Vino blanco fresco y aromático con notas cítricas y frutales.</div><div class="plato-tag">Copa</div></div>
-        <div class="plato"><div class="plato-icono"><svg viewBox="0 0 24 24" fill="none" stroke="var(--rojo)" stroke-width="1.5" stroke-linecap="round"><path d="M6 3 L18 3 L15 12 Q14 16 12 17 Q10 16 9 12 Z"/><line x1="12" y1="17" x2="12" y2="21"/><line x1="8" y1="21" x2="16" y2="21"/></svg></div><div class="plato-nom">Botella de Vino Tinto</div><div class="plato-prc">$25.00</div><div class="plato-des">Nero D'Avola o Shiraz. Vinos tintos italianos con notas de frutos rojos y especias.</div><div class="plato-tag">Botella · Nero D'Avola / Shiraz</div></div>
-        <div class="plato"><div class="plato-icono"><svg viewBox="0 0 24 24" fill="none" stroke="var(--rojo)" stroke-width="1.5" stroke-linecap="round"><path d="M6 3 L18 3 L15 12 Q14 16 12 17 Q10 16 9 12 Z"/><line x1="12" y1="17" x2="12" y2="21"/><line x1="8" y1="21" x2="16" y2="21"/></svg></div><div class="plato-nom">Botella de Vino Tinto Chianti</div><div class="plato-prc">$30.00</div><div class="plato-des">Clásico vino italiano con acidez equilibrada y notas de cereza.</div><div class="plato-tag">Botella · Chianti · Italiano</div></div>
-        <div class="plato"><div class="plato-icono"><svg viewBox="0 0 24 24" fill="none" stroke="var(--limon)" stroke-width="1.5" stroke-linecap="round"><path d="M6 3 L18 3 L15 12 Q14 16 12 17 Q10 16 9 12 Z"/><line x1="12" y1="17" x2="12" y2="21"/><line x1="8" y1="21" x2="16" y2="21"/></svg></div><div class="plato-nom">Botella de Vino Blanco</div><div class="plato-prc">$25.00</div><div class="plato-des">Grillo o Sauvignon. Frescos y vibrantes, ideales con mariscos.</div><div class="plato-tag">Botella · Grillo / Sauvignon</div></div>
-        <div class="plato"><div class="plato-icono"><svg viewBox="0 0 24 24" fill="none" stroke="var(--arena-med)" stroke-width="1.5" stroke-linecap="round"><path d="M6 3 L18 3 L15 12 Q14 16 12 17 Q10 16 9 12 Z"/><line x1="12" y1="17" x2="12" y2="21"/><line x1="8" y1="21" x2="16" y2="21"/></svg></div><div class="plato-nom">Botella de Prosecco</div><div class="plato-prc">$22.00</div><div class="plato-des">Espumoso italiano elegante con burbujas finas y notas frutales. Para celebraciones.</div><div class="plato-tag">Botella · Italiano · Espumoso</div></div>
-      </div>
-
-      <div class="subcat" style="margin-top:2.5rem"><h3>Cafés y Bebidas Calientes</h3></div>
-      <div class="platos-g rv" style="transition-delay:.3s">
-        <div class="plato"><div class="plato-icono"><svg viewBox="0 0 24 24" fill="none" stroke="var(--tinta)" stroke-width="1.5" stroke-linecap="round"><path d="M4 10 Q4 18 12 18 Q20 18 20 10 Z"/><line x1="4" y1="10" x2="20" y2="10"/><path d="M20 13 Q23 13 23 16 Q23 19 20 19"/></svg></div><div class="plato-nom">Café Espresso</div><div class="plato-prc">$2.50</div><div class="plato-des">Café intenso y aromático, preparado al momento con extracción perfecta.</div><div class="plato-tag">Italiano clásico</div></div>
-        <div class="plato"><div class="plato-icono"><svg viewBox="0 0 24 24" fill="none" stroke="var(--tinta)" stroke-width="1.5" stroke-linecap="round"><path d="M4 10 Q4 18 12 18 Q20 18 20 10 Z"/><line x1="4" y1="10" x2="20" y2="10"/></svg></div><div class="plato-nom">Café Espresso Macchiato</div><div class="plato-prc">$2.80</div><div class="plato-des">Espresso con un toque de leche cremosa que suaviza su intensidad.</div><div class="plato-tag">Italiano</div></div>
-        <div class="plato"><div class="plato-icono"><svg viewBox="0 0 24 24" fill="none" stroke="var(--warm)" stroke-width="1.5" stroke-linecap="round"><path d="M4 10 Q4 18 12 18 Q20 18 20 10 Z"/><line x1="4" y1="10" x2="20" y2="10"/></svg></div><div class="plato-nom">Café Americano</div><div class="plato-prc">$2.80</div><div class="plato-des">Café suave y ligero, elaborado a partir de espresso diluido en agua caliente.</div><div class="plato-tag">Suave</div></div>
-        <div class="plato"><div class="plato-icono"><svg viewBox="0 0 24 24" fill="none" stroke="var(--warm)" stroke-width="1.5" stroke-linecap="round"><path d="M4 10 Q4 18 12 18 Q20 18 20 10 Z"/><line x1="4" y1="10" x2="20" y2="10"/><path d="M4 8 Q12 5 20 8"/></svg></div><div class="plato-nom">Café Cappuccino</div><div class="plato-prc">$3.50</div><div class="plato-des">Espresso, leche vaporizada y espuma cremosa. Suave y equilibrado.</div><div class="plato-tag">Italiano clásico</div></div>
-      </div>
-    </div>
-  </section>
 </div>
 
 <!-- CTO -->
@@ -448,40 +455,90 @@
   <img class="cto-wm" src="katane_logo.png" alt="" aria-hidden="true"/>
   <div class="w" style="padding-block:var(--pad)">
     <div class="cto-int">
-      <p class="eyebrow rv">¿Listo para ordenar?</p>
-      <h2 class="h2 rv" style="transition-delay:.1s">Visítanos o<br><em>escríbenos ya</em></h2>
-      <p class="rv" style="transition-delay:.2s">Tres sucursales en Ciudad de Panamá. Sin reserva, sin esperas. Solo llega y disfruta.</p>
+      <p class="eyebrow rv" style="justify-content:center">¿Te abrió el apetito?</p>
+      <h2 class="h2 rv" style="transition-delay:.1s;color:var(--tinta)">Reserva tu mesa<br><em>hoy mismo</em></h2>
+      <p class="rv" style="transition-delay:.2s;color:var(--warm)">Escríbenos por WhatsApp y te confirmamos disponibilidad en tu sucursal más cercana.</p>
       <div class="cto-btns rv" style="transition-delay:.3s">
-        <a href="https://wa.me/50769624549" target="_blank" class="btn-r">WhatsApp El Cangrejo</a>
-        <a href="contacto.html" class="btn-o">Ver sucursales →</a>
-      </div>
-      <div class="cto-suc rv" style="transition-delay:.4s">
-        <div class="cto-suc-item"><h4>El Cangrejo</h4><a href="tel:+50769624549">6962-4549</a><a href="https://wa.me/50769624549" target="_blank">WhatsApp</a></div>
-        <div class="cto-suc-item"><h4>San Francisco</h4><a href="tel:+50769558884">6955-8884</a><a href="https://wa.me/50769558884" target="_blank">WhatsApp</a></div>
-        <div class="cto-suc-item"><h4>Costa del Este</h4><a href="tel:+50765591711">6559-1711</a><a href="https://wa.me/50765591711" target="_blank">WhatsApp</a></div>
+        <a href="https://wa.me/50769624549" target="_blank" class="btn-r">Reservar mesa</a>
+        <a href="promociones.html" class="btn-o">Ver promociones →</a>
       </div>
     </div>
   </div>
 </section>
 
+<div class="franja"></div>
 <footer class="footer">
   <div class="footer-g">
-    <div class="footer-m"><img class="footer-logo" src="katane_logo.png" alt="Katané Pizza"/><p>Restaurante siciliano auténtico en Panamá. Tres sucursales, una sola tradición desde 2015.</p><div class="footer-redes"><a href="#" class="rs" aria-label="Instagram"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r=".5" fill="currentColor"/></svg></a><a href="#" class="rs" aria-label="Facebook"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg></a><a href="#" class="rs" aria-label="TikTok"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M9 12a4 4 0 1 0 4 4V4a5 5 0 0 0 5 5"/></svg></a></div></div>
-    <div class="footer-col"><h4>Menú</h4><ul><li><a href="#" onclick="switchCat('entradas')">Entradas</a></li><li><a href="#" onclick="switchCat('pizzas')">Pizzas</a></li><li><a href="#" onclick="switchCat('pastas')">Pastas</a></li><li><a href="#" onclick="switchCat('risottos')">Risottos</a></li><li><a href="#" onclick="switchCat('postres')">Postres</a></li></ul></div>
-    <div class="footer-col"><h4>Katané</h4><ul><li><a href="historia.html">Nuestra historia</a></li><li><a href="historia.html#masa">La masa</a></li><li><a href="blog.html">Blog</a></li></ul></div>
-    <div class="footer-col"><h4>Contacto</h4><ul><li><a href="tel:+50769624549">6962-4549 · El Cangrejo</a></li><li><a href="tel:+50769558884">6955-8884 · San Francisco</a></li><li><a href="tel:+50765591711">6559-1711 · Costa del Este</a></li><li><a href="mailto:katanepizza@gmail.com">katanepizza@gmail.com</a></li></ul></div>
+    <div class="footer-m">
+      <img class="footer-logo" src="katane_logo.png" alt="Katané Pizza"/>
+      <p class="footer-tagline">Restaurante siciliano auténtico en Panamá. Tres sucursales, una sola tradición desde 2015.</p>
+      <div class="footer-redes">
+        <a href="#" class="rs" aria-label="Instagram"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r=".5" fill="currentColor"/></svg></a>
+        <a href="#" class="rs" aria-label="Facebook"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg></a>
+        <a href="#" class="rs" aria-label="TikTok"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M9 12a4 4 0 1 0 4 4V4a5 5 0 0 0 5 5"/></svg></a>
+      </div>
+    </div>
+    <div class="footer-col">
+      <div class="footer-col-tit">Menú</div>
+      <ul>
+        <li><a href="menu.html">Pizzas artesanales</a></li>
+        <li><a href="menu.html">Pastas frescas</a></li>
+        <li><a href="menu.html">Risottos</a></li>
+        <li><a href="menu.html">Postres</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <div class="footer-col-tit">Katané</div>
+      <ul>
+        <li><a href="historia.html">Nuestra historia</a></li>
+        <li><a href="blog.html">Blog</a></li>
+        <li><a href="promociones.html">Promociones</a></li>
+        <li><a href="contacto.html">Contacto</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <div class="footer-col-tit">Contacto</div>
+      <ul>
+        <li><a href="tel:+50769624549">6962-4549 · El Cangrejo</a></li>
+        <li><a href="tel:+50769558884">6955-8884 · San Francisco</a></li>
+        <li><a href="tel:+50765591711">6559-1711 · Costa del Este</a></li>
+        <li><a href="mailto:katanepizza@gmail.com">katanepizza@gmail.com</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <div class="footer-col-tit">Legal</div>
+      <ul>
+        <li><a href="privacidad.html">Política de privacidad</a></li>
+        <li><a href="descargos.html">Descargos de responsabilidad</a></li>
+        <li><a href="terminos.html">Términos y condiciones</a></li>
+        <li><a href="copyright.html">Copyright</a></li>
+      </ul>
+    </div>
   </div>
-  <div class="footer-bot"><p>© 2024 Katané Pizza, Panamá. Tutti i diritti riservati.</p><div style="display:flex;gap:1.5rem"><a href="https://katanepizza.com/politica-de-privacidad/" target="_blank">Privacidad</a><a href="https://katanepizza.com/terminos-y-condiciones/" target="_blank">Términos</a></div></div>
+  <div class="footer-bot">
+    <p>© 2025 Katané Pizza, Panamá. Tutti i diritti riservati.</p>
+    <div style="display:flex;gap:1.5rem">
+      <a href="privacidad.html">Privacidad</a>
+      <a href="terminos.html">Términos</a>
+      <a href="copyright.html">Copyright</a>
+    </div>
+  </div>
 </footer>
 
 <script src="katane.js"></script>
 <script>
-function switchCat(cat) {
-  document.querySelectorAll('.mnav-tab').forEach(t => t.classList.toggle('on', t.dataset.cat === cat));
-  document.querySelectorAll('.mpanel-full').forEach(p => p.classList.toggle('on', p.id === 'cat-' + cat));
-  document.querySelector('.menu-nav').scrollIntoView({ behavior: 'smooth', block: 'start' });
-}
-document.querySelectorAll('.mnav-tab').forEach(t => t.addEventListener('click', () => switchCat(t.dataset.cat)));
+document.querySelectorAll('.mtab').forEach(t => {
+  t.addEventListener('click', () => {
+    document.querySelectorAll('.mtab').forEach(x => x.classList.remove('on'));
+    t.classList.add('on');
+    const target = document.getElementById(t.dataset.sec);
+    if (target) {
+      const offset = document.querySelector('.mtabs').offsetHeight + document.getElementById('nav').offsetHeight;
+      const top = target.getBoundingClientRect().top + window.scrollY - offset - 24;
+      window.scrollTo({ top, behavior: 'smooth' });
+    }
+  });
+});
 </script>
 </body>
 </html>

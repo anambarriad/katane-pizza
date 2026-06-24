@@ -360,13 +360,30 @@ button { cursor:pointer; border:none; background:none; font:inherit; color:inher
 }
 .footer > * { position:relative; z-index:1; }
 .footer-g {
-  display:grid; grid-template-columns:2fr 1fr 1fr 1fr;
+  display:grid; grid-template-columns:1.5fr 1fr 1fr 1fr 1fr;
   gap:2.75rem; padding-bottom:3rem;
   border-bottom:1px solid var(--arena-med);
   max-width:var(--w); margin-inline:auto;
 }
 .footer-logo { height:52px; width:auto; display:block; margin-bottom:.9rem; mix-blend-mode:multiply; }
 .footer-m p { font-size:.84rem; color:var(--warm); line-height:1.75; max-width:230px; font-style:italic; }
+.footer-tagline {
+  font-family:var(--ff-d);
+  font-style:italic;
+  font-size:.88rem;
+  color:var(--warm);
+  line-height:1.75;
+  max-width:220px;
+}
+.footer-col-tit {
+  font-family:var(--ff-b);
+  font-size:.68rem;
+  font-weight:500;
+  letter-spacing:.14em;
+  text-transform:uppercase;
+  color:var(--rojo);
+  margin-bottom:1.15rem;
+}
 .footer-redes { display:flex; gap:.7rem; margin-top:1.4rem; }
 .rs {
   width:34px; height:34px;

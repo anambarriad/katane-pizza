@@ -426,3 +426,59 @@ button { cursor:pointer; border:none; background:none; font:inherit; color:inher
 @media(prefers-reduced-motion:reduce){
   *,*::before,*::after { animation-duration:.01ms!important; transition-duration:.01ms!important; }
 }
+
+@media(max-width:767px){
+
+  /* Historia resumida en index — apilar columnas */
+  #historia .w > div[style*="grid-template-columns"] {
+    grid-template-columns:1fr !important;
+  }
+
+  /* Equipo en historia.html — apilar columnas */
+  #inicio .w > div[style*="grid-template-columns"],
+  #inicio .w > div > div[style*="grid-template-columns"] {
+    grid-template-columns:1fr !important;
+  }
+
+  /* Reseñas Google — una por columna */
+  div[style*="grid-template-columns:repeat(3,1fr)"] {
+    grid-template-columns:1fr !important;
+  }
+
+  /* Sucursales — una por columna */
+  div[style*="grid-template-columns:repeat(3,1fr)"],
+  div[style*="grid-template-columns:repeat(2,1fr)"] {
+    grid-template-columns:1fr !important;
+  }
+
+  /* Texto justificado — quitar en móvil para mejor lectura */
+  .h-p, p[style*="text-align:justify"] {
+    text-align:left !important;
+  }
+
+  /* Nuestro equipo en historia — apilar */
+  div[style*="grid-template-columns:1fr 1fr"] {
+    grid-template-columns:1fr !important;
+  }
+
+  /* CTA sucursales — una por columna */
+  .cto-suc {
+    grid-template-columns:1fr !important;
+  }
+
+  /* Footer grid — apilar */
+  .footer-g {
+    grid-template-columns:1fr !important;
+  }
+
+  /* Valores — wrap en móvil */
+  div[style*="display:flex;flex-wrap:wrap"] {
+    flex-direction:column !important;
+  }
+
+  /* Estadísticas — 2 columnas en móvil */
+  .stats-g {
+    grid-template-columns:1fr 1fr !important;
+  }
+
+}

@@ -37,11 +37,19 @@ document.addEventListener('DOMContentLoaded', () => {
     }));
   }
 
-  /* ── SCROLL REVEAL ───────────────────────── */
-  const obs = new IntersectionObserver(es => es.forEach(e => {
-    if (e.isIntersecting) { e.target.classList.add('on'); obs.unobserve(e.target); }
-  }), { threshold: .08, rootMargin: '0px 0px -20px 0px' });
-  document.querySelectorAll('.rv,.rl,.rr').forEach(el => obs.observe(el));
+  /* ── SCROLL ANIMATIONS ───────────────────── */
+  const animEls = document.querySelectorAll('.rv,.rl,.rr');
+  if (animEls.length) {
+    const obs = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          e.target.classList.add('on');
+          obs.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.12 });
+    animEls.forEach(el => obs.observe(el));
+  }
 
   /* ── TABS MENÚ ───────────────────────────── */
   document.querySelectorAll('.mtab').forEach(t => t.addEventListener('click', () => {

@@ -47,13 +47,21 @@ button { cursor:pointer; border:none; background:none; font:inherit; color:inher
 /* ── LAYOUT ──────────────────────────────── */
 .w { max-width:var(--w); margin-inline:auto; padding-inline:var(--g); }
 
-/* ── REVEAL ──────────────────────────────── */
-.rv    { opacity:1; }
-.rv.on { opacity:1; }
-.rl    { opacity:1; }
-.rl.on { opacity:1; }
-.rr    { opacity:1; }
-.rr.on { opacity:1; }
+/* ── ANIMACIONES DE ENTRADA ─────────────── */
+.rv, .rl, .rr {
+  opacity:0;
+  transition:opacity .7s var(--ease), transform .7s var(--ease);
+}
+.rv { transform:translateY(28px); }
+.rl { transform:translateX(-28px); }
+.rr { transform:translateX(28px); }
+.rv.on, .rl.on, .rr.on {
+  opacity:1;
+  transform:translate(0);
+}
+.menu-grid .menu-card.rv:nth-child(3n+1) { transition-delay:.05s; }
+.menu-grid .menu-card.rv:nth-child(3n+2) { transition-delay:.10s; }
+.menu-grid .menu-card.rv:nth-child(3n)   { transition-delay:.15s; }
 
 /* ── TIPOGRAFÍA ──────────────────────────── */
 .eyebrow {

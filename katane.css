@@ -6,20 +6,25 @@
 
 /* ── TOKENS ─────────────────────────────── */
 :root {
-  --crema:     #FAF5EA;
+  /* Paleta Katané — Sicilian Warmth */
+  --crema:     #F8F1E1;
   --arena:     #F0E6CC;
-  --arena-med: #DDD0B0;
-  --piedra:    #C8B89A;
-  --rojo:      #B83A18;
-  --rojo-osc:  #8C2010;
-  --terracota: #C85028;
-  --limon:     #B89420;
-  --oliva:     #4E6438;
-  --oliva-clr: #7A8E5C;
-  --warm:      #6E5840;
-  --tinta:     #281808;
-  --noche:     #180C04;
-  --azul:      #2A5080;
+  --arena-med: #D9C9A8;
+  --piedra:    #C4AD88;
+  --rojo:      #A12C28;
+  --rojo-osc:  #7A1A18;
+  --terracota: #B85F2C;
+  --limon:     #B85F2C;
+  --oliva:     #4D6A3B;
+  --oliva-clr: #4D6A3B;
+  --warm:      #6B4E35;
+  --tinta:     #1A1008;
+  --noche:     #0A0804;
+  --azul:      #0A3D62;
+  --azul-cob:  #1255CC;
+
+  /* Fondo único del body */
+  --bg: #F8F1E1;
 
   --ff-d: 'Cormorant Garamond', Georgia, serif;
   --ff-b: 'Jost', system-ui, sans-serif;
@@ -31,6 +36,8 @@
   --ease:   cubic-bezier(.25,.46,.45,.94);
   --shadow: 0 4px 28px rgba(40,24,8,.10);
 }
+
+body { background:var(--bg); }
 
 /* ── RESET ───────────────────────────────── */
 *,*::before,*::after { box-sizing:border-box; margin:0; padding:0; }
@@ -66,12 +73,12 @@ button { cursor:pointer; border:none; background:none; font:inherit; color:inher
 /* ── TIPOGRAFÍA ──────────────────────────── */
 .eyebrow {
   font-family:var(--ff-b); font-size:.7rem; font-weight:500;
-  letter-spacing:.18em; text-transform:uppercase; color:var(--terracota);
+  letter-spacing:.18em; text-transform:uppercase; color:var(--rojo);
   display:flex; align-items:center; gap:.75rem; margin-bottom:.65rem;
 }
 .eyebrow::before,.eyebrow::after {
   content:''; display:inline-block; width:1.75rem; height:1px;
-  background:var(--limon); opacity:.7;
+  background:var(--azul-cob); opacity:.4;
 }
 .h2 {
   font-family:var(--ff-d); font-size:clamp(2rem,4vw,3.6rem);
@@ -128,7 +135,7 @@ button { cursor:pointer; border:none; background:none; font:inherit; color:inher
   height:8px;
   background:repeating-linear-gradient(
     90deg, var(--azul) 0, var(--azul) 8px,
-    #fff 8px, #fff 10px, var(--limon) 10px, var(--limon) 12px,
+    #fff 8px, #fff 10px, var(--oliva) 10px, var(--oliva) 12px,
     #fff 12px, #fff 14px, var(--azul) 14px, var(--azul) 22px,
     var(--crema) 22px, var(--crema) 24px
   );
@@ -190,7 +197,7 @@ button { cursor:pointer; border:none; background:none; font:inherit; color:inher
   padding:0;
 }
 .nav-interna .nav-links a { color:var(--warm); }
-.nav-interna .nav-cta { color:var(--terracota); border-color:var(--terracota); }
+.nav-interna .nav-cta { color:var(--azul); border-color:var(--azul); }
 .nav-interna .hamb span { background:var(--warm); }
 
 .nav-links { display:flex; gap:2rem; list-style:none; }
@@ -198,13 +205,13 @@ button { cursor:pointer; border:none; background:none; font:inherit; color:inher
   font-size:.72rem; font-weight:500; letter-spacing:.1em; text-transform:uppercase;
   color:var(--warm); opacity:.65; transition:opacity .25s,color .25s;
 }
-.nav-links a:hover, .nav-links a.activo { opacity:1; color:var(--terracota); }
+.nav-links a:hover, .nav-links a.activo { opacity:1; color:var(--azul); }
 .nav-cta {
   font-size:.72rem; font-weight:500; letter-spacing:.1em; text-transform:uppercase;
-  padding:.5rem 1.35rem; border:1.5px solid var(--terracota);
-  color:var(--terracota); border-radius:1px; transition:background .25s,color .25s;
+  padding:.5rem 1.35rem; border:1.5px solid var(--azul);
+  color:var(--azul); border-radius:1px; transition:background .25s,color .25s;
 }
-.nav-cta:hover { background:var(--terracota); color:var(--crema); }
+.nav-cta:hover { background:var(--azul); color:var(--crema); }
 .hamb { display:none; flex-direction:column; gap:5px; }
 .hamb span { display:block; width:24px; height:1.5px; background:var(--warm); border-radius:1px; transition:transform .3s,opacity .25s; }
 .hamb.open span:nth-child(1) { transform:translateY(6.5px) rotate(45deg); }
@@ -265,7 +272,7 @@ button { cursor:pointer; border:none; background:none; font:inherit; color:inher
 
 /* ── STATS ───────────────────────────────── */
 .stats {
-  background:var(--azul); padding:3.25rem 0; position:relative; overflow:hidden;
+  background:#0A3D62; padding:3.25rem 0; position:relative; overflow:hidden;
   border-top:3px solid var(--limon); border-bottom:3px solid var(--limon);
 }
 .stats::before {
@@ -284,7 +291,7 @@ button { cursor:pointer; border:none; background:none; font:inherit; color:inher
 .suc-hdr { margin-bottom:clamp(2rem,4.5vw,3.5rem); }
 .suc-g { display:grid; grid-template-columns:repeat(3,1fr); gap:1.75rem; }
 .suc-card {
-  background:var(--arena); border:1px solid var(--arena-med);
+  background:rgba(240,230,204,.45); border:1px solid var(--arena-med);
   border-radius:3px; overflow:hidden; position:relative;
 }
 .suc-card:hover { box-shadow:var(--shadow); transform:translateY(-4px); }
@@ -319,7 +326,7 @@ button { cursor:pointer; border:none; background:none; font:inherit; color:inher
 /* ── CONTACTO CTA ────────────────────────── */
 .cto {
   padding:var(--pad) 0;
-  background:var(--piedra);
+  background:rgba(240,230,204,.45);
   text-align:center; position:relative; overflow:hidden;
 }
 /* Textura papel artesanal */
@@ -336,8 +343,8 @@ button { cursor:pointer; border:none; background:none; font:inherit; color:inher
 }
 .cto-wm { position:absolute; top:50%; left:50%; transform:translate(-50%,-50%); width:min(35vw,320px); pointer-events:none; z-index:1; opacity:.04; mix-blend-mode:multiply; }
 .cto-int { position:relative; z-index:2; max-width:580px; margin-inline:auto; }
-.cto-int .eyebrow { justify-content:center; color:var(--terracota); }
-.cto-int .eyebrow::before,.cto-int .eyebrow::after { background:var(--limon); opacity:.5; }
+.cto-int .eyebrow { justify-content:center; color:var(--rojo); }
+.cto-int .eyebrow::before,.cto-int .eyebrow::after { background:var(--azul-cob); opacity:.4; }
 .cto-int .h2 { color:var(--tinta); margin-bottom:1.4rem; }
 .cto-int .h2 em { color:var(--rojo); }
 .cto-int p { color:var(--warm); font-size:1rem; line-height:1.85; }
@@ -355,7 +362,7 @@ button { cursor:pointer; border:none; background:none; font:inherit; color:inher
 .cto-suc-item a:hover { color:var(--rojo); }
 /* ── FOOTER ──────────────────────────────── */
 .footer {
-  background:var(--arena);
+  background:rgba(240,230,204,.45);
   padding:4.5rem var(--g) 2.25rem;
   border-top:2px solid var(--arena-med);
   position:relative;

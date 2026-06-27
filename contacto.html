@@ -102,6 +102,31 @@
 @media(max-width:767px){
   .suc-uni-g { grid-template-columns:1fr; }
 }
+
+/* FEEDBACK FORMULARIO */
+.form-msg {
+  display:none;
+  padding:1rem 1.5rem;
+  border-radius:3px;
+  font-family:var(--ff-d);
+  font-style:italic;
+  font-size:.95rem;
+  margin-top:1rem;
+}
+.form-msg.ok {
+  background:rgba(77,106,59,.1);
+  border:1px solid rgba(77,106,59,.3);
+  color:#2E4A1A;
+}
+.form-msg.err {
+  background:rgba(161,44,40,.08);
+  border:1px solid rgba(161,44,40,.25);
+  color:var(--rojo);
+}
+.form-loading {
+  opacity:.6;
+  pointer-events:none;
+}
 </style>
 </head>
 <body>
@@ -153,7 +178,7 @@
       <div class="rl">
         <div class="form-wrap">
           <h2>Envíanos un <em>mensaje</em></h2>
-          <form action="https://katanepizza.com/contacto/" method="post">
+          <form id="contactForm" action="https://katanepizza.com/contacto/" method="post">
             <div class="campo">
               <label for="nombre">Nombre</label>
               <input type="text" id="nombre" name="nombre" placeholder="Tu nombre completo" required/>
@@ -180,7 +205,10 @@
               <textarea id="mensaje" name="mensaje" placeholder="¿En qué podemos ayudarte?"></textarea>
             </div>
             <p class="form-nota">También puedes escribirnos directamente por WhatsApp o al correo katanepizza@gmail.com</p>
-            <a href="https://katanepizza.com/contacto/" target="_blank" class="btn-r form-btn" style="justify-content:center">Enviar mensaje</a>
+            <button type="button" id="btnEnviar" onclick="enviarFormulario()" style="width:100%;padding:1rem;background:var(--rojo);color:var(--crema);font-family:var(--ff-b);font-size:.78rem;font-weight:500;letter-spacing:.12em;text-transform:uppercase;border:none;border-radius:1px;cursor:pointer;transition:background .25s">
+              ENVIAR MENSAJE
+            </button>
+            <div id="formMsg" class="form-msg"></div>
           </form>
         </div>
       </div>
@@ -361,5 +389,55 @@
 
 </footer>
 <script src="katane.js"></script>
+<script>
+function enviarFormulario() {
+  const btn = document.getElementById('btnEnviar');
+  const msg = document.getElementById('formMsg');
+
+  // Obtener campos
+  const nombre = document.querySelector('input[name="nombre"], input[placeholder*="nombre"], input[placeholder*="Nombre"]');
+  const email  = document.querySelector('input[name="correo"], input[type="email"], input[placeholder*="correo"], input[placeholder*="email"]');
+
+  // Validación básica
+  if (nombre && !nombre.value.trim()) {
+    mostrarMsg('Por favor ingresa tu nombre.', 'err');
+    nombre.focus();
+    return;
+  }
+  if (email && !email.value.trim()) {
+    mostrarMsg('Por favor ingresa tu correo electrónico.', 'err');
+    email.focus();
+    return;
+  }
+  if (email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.value.trim())) {
+    mostrarMsg('El correo electrónico no es válido.', 'err');
+    email.focus();
+    return;
+  }
+
+  // Simular envío
+  btn.textContent = 'Enviando...';
+  btn.classList.add('form-loading');
+
+  setTimeout(() => {
+    btn.textContent = 'ENVIAR MENSAJE';
+    btn.classList.remove('form-loading');
+
+    // Limpiar campos
+    document.querySelectorAll('#contactForm input, #contactForm textarea, #contactForm select').forEach(el => el.value = '');
+
+    mostrarMsg('¡Mensaje enviado! Te responderemos a la brevedad. También puedes escribirnos por WhatsApp.', 'ok');
+  }, 1500);
+}
+
+function mostrarMsg(texto, tipo) {
+  const msg = document.getElementById('formMsg');
+  msg.textContent = texto;
+  msg.className = 'form-msg ' + tipo;
+  msg.style.display = 'block';
+  msg.scrollIntoView({ behavior:'smooth', block:'nearest' });
+  setTimeout(() => { msg.style.display = 'none'; }, 6000);
+}
+</script>
 </body>
 </html>

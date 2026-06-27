@@ -177,11 +177,11 @@ button { cursor:pointer; border:none; background:none; font:inherit; color:inher
   display:flex; align-items:center;
 }
 .nav-logo img {
-  height:40px; width:auto; transition:height .4s;
-  background:rgba(250,245,234,.92);
-  border-radius:2px;
-  padding:4px 6px;
-  box-shadow:0 1px 8px rgba(40,24,8,.10);
+  height:40px;
+  width:auto;
+  transition:height .4s;
+  mix-blend-mode:multiply;
+  filter:none;
 }
 .nav.on .nav-logo img { height:34px; }
 
@@ -191,11 +191,7 @@ button { cursor:pointer; border:none; background:none; font:inherit; color:inher
   border-bottom:1px solid var(--arena-med);
   padding-top:.75rem; padding-bottom:.75rem;
 }
-.nav-interna .nav-logo img {
-  background:transparent;
-  box-shadow:none;
-  padding:0;
-}
+.nav-interna .nav-logo img { mix-blend-mode:multiply; }
 .nav-interna .nav-links a { color:var(--warm); }
 .nav-interna .nav-cta { color:var(--azul); border-color:var(--azul); }
 .nav-interna .hamb span { background:var(--warm); }

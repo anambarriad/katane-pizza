@@ -496,4 +496,10 @@ button { cursor:pointer; border:none; background:none; font:inherit; color:inher
     grid-template-columns:1fr 1fr !important;
   }
 
+  /* Valores en móvil — apilar en 1 columna */
+  #historia div[style*="grid-template-columns:repeat(5,1fr)"],
+  div[style*="grid-template-columns:repeat(5,1fr)"] {
+    grid-template-columns:1fr !important;
+  }
+
 }

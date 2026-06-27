@@ -15,14 +15,32 @@
 
 /* NIVEL 1 — Categorías principales */
 .cat-nav {
-  display:flex; gap:0; overflow-x:auto;
-  justify-content:center;
+  display:flex;
+  gap:0;
+  overflow-x:auto;
+  overflow-y:hidden;
+  justify-content:flex-start;
   border-bottom:2px solid var(--arena-med);
-  margin-bottom:0; scrollbar-width:none;
-  position:sticky; top:75px; z-index:99;
+  margin-bottom:0;
+  scrollbar-width:thin;
+  scrollbar-color:var(--rojo) var(--arena);
+  position:sticky;
+  top:75px;
+  z-index:99;
   background:var(--crema);
+  -webkit-overflow-scrolling:touch;
+  scroll-snap-type:x proximity;
 }
-.cat-nav::-webkit-scrollbar { display:none; }
+.cat-nav::-webkit-scrollbar {
+  height:3px;
+}
+.cat-nav::-webkit-scrollbar-track {
+  background:var(--arena);
+}
+.cat-nav::-webkit-scrollbar-thumb {
+  background:var(--rojo);
+  border-radius:2px;
+}
 .cat-btn {
   font-family:var(--ff-d); font-size:1rem; font-weight:600;
   color:var(--warm); padding:1rem 1.5rem;
@@ -30,17 +48,36 @@
   white-space:nowrap; position:relative;
   border-bottom:3px solid transparent;
   margin-bottom:-2px; transition:color .25s;
+  scroll-snap-align:start;
+  flex-shrink:0;
 }
 .cat-btn:hover { color:var(--tinta); }
 .cat-btn.on { color:var(--rojo); border-bottom-color:var(--rojo); }
 
 /* NIVEL 2 — Subcategorías */
 .subcat-nav {
-  display:flex; gap:0; overflow-x:auto;
-  background:var(--arena); border-bottom:1px solid var(--arena-med);
-  scrollbar-width:none; padding:0 var(--g);
+  display:flex;
+  gap:0;
+  overflow-x:auto;
+  overflow-y:hidden;
+  background:var(--arena);
+  border-bottom:1px solid var(--arena-med);
+  scrollbar-width:thin;
+  scrollbar-color:var(--azul) var(--arena-med);
+  padding:0 var(--g);
+  -webkit-overflow-scrolling:touch;
+  scroll-snap-type:x proximity;
 }
-.subcat-nav::-webkit-scrollbar { display:none; }
+.subcat-nav::-webkit-scrollbar {
+  height:3px;
+}
+.subcat-nav::-webkit-scrollbar-track {
+  background:var(--arena-med);
+}
+.subcat-nav::-webkit-scrollbar-thumb {
+  background:var(--azul);
+  border-radius:2px;
+}
 .subcat-btn {
   font-family:var(--ff-b); font-size:.72rem; font-weight:500;
   letter-spacing:.1em; text-transform:uppercase;
@@ -49,6 +86,8 @@
   white-space:nowrap; position:relative;
   border-bottom:2px solid transparent;
   margin-bottom:-1px; transition:color .25s;
+  scroll-snap-align:start;
+  flex-shrink:0;
 }
 .subcat-btn:hover { color:var(--tinta); }
 .subcat-btn.on { color:var(--azul); border-bottom-color:var(--azul); }
